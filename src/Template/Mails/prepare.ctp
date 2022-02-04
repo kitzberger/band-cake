@@ -5,26 +5,24 @@
         <small>
             <?= $this->Html->link('<i class="fi-arrow-left"></i> '.__('View'), ['action' => 'view', $mail->id], ['escape' => false]) ?>
         </small>
+        <small class="right">
+            <?php
+                echo $this->Html->link('<i class="fi-mail"></i> '.__('Send now!'), ['controller' => 'Mails', 'action' => 'send', $mail->id, $location->id], ['escape' => false, 'class' => 'button small success'])
+            ?>
+        </small>
     </h3>
     <div class="row">
         <h4><?= __('Text') ?></h4>
-        <?php
-            $text = $mail->text;
-            $text = str_replace(
-                [
-                    '{person}',
-                    '{title}',
-                    '{city}',
-                ],
-                [
-                    $location->person ?? 'ihr Lieben',
-                    $location->title,
-                    $location->city,
-                ],
-                $text
-            );
-            echo $this->Text->autoParagraph(h($text));
-        ?>
+        <div class="columns medium-6">
+            <?php
+                echo $this->Text->autoParagraph(h($mail->text));
+            ?>
+        </div>
+        <div class="columns medium-6">
+            <?php
+                echo $this->Text->autoParagraph(h($preparedMailText));
+            ?>
+        </div>
     </div>
     <div class="related">
         <h4><?= __('Location') ?></h4>
@@ -47,7 +45,6 @@
                 <td><?= $location->_joinData->sent ? $location->_joinData->sent->format('Y-m-d') : '-' ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['controller' => 'Locations', 'action' => 'view', $location->id]) ?>
-                    <?= $this->Html->link(__('Send'), ['controller' => 'Mails', 'action' => 'send', $mail->id, $location->id]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

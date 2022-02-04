@@ -65,7 +65,7 @@
                 <th scope="col"><?= __('Subject') ?></th>
                 <th scope="col"><?= __('Body') ?></th>
                 <th scope="col"><?= __('Email') ?></th>
-                <th scope="col"><?= __('Sent') ?></th>
+                <th scope="col"><?= __('Status') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
             <?php foreach ($location->mails as $mail): ?>
@@ -73,10 +73,25 @@
                 <td><?= h($mail->subject) ?></td>
                 <td><?= h($mail->text) ?></td>
                 <td><?= $mail->_joinData->email ? h($mail->_joinData->email) : h($mail->email) ?></td>
-                <td><?= $mail->_joinData->sent ? $mail->_joinData->sent->format('Y-m-d') : '-' ?></td>
+                <td>
+                    <?php
+                        if ($mail->_joinData->sent) {
+                            echo '<span title="' . $mail->_joinData->sent->format('Y-m-d') . '">' . __('Sent!') . '</span>';
+                        } elseif ($mail->_joinData->email) {
+                            echo '<span>' . __('In mail queue') . '</span>';
+                        } else {
+                            echo '';
+                        }
+                    ?>
+                </td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Mails', 'action' => 'view', $mail->id]) ?>
-                    <?= $this->Html->link(__('Send'), ['controller' => 'Mails', 'action' => 'send', $mail->id, $location->id]) ?>
+                    <?php
+                        echo $this->Html->link(__('View'), ['controller' => 'Mails', 'action' => 'view', $mail->id]);
+                        if (empty($mail->_joinData->email)) {
+                            echo ' ';
+                            echo $this->Html->link(__('Send'), ['controller' => 'Mails', 'action' => 'prepare', $mail->id, $location->id]);
+                        }
+                    ?>
                 </td>
             </tr>
             <?php endforeach; ?>

@@ -112,7 +112,40 @@ class MailsController extends AppController
     }
 
     /**
-     * View method
+     * prepare method
+     *
+     * @param string|null $mailId Mail id.
+     * @param string|null $locationId Location id.
+     * @return \Cake\Http\Response|null
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function prepare($mailId = null, $locationId = null)
+    {
+        $mail = $this->Mails->get(
+            $mailId,
+            [
+                'contain' => [
+                    'Locations' => function (\Cake\ORM\Query $q) use ($locationId) {
+                        return $q->where(['Locations.id' => $locationId]);
+                    },
+                ],
+            ]
+        );
+
+        if ($location = $mail->locations[0]) {
+            $preparedMailText = $this->prepareMailText($mail->text, $location);
+        } else {
+            $this->Flash->error(__('The mail could not be prepared. Please, try again.'));
+            $this->redirect(['action' => 'view', $mailId]);
+        }
+
+        $this->set('mail', $mail);
+        $this->set('location', $location);
+        $this->set('preparedMailText', $preparedMailText);
+    }
+
+    /**
+     * send method
      *
      * @param string|null $mailId Mail id.
      * @param string|null $locationId Location id.
@@ -132,7 +165,50 @@ class MailsController extends AppController
             ]
         );
 
-        $this->set('mail', $mail);
-        $this->set('location', $mail->locations[0]);
+        if ($location = $mail->locations[0]) {
+            if (empty($location->email)) {
+                $this->Flash->error(__('Location doesn\'t have an email!'));
+            } else {
+                $mailText = $this->prepareMailText($mail->text, $location);
+
+                if (strpos($mailText, 'xxx') > -1) {
+                    $this->Flash->error(__('Mailtext has unresolved markers!'));
+                } else {
+                    $locationMail = $location->_joinData;
+                    $locationMail->email = $location->email;
+                    $locationMail->subject = $mail->subject;
+                    $locationMail->text = $this->prepareMailText($mail->text, $location);
+                    $this->loadModel('LocationsMails');
+                    if ($this->LocationsMails->save($locationMail)) {
+                        $this->Flash->success(__('The mail has been queued for sending.'));
+                    } else {
+                        $this->Flash->error(__('The mail could not be sent. Please, try again.'));
+                    }
+                }
+            }
+        } else {
+            $this->Flash->error(__('The mail could not be sent. Please, try again.'));
+        }
+
+        return $this->redirect(['action' => 'view', $mailId]);
+    }
+
+    private function prepareMailText($text, $location)
+    {
+        $text = str_replace(
+            [
+                '{person}',
+                '{title}',
+                '{city}',
+            ],
+            [
+                trim($location->person) ? trim($location->person) : 'ihr Lieben',
+                trim($location->title)  ? trim($location->title)  : 'xxx',
+                trim($location->city)   ? trim($location->city)   : 'xxx',
+            ],
+            $text
+        );
+
+        return $text;
     }
 }
