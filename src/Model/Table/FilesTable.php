@@ -111,6 +111,42 @@ class FilesTable extends AbstractTable
         return $rules;
     }
 
+    public function afterSave(\Cake\Event\Event $event, \Cake\Datasource\EntityInterface $entity, \ArrayObject $options)
+    {
+        if ($entity->song_id) {
+            $songs = \Cake\ORM\TableRegistry::get('Songs');
+            $songs->query()
+                ->update()
+                ->set(['modified' => time()])
+                ->where(['id' => $entity->song_id])
+                ->execute();
+        }
+        if ($entity->collection_id) {
+            $collections = \Cake\ORM\TableRegistry::get('Collections');
+            $collections->query()
+                ->update()
+                ->set(['modified' => time()])
+                ->where(['id' => $entity->collection_id])
+                ->execute();
+        }
+        if ($entity->date_id) {
+            $dates = \Cake\ORM\TableRegistry::get('Dates');
+            $dates->query()
+                ->update()
+                ->set(['modified' => time()])
+                ->where(['id' => $entity->date_id])
+                ->execute();
+        }
+        if ($entity->idea_id) {
+            $ideas = \Cake\ORM\TableRegistry::get('Ideas');
+            $ideas->query()
+                ->update()
+                ->set(['modified' => time()])
+                ->where(['id' => $entity->idea_id])
+                ->execute();
+        }
+    }
+
     public function afterSaveCommit(\Cake\Event\Event $event, \Cake\Datasource\EntityInterface $entity, \ArrayObject $options)
     {
         $diff = $this->getDiff($entity, ['title', 'file', 'is_public']);

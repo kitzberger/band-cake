@@ -60,7 +60,7 @@ class LocationsController extends AppController
     public function view($id = null)
     {
         $location = $this->Locations->get($id, [
-            'contain' => ['Users']
+            'contain' => ['Users', 'Mails']
         ]);
 
         $this->set('location', $location);

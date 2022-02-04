@@ -10,6 +10,7 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property int $user_id
  * @property string $title
+ * @property string $person
  * @property string $text
  * @property string $url
  * @property string $email

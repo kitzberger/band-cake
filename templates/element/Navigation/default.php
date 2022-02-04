@@ -33,3 +33,8 @@
                   ['controller' => 'Locations', 'action' => 'index'],
                   ['class' => $controller=='Locations' ? 'active' : '']
               ) ?></li>
+<li><?= $this->Html->link(
+                  __('Mails'),
+                  ['controller' => 'Mails', 'action' => 'index'],
+                  ['class' => $controller=='Mails' ? 'active' : '']
+              ) ?></li>
