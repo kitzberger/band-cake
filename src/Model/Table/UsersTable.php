@@ -82,21 +82,20 @@ class UsersTable extends Table
     public function validationDefault(Validator $validator): Validator
     {
         $validator
-            ->integer('id')
-            ->allowEmpty('id', 'create');
+            ->integer('id');
 
         $validator
             ->email('email')
             ->requirePresence('email', 'create')
-            ->notEmpty('email');
+            ->notEmptyString('email');
 
         $validator
             ->requirePresence('password', 'create')
-            ->notEmpty('password');
+            ->notEmptyString('password');
 
         $validator
             ->requirePresence('username', 'create')
-            ->notEmpty('username');
+            ->notEmptyString('username');
 
         $validator
             ->boolean('is_admin');

@@ -12,11 +12,13 @@ class FootprintBehavior extends Behavior
 {
     public function getFootprint(EntityInterface $entity)
     {   
-        if ($entity->isNew()) {
-            $entity->set('created_by', $_SESSION['Auth']['User']['id']);
-            $entity->set('modified_by', $_SESSION['Auth']['User']['id']);
-        } else {
-            $entity->set('modified_by', $_SESSION['Auth']['User']['id']);
+        if (isset($_SESSION['Auth'])) {
+            if ($entity->isNew()) {
+                $entity->set('created_by', $_SESSION['Auth']['User']['id']);
+                $entity->set('modified_by', $_SESSION['Auth']['User']['id']);
+            } else {
+                $entity->set('modified_by', $_SESSION['Auth']['User']['id']);
+            }
         }
     }
 
