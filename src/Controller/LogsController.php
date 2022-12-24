@@ -90,7 +90,7 @@ class LogsController extends AppController
                 'conditions' => [
                     'Logs.user_id !=' => $user['id'],
                     'Logs.created >' => $user['notified'] ? $user['notified'] : '2000-01-01',
-                    'Logs.share_id' => 0 // don't include log entries about shares
+                    'Logs.share_id IS' => null // don't include log entries about shares
                 ],
             ]
         );
