@@ -1,0 +1,58 @@
+<div class="songs index large-9 medium-8 columns content">
+    <h3>
+        <?= __('Songs') ?>
+        <small>
+            <?= $this->Html->link('<i class="fi-page-add"></i> ' . __('New'), ['controller' => 'Songs', 'action' => 'add'], ['escape' => false]) ?>
+        </small>
+        <?php if ($currentUser['is_admin']) { ?>
+        <small class="right">
+            <?= $this->Html->link('<i class="fi-refresh"></i> ' . __('Sync'), ['controller' => 'Songs', 'action' => 'sync'], ['escape' => false, 'class' => 'button alert small']) ?>
+        </small>
+        <?php } ?>
+    </h3>
+    <?= $this->element('sword', ['sword' => $sword]) ?>
+    <p>
+        <?=
+
+            $this->Paginator->counter(
+                'Page {{page}} of {{pages}}, showing {{current}} records out of
+                 {{count}} total, starting on record {{start}}, ending on {{end}}'
+            );
+
+        ?>
+    </p>
+    <table cellpadding="0" cellspacing="0" class="songs no-padding-on-small">
+        <thead>
+            <tr>
+                <th><?= $this->Paginator->sort('title') ?></th>
+                <th></th>
+                <th class="show-for-medium"><?= $this->Paginator->sort('created') ?></th>
+                <th><?= $this->Paginator->sort('modified') ?></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($songs as $song): ?>
+            <tr>
+                <td>
+                    <?= $this->Html->link($song->title, ['action' => 'view', $song->id]) ?>
+                    <?= $song->artist ? ' (' . $song->artist . ')' : '' ?>
+                </td>
+                <td>
+                    <?= $song->url ? '<span class="label success round">&#10026;</span>' : '' ?>
+                    <?= count($song->versions) ? '<span class="label round">' . count($song->versions) . '</span>' : '' ?>
+                </td>
+                <td class="show-for-medium"><?= $this->element('date', ['date' => $song->created]) ?></td>
+                <td><?= $this->element('date', ['date' => $song->modified]) ?></td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    <div class="paginator">
+        <ul class="pagination">
+            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->numbers() ?>
+            <?= $this->Paginator->next(__('next') . ' >') ?>
+        </ul>
+        <p><?= $this->Paginator->counter() ?></p>
+    </div>
+</div>

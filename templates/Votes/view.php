@@ -1,0 +1,33 @@
+<div class="votes view large-9 medium-8 columns content">
+    <h3>
+        <?= h($vote->id) ?>
+        <small>
+            <?= $this->Html->link(__('Edit'), ['controller' => 'Votes', 'action' => 'edit', $vote->id]) ?>
+        </small>
+    </h3>
+    <table class="vertical-table">
+        <tr>
+            <th><?= __('User') ?></th>
+            <td><?= $vote->has('user') ? $this->element('username', ['user' => $vote->user]) : '' ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Record') ?></th>
+            <td>
+                <?= $vote->has('date') ? $this->Html->link($vote->date->title, ['controller' => 'Dates', 'action' => 'view', $vote->date->id]) : '' ?>
+                <?= $vote->has('idea') ? $this->Html->link($vote->idea->title, ['controller' => 'Ideas', 'action' => 'view', $vote->idea->id]) : '' ?>
+            </td>
+        </tr>
+        <tr>
+            <th><?= __('Vote') ?></th>
+            <td><?= $this->Number->format($vote->vote) ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Created') ?></th>
+            <td><?= h($vote->created) ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Modified') ?></th>
+            <td><?= h($vote->modified) ?></td>
+        </tr>
+    </table>
+</div>

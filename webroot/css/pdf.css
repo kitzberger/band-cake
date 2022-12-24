@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro');
+
+h1, h2, h3 { font-weight: normal; }
+
+ul li { font-size: 0.8em; }
+
+.markdown { text-align: left !important; }
+.markdown h1 { margin: 0 0 15px 0; padding: 0; font-size: 2.0rem; }
+.markdown h2 { margin: 15px 0; padding: 0; font-size: 1.5rem; page-break-after: avoid; }
+.markdown h3 { margin: 15px 0; padding: 0; font-size: 1.2rem; color: #be140b; page-break-after: avoid; }
+.markdown p { margin: 15px 0; page-break-inside: avoid; }
+.markdown pre { border: 0 none; box-shadow: none; margin: 15px 0; padding: 0; page-break-inside: avoid; }
+.markdown pre code { display: block; font-family: 'Source Code Pro', monospace; page-break-inside: avoid; }
+.markdown hr { display: none; }
+
+.markdown.mode-text h2 { font-weight: bold; }
+.markdown.mode-text pre code { font-size: 1.3rem; }
+
+.markdown.mode-chords h2 { font-weight: bold; }
+.markdown.mode-chords p + h2 { }
+.markdown.mode-chords p { font-size: 1.5rem; padding-left: 50px; }
+
+body { }

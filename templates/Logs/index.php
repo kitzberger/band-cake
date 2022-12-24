@@ -1,0 +1,51 @@
+<div class="logs index large-9 medium-8 columns content">
+    <h3><?= __('Logs') ?></h3>
+    <table cellpadding="0" cellspacing="0" class="logs no-padding-on-small">
+        <thead>
+            <tr>
+                <th><?= __('Id') ?></th>
+                <th><?= __('User') ?></th>
+                <th><?= __('Record') ?></th>
+                <th><?= __('Diff') ?></th>
+                <th><?= $this->Paginator->sort('created') ?></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($logs as $log): ?>
+            <tr>
+                <td><?= $this->Number->format($log->id) ?></td>
+                <td><?= $log->has('user') ? $this->element('username', ['user' => $log->user]) : '' ?></td>
+                <td>
+                    <?php
+                        if ($log->has('song')) {
+                            echo __('Song') . ': ' . $this->Html->link($log->song->title, ['_full' => true, 'controller' => 'Songs', 'action' => 'view', $log->song->id]);
+                        }
+                        if ($log->has('date')) {
+                            echo __('Date on') . ' ' . $log->date->begin->format('Y-m-d') . ': ' . $this->Html->link($log->date->title, ['_full' => true, 'controller' => 'Dates', 'action' => 'view', $log->date->id]);
+                        }
+                        if ($log->has('idea')) {
+                            echo __('Idea') . ': ' . $this->Html->link($log->idea->title, ['_full' => true, 'controller' => 'Ideas', 'action' => 'view', $log->idea->id]);
+                        }
+                        if ($log->has('collection')) {
+                            echo __('Collection') . ': ' . $this->Html->link($log->collection->title, ['controller' => 'Collections', 'action' => 'view', $log->collection->id]);
+                        }
+                        if ($log->has('share')) {
+                            echo __('Share') . ': ' . $this->Html->link($log->share->id, ['_full' => true, 'controller' => 'Shares', 'action' => 'view', $log->share->id]);
+                        }
+                    ?>
+                </td>
+                <td class="diff"><?= $this->Diff->render($log->diff) ?></td>
+                <td><?= h($log->created) ?></td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    <div class="paginator">
+        <ul class="pagination">
+            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->numbers() ?>
+            <?= $this->Paginator->next(__('next') . ' >') ?>
+        </ul>
+        <p><?= $this->Paginator->counter() ?></p>
+    </div>
+</div>

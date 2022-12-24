@@ -1,0 +1,12 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+
+    RewriteBase /
+
+    # Enforce HTTPS
+    RewriteCond %{HTTPS} off
+    RewriteRule (.*) https://%{HTTP_HOST}/$1 [L,R=301]
+
+    RewriteRule ^$    webroot/  [L]
+    RewriteRule (.*) webroot/$1 [L]
+</IfModule>

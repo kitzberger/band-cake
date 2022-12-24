@@ -1,0 +1,11 @@
+/.php-cs-fixer.cache
+/*.sql
+/*.mysql
+
+/vendor/*
+/config/.env
+/config/Migrations/schema-dump-default.lock
+/tmp/*
+/logs/*
+/webroot/uploads/*
+/webroot/cache/*
