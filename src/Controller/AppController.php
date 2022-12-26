@@ -52,6 +52,7 @@ class AppController extends Controller
 
         $this->enabledFeatures = [
             'remoteCalendar' => (bool)Configure::read('Calendar.url'),
+            'githubRepo' => (bool)Configure::read('Github.repository_url'),
         ];
     }
 
@@ -78,6 +79,7 @@ class AppController extends Controller
         $this->set('_csrfToken', $this->request->getAttribute('csrfToken'));
 
         $this->set('remoteCalendarEnabled', $this->enabledFeatures['remoteCalendar']);
+        $this->set('githubEnabled', $this->enabledFeatures['githubRepo']);
 
         if (!array_key_exists('_serialize', $this->viewBuilder()->getVars()) &&
             in_array($this->response->getType(), ['application/json', 'application/xml'])

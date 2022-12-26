@@ -4,11 +4,11 @@
         <small>
             <?= $this->Html->link('<i class="fi-page-add"></i> ' . __('New'), ['controller' => 'Songs', 'action' => 'add'], ['escape' => false]) ?>
         </small>
-        <?php if ($currentUser['is_admin']) { ?>
+        <?php if ($githubEnabled): ?>
         <small class="right">
             <?= $this->Html->link('<i class="fi-refresh"></i> ' . __('Sync'), ['controller' => 'Songs', 'action' => 'sync'], ['escape' => false, 'class' => 'button alert small']) ?>
         </small>
-        <?php } ?>
+        <?php endif; ?>
     </h3>
     <?= $this->element('sword', ['sword' => $sword]) ?>
     <p>

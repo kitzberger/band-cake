@@ -124,24 +124,26 @@ class SongsController extends AppController
      */
     public function sync()
     {
-        $songs = $this->Songs->find('all')->where(['Songs.url !=' => '']);
+        if ($this->enabledFeatures['githubEnabled']) {
+            $songs = $this->Songs->find('all')->where(['Songs.url !=' => '']);
 
-        $count = 0;
-        foreach ($songs as $song) {
-            if ($song['url']) {
-                $songText = $this->Github->loadResource($song['url']);
-                if ($songText && $songText != $song['text']) {
-                    $song = $this->Songs->patchEntity($song, ['text' => $songText]);
-                    if ($this->Songs->save($song)) {
-                        $this->Flash->success(sprintf(__('The song "{0}" has been updated.', $song['title'])));
-                        $count++;
+            $count = 0;
+            foreach ($songs as $song) {
+                if ($song['url']) {
+                    $songText = $this->Github->loadResource($song['url']);
+                    if ($songText && $songText != $song['text']) {
+                        $song = $this->Songs->patchEntity($song, ['text' => $songText]);
+                        if ($this->Songs->save($song)) {
+                            $this->Flash->success(sprintf(__('The song "{0}" has been updated.', $song['title'])));
+                            $count++;
+                        }
                     }
                 }
             }
-        }
 
-        if ($count === 0) {
-            $this->Flash->default(__('No songs updated!'));
+            if ($count === 0) {
+                $this->Flash->default(__('No songs updated!'));
+            }
         }
 
         return $this->redirect(['action' => 'index']);
