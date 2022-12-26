@@ -12,12 +12,13 @@
                         ['confirm' => __('Are you sure you want to delete "{0}"?', $date->title), 'escape' => false]
                     );
                 }
-            ?>
-            <?php
-                echo $this->Html->link('<i class="fi-upload-cloud"></i> ' . __('Publish'), ['controller' => 'Dates', 'action' => 'publish', $date->id], ['escape' => false]);
-                if ($date->uri) {
+                if ($remoteCalendarEnabled) {
                     echo ' ';
-                    echo $this->Html->link('<i class="fi-trash"></i> ' . __('Unpublish'), ['controller' => 'Dates', 'action' => 'unpublish', $date->id], ['escape' => false]);
+                    echo $this->Html->link('<i class="fi-upload-cloud"></i> ' . __('Publish'), ['controller' => 'Dates', 'action' => 'publish', $date->id], ['escape' => false]);
+                    if ($date->uri) {
+                        echo ' ';
+                        echo $this->Html->link('<i class="fi-trash"></i> ' . __('Unpublish'), ['controller' => 'Dates', 'action' => 'unpublish', $date->id], ['escape' => false]);
+                    }
                 }
             ?>
         </small>
@@ -69,10 +70,12 @@
             <th><?= __('Status') ?></th>
             <td><?= $this->element('Dates/status') ?></td>
         </tr>
+        <?php if($remoteCalendarEnabled): ?>
         <tr>
             <th><?= __('Calendar entry') ?></th>
             <td><?= $this->Html->link($date->uri, ['controller' => 'Dates', 'action' => 'download', $date->id]) ?></td>
         </tr>
+        <?php endif; ?>
         <tr>
             <th><?= __('Created') ?></th>
             <td><?= h($date->created) ?></td>

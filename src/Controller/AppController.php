@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Cake\Controller\Controller;
+use Cake\Core\Configure;
 use Cake\Event\EventInterface;
 use Cake\Mailer\Email;
 
@@ -16,6 +17,8 @@ use Cake\Mailer\Email;
  */
 class AppController extends Controller
 {
+    protected array $enabledFeatures = [];
+
     /**
      * Initialization hook method.
      *
@@ -46,6 +49,10 @@ class AppController extends Controller
         ]);
 
         $this->viewBuilder()->addHelpers(['Tanuck/Markdown.Markdown']);
+
+        $this->enabledFeatures = [
+            'remoteCalendar' => (bool)Configure::read('Calendar.url'),
+        ];
     }
 
     /**
@@ -69,6 +76,8 @@ class AppController extends Controller
         }
         $this->set('controller', $this->request->getParam('controller'));
         $this->set('_csrfToken', $this->request->getAttribute('csrfToken'));
+
+        $this->set('remoteCalendarEnabled', $this->enabledFeatures['remoteCalendar']);
 
         if (!array_key_exists('_serialize', $this->viewBuilder()->getVars()) &&
             in_array($this->response->getType(), ['application/json', 'application/xml'])

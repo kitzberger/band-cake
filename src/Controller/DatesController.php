@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Helper\CalDAV;
 use Cake\I18n\FrozenDate;
 
 /**
@@ -162,14 +163,16 @@ class DatesController extends AppController
         if ($this->request->is('post')) {
             $date = $this->Dates->patchEntity($date, $this->request->getData());
             if ($this->Dates->save($date)) {
-                if ($date->status > 0) {
-                    try {
-                        $uri = \App\Helper\CalDAV::putEvent($date);
-                        $date->uri = $uri;
-                        $this->Dates->save($date);
-                        $this->Flash->success(__('The date has been published on the remote calendar.'));
-                    } catch (\Exception $e) {
-                        $this->Flash->error(__('The date could not be put on the remote calendar. Please, try again.'));
+                if ($this->enabledFeatures['remoteCalendar']) {
+                    if ($date->status > 0) {
+                        try {
+                            $uri = CalDAV::putEvent($date);
+                            $date->uri = $uri;
+                            $this->Dates->save($date);
+                            $this->Flash->success(__('The date has been published on the remote calendar.'));
+                        } catch (\Exception $e) {
+                            $this->Flash->error(__('The date could not be put on the remote calendar. Please, try again.'));
+                        }
                     }
                 }
 
@@ -206,14 +209,16 @@ class DatesController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $date = $this->Dates->patchEntity($date, $this->request->getData());
             if ($this->Dates->save($date)) {
-                if ($date->uri || $date->status > 0) {
-                    try {
-                        $uri = \App\Helper\CalDAV::putEvent($date);
-                        $date->uri = $uri;
-                        $this->Dates->save($date);
-                        $this->Flash->success(__('The date has been updated on the remote calendar.'));
-                    } catch (\Exception $e) {
-                        $this->Flash->error(__('The date could not be updated on the remote calendar. Please, try again.'));
+                if ($this->enabledFeatures['remoteCalendar']) {
+                    if ($date->uri || $date->status > 0) {
+                        try {
+                            $uri = CalDAV::putEvent($date);
+                            $date->uri = $uri;
+                            $this->Dates->save($date);
+                            $this->Flash->success(__('The date has been updated on the remote calendar.'));
+                        } catch (\Exception $e) {
+                            $this->Flash->error(__('The date could not be updated on the remote calendar. Please, try again.'));
+                        }
                     }
                 }
                 $this->Flash->success(__('The date has been saved.'));
@@ -241,9 +246,9 @@ class DatesController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $date = $this->Dates->get($id);
         if ($this->Dates->delete($date)) {
-            if ($date->uri) {
+            if ($this->enabledFeatures['remoteCalendar'] && $date->uri) {
                 try {
-                    \App\Helper\CalDAV::deleteEvent($date);
+                    CalDAV::deleteEvent($date);
                     $this->Flash->success(__('The date has been deleted from the remote calendar.'));
                 } catch (\Exception $e) {
                     $this->Flash->error(__('The date could not be deleted from the remote calendar. Please, try again.'));
@@ -270,22 +275,24 @@ class DatesController extends AppController
             'contain' => ['Locations']
         ]);
 
-        $uri = null;
-        try {
-            $uri = \App\Helper\CalDAV::putEvent($date);
-        } catch (\Exception $e) {
-            $this->Flash->error($e->getMessage());
-        }
+        if ($this->enabledFeatures['remoteCalendar']) {
+            $uri = null;
+            try {
+                $uri = CalDAV::putEvent($date);
+            } catch (\Exception $e) {
+                $this->Flash->error($e->getMessage());
+            }
 
-        if (!empty($uri)) {
-            $date->uri = $uri;
-            if ($this->Dates->save($date)) {
-                $this->Flash->success(__('The date has been published on the remote calendar.'));
+            if (!empty($uri)) {
+                $date->uri = $uri;
+                if ($this->Dates->save($date)) {
+                    $this->Flash->success(__('The date has been published on the remote calendar.'));
+                } else {
+                    $this->Flash->error(__('The date could not be published on the remote calendar. Please, try again.'));
+                }
             } else {
                 $this->Flash->error(__('The date could not be published on the remote calendar. Please, try again.'));
             }
-        } else {
-            $this->Flash->error(__('The date could not be published on the remote calendar. Please, try again.'));
         }
 
         return $this->redirect(['action' => 'view', $date->id]);
@@ -302,22 +309,24 @@ class DatesController extends AppController
     {
         $date = $this->Dates->get($id);
 
-        $success = null;
-        try {
-            $success = \App\Helper\CalDAV::deleteEvent($date);
-        } catch (\Exception $e) {
-            $this->Flash->error($e->getMessage());
-        }
+        if ($this->enabledFeatures['remoteCalendar']) {
+            $success = null;
+            try {
+                $success = CalDAV::deleteEvent($date);
+            } catch (\Exception $e) {
+                $this->Flash->error($e->getMessage());
+            }
 
-        if (!empty($success)) {
-            $date->uri = null;
-            if ($this->Dates->save($date)) {
-                $this->Flash->success(__('The date has been unpublished on the remote calendar.'));
+            if (!empty($success)) {
+                $date->uri = null;
+                if ($this->Dates->save($date)) {
+                    $this->Flash->success(__('The date has been unpublished on the remote calendar.'));
+                } else {
+                    $this->Flash->error(__('The date could not be unpublished on the remote calendar. Please, try again.'));
+                }
             } else {
                 $this->Flash->error(__('The date could not be unpublished on the remote calendar. Please, try again.'));
             }
-        } else {
-            $this->Flash->error(__('The date could not be unpublished on the remote calendar. Please, try again.'));
         }
 
         return $this->redirect(['action' => 'view', $date->id]);
@@ -336,15 +345,17 @@ class DatesController extends AppController
             'contain' => []
         ]);
 
-        $uri = null;
-        try {
-            $event = \App\Helper\CalDAV::getEvent($date);
-            header('Content-Type: text/calendar; charset=utf-8');
-            header('Content-Disposition: attachment; filename=' . $event['uri']);
-            echo $event['data'];
-            exit;
-        } catch (\Exception $e) {
-            $this->Flash->error($e->getMessage());
+        if ($this->enabledFeatures['remoteCalendar']) {
+            $uri = null;
+            try {
+                $event = CalDAV::getEvent($date);
+                header('Content-Type: text/calendar; charset=utf-8');
+                header('Content-Disposition: attachment; filename=' . $event['uri']);
+                echo $event['data'];
+                exit;
+            } catch (\Exception $e) {
+                $this->Flash->error($e->getMessage());
+            }
         }
 
         return $this->redirect(['action' => 'view', $date->id]);
