@@ -67,7 +67,7 @@ class AppController extends Controller
         $currentUser = $this->Auth->User();
         $this->set('currentUser', $currentUser);
 
-        if (isset($currentUser) && $currentUser['is_active'] === false) {
+        if (isset($currentUser) && $currentUser['is_passive'] === true) {
             $this->loadModel('Shares');
             $shares = $this->Shares->find('all', [
                 'conditions' => ['Shares.user_id' => $currentUser['id']],

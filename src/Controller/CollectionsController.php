@@ -94,7 +94,7 @@ class CollectionsController extends AppController
             'all',
             [
                 'conditions' => [
-                    'Users.is_active' => false,
+                    'Users.is_passive' => true,
                 ],
             ]
         );
@@ -281,7 +281,7 @@ class CollectionsController extends AppController
         $collection = $this->Collections->get($collection, []);
         $user = $this->Users->get($user, [
             'conditions' => [
-                'Users.is_active' => false,
+                'Users.is_passive' => true,
             ],
         ]);
 

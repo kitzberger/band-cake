@@ -59,12 +59,12 @@ class SharesController extends AppController
             }
             $this->Flash->error(__('The share could not be saved. Please, try again.'));
         }
-        $users = $this->Shares->Users->find('list', ['limit' => 200]);
-        $dates = $this->Shares->Dates->find('list', ['limit' => 200]);
-        $ideas = $this->Shares->Ideas->find('list', ['limit' => 200]);
-        $songs = $this->Shares->Songs->find('list', ['limit' => 200]);
-        $collections = $this->Shares->Collections->find('list', ['limit' => 200]);
-        $files = $this->Shares->Files->find('list', ['limit' => 200]);
+        $users = $this->Shares->Users->find('list', ['limit' => 9999]);
+        $dates = $this->Shares->Dates->find('list', ['limit' => 9999]);
+        $ideas = $this->Shares->Ideas->find('list', ['limit' => 9999]);
+        $songs = $this->Shares->Songs->find('list', ['limit' => 9999]);
+        $collections = $this->Shares->Collections->find('list', ['limit' => 9999]);
+        $files = $this->Shares->Files->find('list', ['limit' => 9999]);
         $this->set(compact('share', 'users', 'dates', 'ideas', 'songs', 'collections', 'files'));
     }
 
@@ -89,12 +89,12 @@ class SharesController extends AppController
             }
             $this->Flash->error(__('The share could not be saved. Please, try again.'));
         }
-        $users = $this->Shares->Users->find('list', ['limit' => 200]);
-        $dates = $this->Shares->Dates->find('list', ['limit' => 200]);
-        $ideas = $this->Shares->Ideas->find('list', ['limit' => 200]);
-        $songs = $this->Shares->Songs->find('list', ['limit' => 200]);
-        $collections = $this->Shares->Collections->find('list', ['limit' => 200]);
-        $files = $this->Shares->Files->find('list', ['limit' => 200]);
+        $users = $this->Shares->Users->find('list', ['limit' => 9999]);
+        $dates = $this->Shares->Dates->find('list', ['limit' => 9999]);
+        $ideas = $this->Shares->Ideas->find('list', ['limit' => 9999]);
+        $songs = $this->Shares->Songs->find('list', ['limit' => 9999]);
+        $collections = $this->Shares->Collections->find('list', ['limit' => 9999]);
+        $files = $this->Shares->Files->find('list', ['limit' => 9999]);
         $this->set(compact('share', 'users', 'dates', 'ideas', 'songs', 'collections', 'files'));
     }
 

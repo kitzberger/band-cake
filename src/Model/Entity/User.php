@@ -17,6 +17,7 @@ use Cake\Auth\DefaultPasswordHasher;
  * @property string $username
  * @property bool $is_admin
  * @property bool $is_active
+ * @property bool $is_passive
  *
  * @property \App\Model\Entity\Comment[] $comments
  * @property \App\Model\Entity\Date[] $dates

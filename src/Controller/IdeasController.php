@@ -78,7 +78,7 @@ class IdeasController extends AppController
             'all',
             [
                 'conditions' => [
-                    'Users.is_active' => false,
+                    'Users.is_passive' => true,
                 ],
             ]
         );
@@ -188,7 +188,7 @@ class IdeasController extends AppController
         $idea = $this->Ideas->get($idea, []);
         $user = $this->Users->get($user, [
             'conditions' => [
-                'Users.is_active' => false,
+                'Users.is_passive' => true,
             ],
         ]);
 

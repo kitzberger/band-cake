@@ -50,11 +50,13 @@
         <nav class="large-3 medium-4 columns" id="actions-sidebar">
             <ul class="side-nav">
                 <?php
-                    echo '<li class="heading heading-menu">' . __('Menu') . '</li>';
-                    if ($currentUser['is_active']) {
-                        echo $this->element('Navigation/default');
-                    } else {
+                    if ($currentUser['is_passive']) {
+                        echo '<li class="heading heading-menu">' . __('Shares') . '</li>';
                         echo $this->element('Navigation/shares');
+                    }
+                    if ($currentUser['is_active'] || $currentUser['is_admin']) {
+                        echo '<li class="heading heading-menu">' . __('Menu') . '</li>';
+                        echo $this->element('Navigation/default');
                     }
                     if ($currentUser['is_admin']) {
                         echo '<li class="heading heading-admin">' . __('Admin') . ' <i class="fi-wrench"></i></li>';

@@ -50,12 +50,17 @@ class CreateUserShell extends Shell
             $isActive = $this->in('Active?', ['yes', 'no'], 'yes');
         }
 
+        while (empty($isPassive)) {
+            $isPassive = $this->in('Passive?', ['yes', 'no'], 'no');
+        }
+
         $user = $this->Users->newEntity([
             'username' => $username,
             'email' => $email,
             'password' => $password,
             'is_admin' => $isAdmin=='yes',
             'is_active' => $isActive=='yes',
+            'is_passive' => $isPassive=='yes',
         ]);
 
         if ($this->Users->save($user)) {

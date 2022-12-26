@@ -22,6 +22,7 @@
                 <th><?= $this->Paginator->sort('email') ?></th>
                 <th><?= $this->Paginator->sort('is_admin') ?></th>
                 <th><?= $this->Paginator->sort('is_active') ?></th>
+                <th><?= $this->Paginator->sort('is_passive') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -30,8 +31,9 @@
             <tr>
                 <td><?= $this->Html->link($user->username, ['action' => 'view', $user->id]) ?></td>
                 <td><?= h($user->email) ?></td>
-                <td><?= h($user->is_admin) ? __('Yes') : '' ?></td>
-                <td><?= h($user->is_active) ? __('Yes') : '' ?></td>
+                <td><?= h($user->is_admin) ? '<i class="fi-check"></i>' : '' ?></td>
+                <td><?= h($user->is_active) ? '<i class="fi-check"></i>' : '' ?></td>
+                <td><?= h($user->is_passive) ? '<i class="fi-check"></i>' : '' ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>

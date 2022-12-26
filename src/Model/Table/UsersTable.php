@@ -103,6 +103,9 @@ class UsersTable extends Table
         $validator
             ->boolean('is_active');
 
+        $validator
+            ->boolean('is_passive');
+
         return $validator;
     }
 

@@ -96,7 +96,7 @@ class DatesController extends AppController
             'all',
             [
                 'conditions' => [
-                    'Users.is_active' => false,
+                    'Users.is_passive' => true,
                 ],
             ]
         );
@@ -379,7 +379,7 @@ class DatesController extends AppController
         ]);
         $user = $this->Users->get($user, [
             'conditions' => [
-                'Users.is_active' => false,
+                'Users.is_passive' => true,
             ],
         ]);
 
