@@ -24,9 +24,14 @@
     </div>
     <div id="external-events" class="columns medium-2 hide-for-small-only">
         <h4><?= __('Date templates') ?></h4>
-        <div class='fc-event' data-start-time="15:00" data-stop-time="19:00">Probe 15 Uhr</div>
-        <div class='fc-event' data-start-time="16:00" data-stop-time="20:00">Probe 16 Uhr</div>
-        <div class='fc-event' data-start-time="17:00" data-stop-time="21:00">Probe 17 Uhr</div>
-        <div class='fc-event' data-start-time="18:00" data-stop-time="22:00">Probe 18 Uhr</div>
+        <p>These items can be drag'n'dropped into the calendar</p>
+        <?php
+            foreach ([16,17,18,19] as $begin) {
+                $end = $begin+4;
+                echo '<div class="fc-event" data-start-time="' . $begin . ':00" data-stop-time="' . $end . ':00">';
+                echo __('Rehearsal at {0}pm', $begin);
+                echo '</div>';
+            }
+        ?>
     </div>
 </div>

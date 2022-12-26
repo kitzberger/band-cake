@@ -290,10 +290,9 @@ function prepareNewEvent(cal, date) {
 
         // we need to copy it, so that multiple events don't have a reference to the same object
         event = $.extend(event, eventTemplate);
-        event.start = date.time(event.start);
-        event.end = date.time(event.end);
+        event.start = moment(date._d.toDateString() + ' ' + event.start);
+        event.end = moment(date._d.toDateString() + ' ' + event.end);
     }
-    //console.dir(event);
 
     return event;
 }
@@ -308,6 +307,7 @@ function prepareNewDatePayload(cal, date) {
             begin:      date._d.toMyDateString() + ' ' + eventTemplate.start.substring(0,2) + ':' + eventTemplate.start.substring(3,5),
             end:        date._d.toMyDateString() + ' ' + eventTemplate.end.substring(0,2) + ':' + eventTemplate.end.substring(3,5),
             is_fullday: 0,
+            status:     0,
             text:       ''
         };
     } else {
@@ -318,6 +318,7 @@ function prepareNewDatePayload(cal, date) {
             begin:      date.start._d.toMyDateString() + ' 00:00',
             end:        date.start._d.toMyDateString() + ' 23:59',
             is_fullday: 1,
+            status:     0,
             text:       ''
         }
     }
