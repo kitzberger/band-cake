@@ -120,7 +120,7 @@ class AppController extends Controller
         $deliveryProfile = 'default';
         $config = Email::getConfig($deliveryProfile);
         if (empty($config) || empty($config['from'])) {
-            throw new \Exception('Missing default from address in config!');
+            throw new \Exception('Missing \'' . $deliveryProfile . '\' from address in config!');
         }
         $from = $config['from'];
 

@@ -43,6 +43,12 @@ class LocationsTable extends AbstractTable
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
+
+        $this->belongsToMany('Mails', [
+            'foreignKey' => 'location_id',
+            'targetForeignKey' => 'mail_id',
+            'joinTable' => 'locations_mails'
+        ]);
     }
 
     /**
@@ -60,6 +66,9 @@ class LocationsTable extends AbstractTable
         $validator
             ->requirePresence('title', 'create')
             ->notEmpty('title');
+
+        $validator
+            ->allowEmpty('person');
 
         $validator
             ->allowEmpty('text');
