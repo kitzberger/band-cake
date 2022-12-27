@@ -1,7 +1,6 @@
 <?php
-namespace App\Controller;
 
-use App\Controller\AppController;
+namespace App\Controller;
 
 /**
  * Mails Controller
@@ -203,8 +202,8 @@ class MailsController extends AppController
             ],
             [
                 trim($location->person) ? trim($location->person) : 'ihr Lieben',
-                trim($location->title)  ? trim($location->title)  : 'xxx',
-                trim($location->city)   ? trim($location->city)   : 'xxx',
+                trim($location->title) ? trim($location->title) : 'xxx',
+                trim($location->city) ? trim($location->city) : 'xxx',
             ],
             $text
         );

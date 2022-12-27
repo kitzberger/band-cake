@@ -7,5 +7,4 @@ namespace App\Model\Entity;
  */
 trait CommentableTrait
 {
-
 }
