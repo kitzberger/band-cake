@@ -49,7 +49,7 @@ class MailsController extends AppController
      */
     public function add()
     {
-        $mail = $this->Mails->newEntity();
+        $mail = $this->Mails->newEmptyEntity();
         if ($this->request->is('post')) {
             $mail = $this->Mails->patchEntity($mail, $this->request->getData());
             if ($this->Mails->save($mail)) {
