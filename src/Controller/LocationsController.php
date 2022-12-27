@@ -41,7 +41,12 @@ class LocationsController extends AppController
         $this->paginate = [
             'contain' => ['Users'],
             'order' => ['Locations.modified DESC'],
-            'conditions' => ['Locations.title LIKE' => '%' . $sword . '%'],
+            'conditions' => [
+                'OR' => [
+                    'Locations.title LIKE' => '%' . $sword . '%',
+                    'Locations.city LIKE' => '%' . $sword . '%',
+                ],
+            ],
         ];
 
         $locations = $this->paginate($this->Locations);

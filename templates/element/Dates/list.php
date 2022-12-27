@@ -18,6 +18,7 @@
         <?php endforeach; ?>
     </tbody>
 </table>
+<?php if ($this->Paginator->total() > 1): ?>
 <div class="paginator">
     <ul class="pagination">
         <?= $this->Paginator->prev('< ' . __('previous')) ?>
@@ -26,3 +27,4 @@
     </ul>
     <p><?= $this->Paginator->counter() ?></p>
 </div>
+<?php endif; ?>
