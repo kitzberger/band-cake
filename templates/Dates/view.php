@@ -70,7 +70,7 @@
             <th><?= __('Status') ?></th>
             <td><?= $this->element('Dates/status') ?></td>
         </tr>
-        <?php if($remoteCalendarEnabled): ?>
+        <?php if ($remoteCalendarEnabled): ?>
         <tr>
             <th><?= __('Calendar entry') ?></th>
             <td><?= $this->Html->link($date->uri, ['controller' => 'Dates', 'action' => 'download', $date->id]) ?></td>
