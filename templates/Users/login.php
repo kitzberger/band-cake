@@ -1,5 +1,6 @@
 <?php
 use Cake\Core\Configure;
+
 ?>
 <!DOCTYPE html>
 <html>

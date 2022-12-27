@@ -2,8 +2,6 @@
 
 namespace App\Model\Table;
 
-use Cake\Network\Session;
-
 class AbstractTable extends \Cake\ORM\Table
 {
     protected function getDiff($entity, $fields = null)
