@@ -30,18 +30,20 @@
             <tr>
                 <td><?= $this->Html->link($location->title, ['action' => 'view', $location->id]) ?></td>
                 <td><?= h($location->city) ?></td>
-                <td class="show-for-medium"><?= h($location->created) ?></td>
-                <td class="show-for-medium"><?= h($location->modified) ?></td>
+                <td class="show-for-medium"><?= $this->element('date', ['date' => $location->created]) ?></td>
+                <td><?= $this->element('date', ['date' => $location->modified]) ?></td>
             </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-        </ul>
-        <p><?= $this->Paginator->counter() ?></p>
-    </div>
+    <?php if ($this->Paginator->total() > 1): ?>
+        <div class="paginator">
+            <ul class="pagination">
+                <?= $this->Paginator->prev('< ' . __('previous')) ?>
+                <?= $this->Paginator->numbers() ?>
+                <?= $this->Paginator->next(__('next') . ' >') ?>
+            </ul>
+            <p><?= $this->Paginator->counter() ?></p>
+        </div>
+    <?php endif; ?>
 </div>
