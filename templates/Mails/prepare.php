@@ -3,11 +3,11 @@
         <?= h($mail->subject) . ' => ' . h($location->title) ?>
         <?php $this->assign('title', $mail->subject); ?>
         <small>
-            <?= $this->Html->link('<i class="fi-arrow-left"></i> '.__('View'), ['action' => 'view', $mail->id], ['escape' => false]) ?>
+            <?= $this->Html->link('<i class="fi-arrow-left"></i> ' . __('View'), ['action' => 'view', $mail->id], ['escape' => false]) ?>
         </small>
         <small class="right">
             <?php
-                echo $this->Html->link('<i class="fi-mail"></i> '.__('Send now!'), ['controller' => 'Mails', 'action' => 'send', $mail->id, $location->id], ['escape' => false, 'class' => 'button small success'])
+                echo $this->Html->link('<i class="fi-mail"></i> ' . __('Send now!'), ['controller' => 'Mails', 'action' => 'enqueue', $mail->id, $location->id], ['escape' => false, 'class' => 'button small success'])
             ?>
         </small>
     </h3>
@@ -32,6 +32,7 @@
                 <th scope="col"><?= __('Title') ?></th>
                 <th scope="col"><?= __('City') ?></th>
                 <th scope="col"><?= __('Zip') ?></th>
+                <th scope="col"><?= __('Person') ?></th>
                 <th scope="col"><?= __('Email') ?></th>
                 <th scope="col"><?= __('Sent') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -41,6 +42,7 @@
                 <td><?= h($location->title) ?></td>
                 <td><?= h($location->city) ?></td>
                 <td><?= h($location->zip) ?></td>
+                <td><?= h($location->person) ?></td>
                 <td><?= $location->_joinData->email ? h($location->_joinData->email) : h($location->email) ?></td>
                 <td><?= $location->_joinData->sent ? $location->_joinData->sent->format('Y-m-d') : '-' ?></td>
                 <td class="actions">

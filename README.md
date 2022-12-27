@@ -12,6 +12,36 @@ You might wanna adjust at least the `BASE_URL` variable in `config/.env`.
 
 ## Configuration
 
+### Mails
+
+#### Notifications
+
+That's band internal notifications informing about new/altered records on the platform.
+
+These mails are being sent to 'active' users only.
+
+A cron job might look like this:
+
+```crobtab
+0 1 * * * /var/www/bin/cake notification -q
+```
+
+Make sure to have set up the `EMAIL_DEFAULT_FROM` variable in for `config/.env`.
+
+#### Mails to locations
+
+That's mails to external locations, e.g. for applications.
+
+These mails are based on 'mail' records that define a generic mail text (containing placeholders) that are processed for each selected location.
+
+A cron job might look like this:
+
+```crobtab
+*/5 * * * * /var/www/bin/cake send_mails -q
+```
+
+Make sure to have set up the `EMAIL_EXTERNAL_FROM` variable in for `config/.env`.
+
 ### CalDav
 
 Set `CALENDAR_*` variables in `config/.env` to link this platforms dates to a remote CalDav calendar.

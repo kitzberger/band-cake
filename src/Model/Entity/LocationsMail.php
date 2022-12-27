@@ -2,6 +2,7 @@
 
 namespace App\Model\Entity;
 
+use Cake\Mailer\Email;
 use Cake\ORM\Entity;
 
 /**
@@ -34,6 +35,25 @@ class LocationsMail extends Entity
         'text' => true,
         'sent' => true,
         'location' => true,
-        'mail' => true
+        'mail' => true,
     ];
+
+    public function send()
+    {
+        $deliveryProfile = 'external';
+        $config = Email::getConfig($deliveryProfile);
+        if (empty($config) || empty($config['from'])) {
+            throw new \Exception('Missing \'' . $deliveryProfile . '\' from address in config!');
+        }
+        $from = $config['from'];
+
+        $email = new Email(['template' => 'markdown', 'layout' => 'default']);
+        $email->viewBuilder()->addHelpers(['Tanuck/Markdown.Markdown']);
+        $email->setTransport('default')
+            ->setEmailFormat('html')
+            ->setTo($this->email)
+            ->setFrom($from)
+            ->setSubject($this->subject)
+            ->send($this->text);
+    }
 }

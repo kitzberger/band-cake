@@ -2,7 +2,7 @@
     <h3>
         <?= __('Mails') ?>
         <small>
-            <?= $this->Html->link('<i class="fi-page-add"></i> '.__('New'), ['controller' => 'Mails', 'action' => 'add'], ['escape' => false]) ?>
+            <?= $this->Html->link('<i class="fi-page-add"></i> ' . __('New'), ['controller' => 'Mails', 'action' => 'add'], ['escape' => false]) ?>
         </small>
     </h3>
     <table cellpadding="0" cellspacing="0">

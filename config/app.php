@@ -190,18 +190,12 @@ return [
      */
     'EmailTransport' => [
         'default' => [
-            'className' => 'Cake\Mailer\Transport\MailTransport',
-            /*
-             * The following keys are used in SMTP transports:
-             */
-            'host' => 'localhost',
-            'port' => 25,
-            'timeout' => 30,
-            'username' => null,
-            'password' => null,
-            'client' => null,
-            'tls' => null,
+            'className' => 'Cake\\Mailer\\Transport\\' . env('EMAIL_TRANSPORT_DEFAULT_TYPE', 'Mail') . 'Transport',
             'url' => env('EMAIL_TRANSPORT_DEFAULT_URL', null),
+        ],
+        'external' => [
+            'className' => 'Cake\\Mailer\\Transport\\' . env('EMAIL_TRANSPORT_EXTERNAL_TYPE', 'Mail') . 'Transport',
+            'url' => env('EMAIL_TRANSPORT_EXTERNAL_URL', null),
         ],
     ],
     /**
@@ -217,8 +211,10 @@ return [
         'default' => [
             'transport' => 'default',
             'from' => env('EMAIL_DEFAULT_FROM', 'you@localhost'),
-            //'charset' => 'utf-8',
-            //'headerCharset' => 'utf-8',
+        ],
+        'external' => [
+            'transport' => 'external',
+            'from' => env('EMAIL_EXTERNAL_FROM', 'you@localhost'),
         ],
     ],
     /**

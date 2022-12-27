@@ -144,14 +144,14 @@ class MailsController extends AppController
     }
 
     /**
-     * send method
+     * Put an email to a location into the mail queue
      *
      * @param string|null $mailId Mail id.
      * @param string|null $locationId Location id.
      * @return \Cake\Http\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function send($mailId = null, $locationId = null)
+    public function enqueue($mailId = null, $locationId = null)
     {
         $mail = $this->Mails->get(
             $mailId,
@@ -170,8 +170,8 @@ class MailsController extends AppController
             } else {
                 $mailText = $this->prepareMailText($mail->text, $location);
 
-                if (strpos($mailText, 'xxx') > -1) {
-                    $this->Flash->error(__('Mailtext has unresolved markers!'));
+                if (strpos($mailText, '[xxx]') > -1) {
+                    $this->Flash->error(__('Mailtext has unresolved placeholders!'));
                 } else {
                     $locationMail = $location->_joinData;
                     $locationMail->email = $location->email;
@@ -192,18 +192,50 @@ class MailsController extends AppController
         return $this->redirect(['action' => 'view', $mailId]);
     }
 
+    /**
+     * Remove an email to a location from the mail queue
+     *
+     * @param string|null $mailId Mail id.
+     * @param string|null $locationId Location id.
+     * @return \Cake\Http\Response|null
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function unqueue($mailId = null, $locationId = null)
+    {
+        $this->loadModel('LocationsMails');
+
+        $mail = $this->LocationsMails->find(
+            'all',
+            [
+                'conditions' => [
+                    'mail_id' => $mailId,
+                    'location_id' => $locationId,
+                    'sent IS' => null,
+                ],
+            ]
+        )->first();
+
+        if ($this->LocationsMails->delete($mail)) {
+            $this->Flash->success(__('The mail has been deleted.'));
+        } else {
+            $this->Flash->error(__('The mail could not be deleted. Please, try again.'));
+        }
+
+        return $this->redirect(['action' => 'view', $mailId]);
+    }
+
     private function prepareMailText($text, $location)
     {
         $text = str_replace(
             [
                 '{person}',
-                '{title}',
+                '{location}',
                 '{city}',
             ],
             [
-                trim($location->person) ? trim($location->person) : 'ihr Lieben',
-                trim($location->title) ? trim($location->title) : 'xxx',
-                trim($location->city) ? trim($location->city) : 'xxx',
+                trim($location->person) ? trim($location->person) : '[xxx]',
+                trim($location->title) ? trim($location->title) : '[xxx]',
+                trim($location->city) ? trim($location->city) : '[xxx]',
             ],
             $text
         );

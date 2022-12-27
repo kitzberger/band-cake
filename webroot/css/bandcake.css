@@ -205,3 +205,12 @@ div.dashboard > table td table td:last-child { padding-right: 0; }
 @media only screen and (max-width: 40em) {
     div.dashboard > table > tbody > tr > td { display: block; width: 100%; padding-right: 0; padding-bottom: 20px; }
 }
+
+div.input p.hint {
+    color: #888888;
+    font-size: 0.8em;
+    margin-bottom: 0;
+}
+div.input p.hint code {
+    padding: 0;
+}

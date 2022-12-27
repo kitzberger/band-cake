@@ -3,11 +3,11 @@
         <?= h($mail->subject) ?>
         <?php $this->assign('title', $mail->subject); ?>
         <small>
-            <?= $this->Html->link('<i class="fi-pencil"></i> '.__('Edit'), ['action' => 'edit', $mail->id], ['escape' => false]) ?>
+            <?= $this->Html->link('<i class="fi-pencil"></i> ' . __('Edit'), ['action' => 'edit', $mail->id], ['escape' => false]) ?>
             <?php
                 if ($currentUser['is_admin']) {
                     echo $this->Form->postLink(
-                        '<i class="fi-trash"></i> '.__('Delete'),
+                        '<i class="fi-trash"></i> ' . __('Delete'),
                         ['action' => 'delete', $mail->id],
                         ['confirm' => __('Are you sure you want to delete "{0}"?', $mail->subject), 'escape' => false]
                     );
@@ -31,7 +31,15 @@
     </table>
     <div class="row">
         <h4><?= __('Text') ?></h4>
-        <?= $this->Text->autoParagraph(h($mail->text)); ?>
+        <?php
+            $text = h($mail->text);
+            $text = str_replace(
+                ['{', '}'],
+                ['<code>{', '}</code>'],
+                $text
+            );
+            echo $this->Text->autoParagraph($text);
+        ?>
     </div>
     <div class="related">
         <h4><?= __('Recipients') ?></h4>
@@ -41,15 +49,17 @@
                 <th scope="col"><?= __('Title') ?></th>
                 <th scope="col"><?= __('City') ?></th>
                 <th scope="col"><?= __('Zip') ?></th>
+                <th scope="col"><?= __('Person') ?></th>
                 <th scope="col"><?= __('Email') ?></th>
                 <th scope="col"><?= __('Status') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
             <?php foreach ($mail->locations as $location): ?>
             <tr>
-                <td><?= h($location->title) ?></td>
+                <td><?= $this->Html->link($location->title, ['controller' => 'Locations', 'action' => 'view', $location->id]) ?></td>
                 <td><?= h($location->city) ?></td>
                 <td><?= h($location->zip) ?></td>
+                <td><?= h($location->person) ?></td>
                 <td><?= $location->_joinData->email ? h($location->_joinData->email) : h($location->email) ?></td>
                 <td>
                     <?php
@@ -64,10 +74,10 @@
                 </td>
                 <td class="actions">
                     <?php
-                        echo $this->Html->link(__('View'), ['controller' => 'Locations', 'action' => 'view', $location->id]);
                         if (empty($location->_joinData->email)) {
-                            echo ' ';
                             echo $this->Html->link(__('Send'), ['controller' => 'Mails', 'action' => 'prepare', $mail->id, $location->id]);
+                        } elseif (empty($location->_joinData->sent)) {
+                            echo $this->Html->link(__('Abort'), ['controller' => 'Mails', 'action' => 'unqueue', $mail->id, $location->id]);
                         }
                     ?>
                 </td>
