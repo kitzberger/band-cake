@@ -19,7 +19,7 @@ class MailsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Users']
+            'contain' => ['Users', 'Locations']
         ];
         $mails = $this->paginate($this->Mails);
 

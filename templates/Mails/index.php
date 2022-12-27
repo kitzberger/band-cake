@@ -5,13 +5,12 @@
             <?= $this->Html->link('<i class="fi-page-add"></i> '.__('New'), ['controller' => 'Mails', 'action' => 'add'], ['escape' => false]) ?>
         </small>
     </h3>
-
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('subject') ?></th>
+                <th scope="col"><?= __('Recipients') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
             </tr>
@@ -19,9 +18,9 @@
         <tbody>
             <?php foreach ($mails as $mail): ?>
             <tr>
-                <td><?= $this->Number->format($mail->id) ?></td>
+                <td><?= $this->Html->link($mail->subject, ['action' => 'view', $mail->id]) ?></td>
+                <td><?= count($mail->locations) ?></td>
                 <td><?= $mail->has('user') ? $this->Html->link($mail->user->username, ['controller' => 'Users', 'action' => 'view', $mail->user->id]) : '' ?></td>
-                <td><?= h($mail->subject) ?></td>
                 <td class="show-for-medium"><?= $this->element('date', ['date' => $mail->created]) ?></td>
                 <td><?= $this->element('date', ['date' => $mail->modified]) ?></td>
             </tr>
