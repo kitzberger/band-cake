@@ -12,6 +12,7 @@ use Cake\Validation\Validator;
  * @property \Cake\ORM\Association\BelongsTo $Dates
  * @property \Cake\ORM\Association\BelongsTo $Ideas
  * @property \Cake\ORM\Association\BelongsTo $Songs
+ * @property \Cake\ORM\Association\BelongsTo $SongsVersion
  * @property \Cake\ORM\Association\BelongsToMany $Collections
  * @property \Cake\ORM\Association\HasMany $Shares
  *
@@ -56,6 +57,9 @@ class FilesTable extends AbstractTable
         ]);
         $this->belongsTo('Songs', [
             'foreignKey' => 'song_id'
+        ]);
+        $this->belongsTo('SongsVersions', [
+            'foreignKey' => 'song_version_id'
         ]);
         $this->belongsToMany('Collections', [
             'foreignKey' => 'file_id',
@@ -107,6 +111,7 @@ class FilesTable extends AbstractTable
         $rules->add($rules->existsIn(['date_id'], 'Dates'));
         $rules->add($rules->existsIn(['idea_id'], 'Ideas'));
         $rules->add($rules->existsIn(['song_id'], 'Songs'));
+        $rules->add($rules->existsIn(['song_version_id'], 'SongsVersions'));
 
         return $rules;
     }

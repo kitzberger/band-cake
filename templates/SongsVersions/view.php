@@ -52,4 +52,14 @@
         <h4><?= __('Text') ?></h4>
         <?= $this->Text->autoParagraph(h($songsVersion->text)); ?>
     </div>
+    <div class="related">
+        <h4><?= __('Comments') ?></h4>
+        <?= $this->element('Comments/list', ['comments' => $songsVersion->comments]); ?>
+        <?= $this->element('Comments/new', ['comment' => null, 'song_version_id' => $songsVersion->id]); ?>
+    </div>
+    <div class="related">
+        <h4><?= __('Files') ?></h4>
+        <?= $this->element('Files/upload', ['song_version_id' => $songsVersion->id]); ?>
+        <?= $this->element('Files/list', ['files' => $songsVersion->files]); ?>
+    </div>
 </div>

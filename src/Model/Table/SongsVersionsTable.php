@@ -10,6 +10,8 @@ use Cake\Validation\Validator;
  *
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
  * @property \App\Model\Table\SongsTable&\Cake\ORM\Association\BelongsTo $Songs
+ * @property \Cake\ORM\Association\HasMany $Comments
+ * @property \Cake\ORM\Association\HasMany $Files
  *
  * @method \App\Model\Entity\SongsVersion get($primaryKey, $options = [])
  * @method \App\Model\Entity\SongsVersion newEntity($data = null, array $options = [])
@@ -48,6 +50,12 @@ class SongsVersionsTable extends AbstractTable
         $this->belongsTo('Songs', [
             'foreignKey' => 'song_id',
             'joinType' => 'INNER',
+        ]);
+        $this->hasMany('Comments', [
+            'foreignKey' => 'song_version_id'
+        ]);
+        $this->hasMany('Files', [
+            'foreignKey' => 'song_version_id'
         ]);
     }
 

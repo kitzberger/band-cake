@@ -99,6 +99,7 @@
                 <th class="index"></th>
                 <th><?= __('Title') ?></th>
                 <th><?= __('Version') ?></th>
+                <th><?= __('Reference file') ?></th>
                 <th></th>
             </tr>
             <?php
@@ -125,10 +126,17 @@
                 </td>
                 <td>
                     <?php
-                        foreach ($song->files as $file) {
-                            if ($file->is_public) {
-                                echo $this->element('Files/embed-inline', ['file' => $file]) . '<br>';
+                        $file = null;
+                        foreach ($song->versions as $version) {
+                            if ($version->id === $song->_joinData->song_version_id) {
+                                $file = $version->files[0] ?? null;
                             }
+                        }
+                        if (empty($file)) {
+                            $file = $song->files[0] ?? null;
+                        }
+                        if ($file) {
+                            echo $this->element('Files/embed-inline', ['file' => $file]) . '<br>';
                         }
                     ?>
                 </td>

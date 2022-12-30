@@ -33,6 +33,7 @@
                     <?= $comment->has('date') ? __('Date') . ': ' . $this->Html->link($comment->date->title, ['controller' => 'Dates', 'action' => 'view', $comment->date->id]) : '' ?>
                     <?= $comment->has('idea') ? __('Idea') . ': ' . $this->Html->link($comment->idea->title, ['controller' => 'Ideas', 'action' => 'view', $comment->idea->id]) : '' ?>
                     <?= $comment->has('song') ? __('Song') . ': ' . $this->Html->link($comment->song->title, ['controller' => 'Songs', 'action' => 'view', $comment->song->id]) : '' ?>
+                    <?= $comment->has('songs_version') ? __('Song version') . ': ' . $this->Html->link($comment->songs_version->title, ['controller' => 'SongsVersions', 'action' => 'view', $comment->songs_version->id]) : '' ?>
                     <?= $comment->has('collection') ? __('Collection') . ': ' . $this->Html->link($comment->collection->title, ['controller' => 'Collections', 'action' => 'view', $comment->collection->id]) : '' ?>
                 </td>
                 <td><?= $this->element('date', ['date' => $comment->created]) ?></td>

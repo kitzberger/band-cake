@@ -11,17 +11,19 @@ use Cake\ORM\Entity;
  * @property int $user_id
  * @property int $date_id
  * @property int $idea_id
+ * @property int $song_id
+ * @property int $song_version_id
  * @property string $title
  * @property string $file
  * @property bool $is_public
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
- * @property int $song_id
  *
  * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\Date $date
  * @property \App\Model\Entity\Idea $idea
  * @property \App\Model\Entity\Song $song
+ * @property \App\Model\Entity\SongsVersion $songVersion
  * @property \App\Model\Entity\Collection[] $collections
  * @property \App\Model\Entity\Share[] $shares
  */

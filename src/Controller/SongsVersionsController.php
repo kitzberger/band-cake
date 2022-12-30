@@ -65,7 +65,14 @@ class SongsVersionsController extends AppController
     public function view($id = null)
     {
         $songsVersion = $this->SongsVersions->get($id, [
-            'contain' => ['Users', 'Songs'],
+            'contain' => [
+                'Users',
+                'Songs',
+                'Comments' => ['sort' => ['Comments.created' => 'ASC']],
+                'Comments.Users',
+                'Files' => ['sort' => ['Files.created' => 'DESC']],
+                'Files.Users',
+            ],
         ]);
 
         $this->set('songsVersion', $songsVersion);

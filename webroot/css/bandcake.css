@@ -152,11 +152,13 @@ table.comments td.actions { width: 100px; white-space: nowrap; }
 div.dates div.related fieldset,
 div.ideas div.related fieldset,
 div.songs div.related fieldset,
+div.songsVersions div.related fieldset,
 div.collections div.related fieldset { margin: 0; padding: 0; }
 
 div.dates div.related h4,
 div.ideas div.related h4,
 div.songs div.related h4,
+div.songsVersions div.related h4,
 div.collections div.related h4 { font-size: 20px; }
 
 div.related table { table-layout: auto }
