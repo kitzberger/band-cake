@@ -12,6 +12,8 @@ class LogsController extends AppController
     protected $contain = [
         'Users',
         'Songs',
+        'SongsVersions',
+        'SongsVersions.Songs',
         'Dates',
         'Ideas',
         'Comments',

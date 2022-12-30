@@ -54,18 +54,22 @@ class NotificationShell extends Shell
         }
         $users = $this->Users->find('all', $options);
 
-        foreach ($users as $user) {
-            $this->out('Informing ' . $user['username'] . ' about latest stuff ...');
+        if ($users->count() === 0) {
+            $this->out('No active user(s) found ;-(');
+        } else {
+            foreach ($users as $user) {
+                $this->out('Informing ' . $user['username'] . ' about latest stuff ...');
 
-            $logsController = new LogsController();
-            $result = $logsController->notify($user);
+                $logsController = new LogsController();
+                $result = $logsController->notify($user);
 
-            $this->out('-> ' . $result . ' log(s) sent');
+                $this->out('-> ' . $result . ' log(s) sent');
 
-            if ($result > 0 && empty($specificUser)) {
-                $user->notified = \Cake\I18n\FrozenTime::now();
-                $this->Users->save($user);
-                $this->out('-> Set "notified" to: ' . (string)$user->notified);
+                if ($result > 0 && empty($specificUser)) {
+                    $user->notified = \Cake\I18n\FrozenTime::now();
+                    $this->Users->save($user);
+                    $this->out('-> Set "notified" to: ' . (string)$user->notified);
+                }
             }
         }
     }

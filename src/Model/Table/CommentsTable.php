@@ -127,6 +127,9 @@ class CommentsTable extends AbstractTable
             if ($entity->song_id) {
                 $log->song_id = $entity->song_id;
             }
+            if ($entity->song_version_id) {
+                $log->song_version_id = $entity->song_version_id;
+            }
             if ($entity->collection_id) {
                 $log->collection_id = $entity->collection_id;
             }

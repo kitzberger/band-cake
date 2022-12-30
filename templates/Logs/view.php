@@ -10,6 +10,10 @@
             <td><?= $log->has('song') ? $this->Html->link($log->song->title, ['controller' => 'Songs', 'action' => 'view', $log->song->id]) : '' ?></td>
         </tr>
         <tr>
+            <th><?= __('Song version') ?></th>
+            <td><?= $log->has('songs_version') ? $this->Html->link($log->songs_version->title, ['controller' => 'SongsVersions', 'action' => 'view', $log->songs_version->id]) : '' ?></td>
+        </tr>
+        <tr>
             <th><?= __('Date') ?></th>
             <td><?= $log->has('date') ? $this->Html->link($log->date->title, ['controller' => 'Dates', 'action' => 'view', $log->date->id]) : '' ?></td>
         </tr>

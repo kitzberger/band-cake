@@ -48,6 +48,9 @@ class LogsTable extends Table
         $this->belongsTo('Songs', [
             'foreignKey' => 'song_id',
         ]);
+        $this->belongsTo('SongsVersions', [
+            'foreignKey' => 'song_version_id',
+        ]);
         $this->belongsTo('Dates', [
             'foreignKey' => 'date_id',
         ]);
@@ -101,6 +104,7 @@ class LogsTable extends Table
     {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
         $rules->add($rules->existsIn(['song_id'], 'Songs'));
+        $rules->add($rules->existsIn(['song_version_id'], 'SongsVersions'));
         $rules->add($rules->existsIn(['date_id'], 'Dates'));
         $rules->add($rules->existsIn(['idea_id'], 'Ideas'));
         $rules->add($rules->existsIn(['comment_id'], 'Comments'));

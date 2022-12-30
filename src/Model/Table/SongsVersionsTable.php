@@ -118,10 +118,10 @@ class SongsVersionsTable extends AbstractTable
         if (!empty($diff)) {
             $logs = \Cake\ORM\TableRegistry::get('Logs');
             $log = $logs->newEntity([
-                'user_id' => $entity->modified_by,
-                'song_id' => $entity->song_id,
-                'created' => $entity->modified,
-                'diff' => $diff,
+                'user_id'         => $entity->modified_by,
+                'song_version_id' => $entity->id,
+                'created'         => $entity->modified,
+                'diff'            => $diff,
             ]);
 
             $logs->save($log);

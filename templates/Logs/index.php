@@ -6,6 +6,7 @@
                 <th><?= __('Id') ?></th>
                 <th><?= __('User') ?></th>
                 <th><?= __('Record') ?></th>
+                <th><?= __('Relation') ?></th>
                 <th><?= __('Diff') ?></th>
                 <th><?= $this->Paginator->sort('created') ?></th>
             </tr>
@@ -20,6 +21,10 @@
                         if ($log->has('song')) {
                             echo __('Song') . ': ' . $this->Html->link($log->song->title, ['_full' => true, 'controller' => 'Songs', 'action' => 'view', $log->song->id]);
                         }
+                        if ($log->has('songs_version')) {
+                            echo __('Song') . ': ' . $this->Html->link($log->songs_version->song->title, ['_full' => true, 'controller' => 'Songs', 'action' => 'view', $log->songs_version->song->id]);
+                            echo ', ' . __('Version') . ': ' . $this->Html->link($log->songs_version->title, ['_full' => true, 'controller' => 'SongsVersions', 'action' => 'view', $log->songs_version->id]);
+                        }
                         if ($log->has('date')) {
                             echo __('Date on') . ' ' . $log->date->begin->format('Y-m-d') . ': ' . $this->Html->link($log->date->title, ['_full' => true, 'controller' => 'Dates', 'action' => 'view', $log->date->id]);
                         }
@@ -31,6 +36,16 @@
                         }
                         if ($log->has('share')) {
                             echo __('Share') . ': ' . $this->Html->link($log->share->id, ['_full' => true, 'controller' => 'Shares', 'action' => 'view', $log->share->id]);
+                        }
+                    ?>
+                </td>
+                <td>
+                    <?php
+                        if ($log->has('comment')) {
+                            echo __('Comment');
+                        }
+                        if ($log->has('file')) {
+                            echo __('File');
                         }
                     ?>
                 </td>
