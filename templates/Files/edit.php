@@ -17,7 +17,15 @@
                         'default' => (isset($this->request->query['song_id']) ? $this->request->query['song_id'] : null)
                     ]
                 );
-                echo $this->Form->control('is_public', ['type' => 'checkbox', 'label' => 'Set as reference file for this song?']);
+                echo $this->Form->control(
+                    'song_version_id',
+                    [
+                        'options' => $songsVersions,
+                        'empty' => true,
+                        'default' => (isset($this->request->query['song_version_id']) ? $this->request->query['song_version_id'] : null)
+                    ]
+                );
+                echo $this->Form->control('is_public', ['type' => 'checkbox', 'label' => 'Set as reference file for this song/version?']);
             }
         ?>
     </fieldset>

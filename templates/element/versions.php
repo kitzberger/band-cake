@@ -11,6 +11,11 @@
         data-user-id="<?= $currentUser['id'] ?>"
         data-csrf-token="<?= $_csrfToken ?>">
     <?php
+        echo sprintf(
+            '<li><a href="javascript:" onclick="setVersion(this,%d,%d,null); return false">&nbsp;</a></li>',
+            $collection->id,
+            $song->id
+        );
         foreach ($song->versions as $version) {
             if ($version->id === $chosenVersion) {
                 $chosenVersionTitle = $version->title;

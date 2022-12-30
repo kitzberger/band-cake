@@ -63,11 +63,20 @@
                 <?php
                     if (count($song->versions)) {
                         echo '<table class="versions">';
-                        echo '<tr><th>Name</th><th>Length</th><th>Modified</th></tr>';
+                        echo '<tr><th>Name</th><th>Length</th><th>Reference file</th><th>Modified</th></tr>';
                         foreach ($song->versions as $version) {
                             echo '<tr>';
                             echo '<td>' . $this->Html->link($version->title, ['controller' => 'SongsVersions', 'action' => 'view', $version->id]) . '</td>';
                             echo '<td>' . $this->element('duration', ['seconds' => $version->length]) . '</td>';
+                            if (count($version->files)) {
+                                echo '<td>';
+                                foreach ($version->files as $file) {
+                                    echo $this->element('Files/embed-inline', ['file' => $file]);
+                                }
+                                echo '</td>';
+                            } else {
+                                echo '<td></td>';
+                            }
                             echo '<td>' . $this->element('date', ['date' => $version->modified]) . '</td>';
                             echo '</tr>';
                         }

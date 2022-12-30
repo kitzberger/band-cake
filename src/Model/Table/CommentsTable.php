@@ -12,6 +12,7 @@ use Cake\Validation\Validator;
  * @property \Cake\ORM\Association\BelongsTo $Dates
  * @property \Cake\ORM\Association\BelongsTo $Ideas
  * @property \Cake\ORM\Association\BelongsTo $Songs
+ * @property \Cake\ORM\Association\BelongsTo $SongsVersions
  * @property \Cake\ORM\Association\BelongsTo $Collections
  *
  * @method \App\Model\Entity\Comment get($primaryKey, $options = [])
@@ -56,6 +57,9 @@ class CommentsTable extends AbstractTable
         $this->belongsTo('Songs', [
             'foreignKey' => 'song_id'
         ]);
+        $this->belongsTo('SongsVersions', [
+            'foreignKey' => 'song_version_id'
+        ]);
         $this->belongsTo('Collections', [
             'foreignKey' => 'collection_id'
         ]);
@@ -96,6 +100,7 @@ class CommentsTable extends AbstractTable
         $rules->add($rules->existsIn(['date_id'], 'Dates'));
         $rules->add($rules->existsIn(['idea_id'], 'Ideas'));
         $rules->add($rules->existsIn(['song_id'], 'Songs'));
+        $rules->add($rules->existsIn(['song_version_id'], 'SongsVersions'));
         $rules->add($rules->existsIn(['collection_id'], 'Collections'));
 
         return $rules;

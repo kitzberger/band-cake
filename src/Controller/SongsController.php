@@ -80,12 +80,13 @@ class SongsController extends AppController
             'contain' => [
                 'Users',
                 'Comments' => ['sort' => ['Comments.created' => 'ASC']],
+                'Comments.Users',
                 'Files' => ['sort' => ['Files.created' => 'DESC']],
                 'Files.Users',
                 'Files.Collections',
-                'Comments.Users',
                 'Collections.Users',
                 'SongsVersions',
+                'SongsVersions.Files' => ['conditions' => ['is_public' => 1]],
             ]
         ]);
 

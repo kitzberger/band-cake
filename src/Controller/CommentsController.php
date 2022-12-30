@@ -48,7 +48,7 @@ class CommentsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Users', 'Dates', 'Ideas', 'Songs', 'Collections'],
+            'contain' => ['Users', 'Dates', 'Ideas', 'Songs', 'SongsVersions', 'Collections'],
             'order' => ['Comments.modified DESC'],
         ];
         $comments = $this->paginate($this->Comments);
@@ -67,7 +67,7 @@ class CommentsController extends AppController
     public function view($id = null)
     {
         $comment = $this->Comments->get($id, [
-            'contain' => ['Users', 'Dates', 'Ideas', 'Songs', 'Collections']
+            'contain' => ['Users', 'Dates', 'Ideas', 'Songs', 'SongsVersions', 'Collections']
         ]);
 
         $this->set('comment', $comment);
@@ -97,6 +97,9 @@ class CommentsController extends AppController
                 if ($comment->song_id) {
                     $redirect = ['controller' => 'songs', 'action' => 'view', $comment->song_id];
                 }
+                if ($comment->song_version_id) {
+                    $redirect = ['controller' => 'songsVersions', 'action' => 'view', $comment->song_version_id];
+                }
                 if ($comment->collection_id) {
                     $redirect = ['controller' => 'collections', 'action' => 'view', $comment->collection_id];
                 }
@@ -109,8 +112,9 @@ class CommentsController extends AppController
         $dates = $this->Comments->Dates->find('list', ['limit' => 200]);
         $ideas = $this->Comments->Ideas->find('list', ['limit' => 200]);
         $songs = $this->Comments->Songs->find('list', ['limit' => 200]);
+        $songsVersions = $this->Comments->SongsVersions->find('list', ['limit' => 200]);
         $collections = $this->Comments->Collections->find('list', ['limit' => 200]);
-        $this->set(compact('comment', 'users', 'dates', 'ideas', 'songs', 'collections'));
+        $this->set(compact('comment', 'users', 'dates', 'ideas', 'songs', 'songsVersions', 'collections'));
         $this->set('_serialize', ['comment']);
     }
 
@@ -141,6 +145,9 @@ class CommentsController extends AppController
                 if ($comment->song_id) {
                     $redirect = ['controller' => 'songs', 'action' => 'view', $comment->song_id];
                 }
+                if ($comment->song_version_id) {
+                    $redirect = ['controller' => 'songsVersions', 'action' => 'view', $comment->song_version_id];
+                }
                 if ($comment->collection_id) {
                     $redirect = ['controller' => 'collections', 'action' => 'view', $comment->collection_id];
                 }
@@ -153,8 +160,9 @@ class CommentsController extends AppController
         $dates = $this->Comments->Dates->find('list', ['limit' => 200]);
         $ideas = $this->Comments->Ideas->find('list', ['limit' => 200]);
         $songs = $this->Comments->Songs->find('list', ['limit' => 200]);
+        $songsVersions = $this->Comments->SongsVersions->find('list', ['limit' => 200]);
         $collections = $this->Comments->Collections->find('list', ['limit' => 200]);
-        $this->set(compact('comment', 'users', 'dates', 'ideas', 'songs', 'collections'));
+        $this->set(compact('comment', 'users', 'dates', 'ideas', 'songs', 'songsVersions', 'collections'));
         $this->set('_serialize', ['comment']);
     }
 

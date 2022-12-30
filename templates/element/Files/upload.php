@@ -9,6 +9,9 @@
     if (isset($song_id)) {
         $id_params = ['key' => 'song_id', 'value' => $song_id];
     }
+    if (isset($song_version_id)) {
+        $id_params = ['key' => 'song_version_id', 'value' => $song_version_id];
+    }
     if (isset($collection_id)) {
         $id_params = ['key' => 'collection_id', 'value' => $collection_id];
     }

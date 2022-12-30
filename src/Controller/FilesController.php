@@ -45,7 +45,7 @@ class FilesController extends AppController
         $sword = $this->request->getQuery('sword');
 
         $this->paginate = [
-            'contain' => ['Users', 'Dates', 'Ideas', 'Songs', 'Collections'],
+            'contain' => ['Users', 'Dates', 'Ideas', 'Songs', 'SongsVersions', 'Collections'],
             'order' => ['Files.modified DESC'],
             'conditions' => ['Files.title LIKE' => '%' . $sword . '%'],
         ];
@@ -65,7 +65,7 @@ class FilesController extends AppController
     public function view($id = null)
     {
         $file = $this->Files->get($id, [
-            'contain' => ['Users', 'Dates', 'Ideas', 'Songs', 'Collections', 'Collections.Users']
+            'contain' => ['Users', 'Dates', 'Ideas', 'Songs', 'SongsVersions', 'Collections', 'Collections.Users']
         ]);
 
         $this->set('file', $file);
@@ -105,8 +105,9 @@ class FilesController extends AppController
         $dates = $this->Files->Dates->find('list', ['limit' => 200]);
         $ideas = $this->Files->Ideas->find('list', ['limit' => 200, 'order' => 'title']);
         $songs = $this->Files->Songs->find('list', ['limit' => 200, 'order' => 'title']);
+        $songsVersions = $this->Files->SongsVersions->find('list', ['limit' => 200, 'order' => 'title']);
         $collections = $this->Files->Collections->find('list', ['limit' => 200]);
-        $this->set(compact('file', 'users', 'dates', 'ideas', 'songs', 'collections'));
+        $this->set(compact('file', 'users', 'dates', 'ideas', 'songs', 'songsVersions', 'collections'));
         $this->set('_serialize', ['file']);
     }
 
@@ -186,10 +187,12 @@ class FilesController extends AppController
         $dates = $this->Files->Dates->find('list', ['limit' => 200]);
         $ideas = $this->Files->Ideas->find('list', ['limit' => 200]);
         $collections = $this->Files->Collections->find('list', ['limit' => 200]);
+        $songs = $songsVersions = [];
         if ($file->isAudio()) {
             $songs = $this->Files->Songs->find('list', ['limit' => 200, 'order' => 'title']);
+            $songsVersions = $this->Files->SongsVersions->find('list', ['limit' => 200, 'order' => 'title']);
         }
-        $this->set(compact('file', 'users', 'dates', 'ideas', 'songs', 'collections'));
+        $this->set(compact('file', 'users', 'dates', 'ideas', 'songs', 'songsVersions', 'collections'));
         $this->set('_serialize', ['file']);
     }
 

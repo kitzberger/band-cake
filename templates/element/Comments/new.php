@@ -1,5 +1,5 @@
 <?php
-    $simpleMode = (isset($date_id) || isset($idea_id) || isset($song_id) || isset($collection_id));
+    $simpleMode = (isset($date_id) || isset($idea_id) || isset($song_id) || isset($song_version_id) || isset($collection_id));
 ?>
 <?= $this->Form->create($comment, ['url' => ['controller' => 'Comments', 'action' => 'add']]) ?>
 <fieldset>
@@ -8,32 +8,49 @@
             echo $this->Form->control('date_id', ['type' => 'hidden', 'default' => (isset($date_id) ? $date_id : null)]);
             echo $this->Form->control('idea_id', ['type' => 'hidden', 'default' => (isset($idea_id) ? $idea_id : null)]);
             echo $this->Form->control('song_id', ['type' => 'hidden', 'default' => (isset($song_id) ? $song_id : null)]);
+            echo $this->Form->control('song_version_id', ['type' => 'hidden', 'default' => (isset($song_version_id) ? $song_version_id : null)]);
             echo $this->Form->control('collection_id', ['type' => 'hidden', 'default' => (isset($collection_id) ? $collection_id : null)]);
         } else {
             echo '<legend>' . __('Add Comment') . '</legend>';
             echo $this->Form->control(
                 'date_id',
-                ['options' => $dates,
-                                                'empty' => true,
-                                                'default' => (isset($this->request->query['date_id']) ? $this->request->query['date_id'] : null)]
+                [
+                    'options' => $dates,
+                    'empty' => true,
+                    'default' => (isset($this->request->query['date_id']) ? $this->request->query['date_id'] : null),
+                ]
             );
             echo $this->Form->control(
                 'idea_id',
-                ['options' => $ideas,
-                                                'empty' => true,
-                                                'default' => (isset($this->request->query['idea_id']) ? $this->request->query['idea_id'] : null)]
+                [
+                    'options' => $ideas,
+                    'empty' => true,
+                    'default' => (isset($this->request->query['idea_id']) ? $this->request->query['idea_id'] : null),
+                ]
             );
             echo $this->Form->control(
                 'song_id',
-                ['options' => $songs,
-                                                'empty' => true,
-                                                'default' => (isset($this->request->query['song_id']) ? $this->request->query['song_id'] : null)]
+                [
+                    'options' => $songs,
+                    'empty' => true,
+                    'default' => (isset($this->request->query['song_id']) ? $this->request->query['song_id'] : null),
+                ]
+            );
+            echo $this->Form->control(
+                'song_version_id',
+                [
+                    'options' => $songsVersions,
+                    'empty' => true,
+                    'default' => (isset($this->request->query['song_version_id']) ? $this->request->query['song_version_id'] : null),
+                ]
             );
             echo $this->Form->control(
                 'collection_id',
-                ['options' => $songs,
-                                                'empty' => true,
-                                                'default' => (isset($this->request->query['collection_id']) ? $this->request->query['collection_id'] : null)]
+                [
+                    'options' => $collections,
+                    'empty' => true,
+                    'default' => (isset($this->request->query['collection_id']) ? $this->request->query['collection_id'] : null),
+                ]
             );
         }
 
