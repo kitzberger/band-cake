@@ -34,9 +34,9 @@ foreach ($users as $user) {
 
     if ($user['id'] === $currentUser['id']) {
         echo '<ul id="drop" class="f-dropdown" data-dropdown-content aria-hidden="true" tabindex="-1" data-related-to="' . $related_to . '" data-url-vote="' . $this->Url->build(['controller' => 'Votes', 'action' => 'add']) . '" data-user-id="' . $currentUser['id'] . '" data-csrf-token="' . $_csrfToken . '">';
-        echo '  <li><a href="javascript:" onclick="vote(this,1); return false">Dafür</a></li>';
-        echo '  <li><a href="javascript:" onclick="vote(this,0); return false">Enthalten</a></li>';
-        echo '  <li><a href="javascript:" onclick="vote(this,-1); return false">Dagegen</a></li>';
+        echo '  <li><a href="javascript:" onclick="vote(this,1); return false">Positive</a></li>';
+        echo '  <li><a href="javascript:" onclick="vote(this,0); return false">Neutral</a></li>';
+        echo '  <li><a href="javascript:" onclick="vote(this,-1); return false">Negative</a></li>';
         echo '</ul>';
         echo '<a class="button split ' . $extraClass . '" id="my-vote">' . $user['username'];
         echo '  <span data-dropdown="drop" aria-controls="drop" aria-expanded="false"></span>';

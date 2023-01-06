@@ -30,7 +30,7 @@ echo '<h3>Change own vote</h3>';
 
 $params = ['controller' => 'Votes', 'action' => 'add'];
 $url = $this->Url->build($params, true);
-foreach ([-1 => 'Dagegen', 0 => 'Enthalten', 1 => 'Dafür'] as $voteValue => $voteLabel) {
+foreach ([-1 => 'Negative', 0 => 'Neutral', 1 => 'Positive'] as $voteValue => $voteLabel) {
     echo '<form method="post" action="' . $url . '" class="inline">';
     echo '<input type="hidden" name="user_id" value="' . $user['id'] . '" />';
     if (!empty($vote['date_id'])) {
