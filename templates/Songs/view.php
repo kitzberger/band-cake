@@ -57,7 +57,17 @@
         <tr>
             <th>
                 <?= __('Versions') ?>
-                <?= $this->Html->link(__('<i class="fi-page-add"></i>'), ['controller' => 'SongsVersions', 'action' => 'add', 'song_id' => $song->id], ['escape' => false]); ?>
+                <?= $this->Html->link(
+                    __('<i class="fi-page-add"></i>'),
+                    [
+                        'controller' => 'SongsVersions',
+                        'action' => 'add',
+                        '?' => [
+                            'song_id' => $song->id,
+                        ],
+                    ],
+                    ['escape' => false]
+                ); ?>
             </th>
             <td>
                 <?php
