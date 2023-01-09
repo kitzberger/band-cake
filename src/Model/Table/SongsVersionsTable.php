@@ -111,6 +111,28 @@ class SongsVersionsTable extends AbstractTable
         return $rules;
     }
 
+    public function beforeMarshal(\Cake\Event\Event $event, \ArrayObject $data, \ArrayObject $options)
+    {
+        $length = trim($data['length']);
+
+        if (is_numeric($length)) {
+            if ($length > 15) {
+                // it's probably secords, so we keep it as entered.
+                $data['length'] = $length;
+            } else {
+                // it's probably minutes!
+                $data['length'] = $length * 60;
+            }
+        } else {
+            if (preg_match('/^(\d+)[^\d+](\d+)$/', $length, $matches)) {
+                $minutes = $matches[1];
+                $seconds = $matches[2] ?: 0;
+
+                $data['length'] = ($minutes * 60) + $seconds;
+            }
+        }
+    }
+
     public function afterSaveCommit(\Cake\Event\Event $event, \Cake\Datasource\EntityInterface $entity, \ArrayObject $options)
     {
         $diff = $this->getDiff($entity, ['title', 'length', 'text']);

@@ -5,7 +5,7 @@
         <?php
             echo $this->Form->control('song_id', ['options' => $songs]);
             echo $this->Form->control('title', ['autofocus' => 1]);
-            echo $this->Form->control('length', ['label' => __('Length (in seconds)')]);
+            echo $this->Form->control('length', ['type' => 'text']);
             echo $this->Form->control('text');
         ?>
     </fieldset>
