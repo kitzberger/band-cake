@@ -5,7 +5,7 @@
         <small>
             <?= $this->Html->link('<i class="fi-pencil"></i> ' . __('Edit'), ['controller' => 'Songs', 'action' => 'edit', $song->id], ['escape' => false]) ?>
             <?php
-                if ($currentUser['is_admin']) {
+                if ($currentUser['is_active'] == 1 && $currentUser['id'] == $song->user_id) {
                     echo $this->Form->postLink(
                         '<i class="fi-trash"></i> ' . __('Delete'),
                         ['action' => 'delete', $song->id],

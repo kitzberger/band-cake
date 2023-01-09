@@ -10,7 +10,7 @@
                     echo $this->Html->link('<i class="fi-page-copy"></i> ' . __('Copy'), ['controller' => 'Collections', 'action' => 'add', $collection->id], ['escape' => false]);
                     echo ' ';
                 }
-                if ($currentUser['is_admin']) {
+                if ($currentUser['is_active'] == 1 && $currentUser['id'] == $collection->user_id) {
                     echo $this->Form->postLink(
                         '<i class="fi-trash"></i> ' . __('Delete'),
                         ['action' => 'delete', $collection->id],

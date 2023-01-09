@@ -20,11 +20,11 @@ class SongsController extends AppController
         $action = $this->request->getParam('action');
 
         if ($user['is_active']) {
-            if (in_array($action, ['index', 'view', 'add', 'display'])) {
+            if (in_array($action, ['index', 'view', 'add', 'display', 'edit'])) {
                 return true;
             }
 
-            if (in_array($action, ['edit', 'delete'])) {
+            if (in_array($action, ['delete'])) {
                 $songId = (int)$this->request->getParam('pass')[0];
                 if ($this->Songs->isOwnedBy($songId, $user['id'])) {
                     return true;
