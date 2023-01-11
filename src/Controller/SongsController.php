@@ -105,13 +105,8 @@ class SongsController extends AppController
     {
         $song = $this->Songs->get($id);
 
-        if (isset($this->request->query['transposeBy'])) {
-            $this->set('transposeBy', $this->request->query['transposeBy']);
-        } else {
-            $this->set('transposeBy', 0);
-        }
-
-        $this->set('mode', $this->request->query['mode'] ?? 'full');
+        $this->set('transposeBy', $this->request->getQuery('transposeBy') ?? 0);
+        $this->set('mode', $this->request->getQuery('mode') ?? 'full');
 
         $this->set('song', $song);
         $this->set('_serialize', ['song']);
