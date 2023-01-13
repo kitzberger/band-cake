@@ -115,6 +115,8 @@
 
 .fc-event.unsafed-event .fc-title::after { content: url('../img/5.gif'); }
 
+.fc-unthemed .fc-bg .fc-today { background: #b4dbf3; }
+
 div.message.success {
     background-color: #5da423;
     color: #FFF;
