@@ -15,7 +15,7 @@
             echo $this->Form->control('date_id', ['options' => $dates, 'empty' => true]);
             echo $this->Form->control('idea_id', ['options' => $ideas, 'empty' => true]);
             echo $this->Form->control('song_id', ['options' => $songs, 'empty' => true]);
-            echo $this->Form->control('file_id', ['options' => $songs, 'empty' => true]);
+            echo $this->Form->control('file_id', ['options' => $files, 'empty' => true]);
             echo $this->Form->control('collection_id', ['options' => $collections, 'empty' => true]);
             echo $this->Form->control('expire_date', [
                 'class' => 'datetime',
