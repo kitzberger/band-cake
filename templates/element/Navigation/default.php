@@ -1,9 +1,4 @@
 <li><?= $this->Html->link(
-    __('Logs'),
-    ['controller' => 'Logs', 'action' => 'index'],
-    ['class' => $controller=='Logs' ? 'active' : '']
-) ?></li>
-<li><?= $this->Html->link(
     __('Songs'),
     ['controller' => 'Songs', 'action' => 'index'],
     ['class' => $controller=='Songs' ? 'active' : '']
