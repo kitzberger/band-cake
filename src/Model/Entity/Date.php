@@ -49,6 +49,11 @@ class Date extends Entity
         'id' => false
     ];
 
+    public function _getCombinedTitle()
+    {
+        return $this->_fields['begin']->format('Y-m-d') . ': ' . $this->_fields['title'];
+    }
+
     protected function _getStatusString()
     {
         return \App\Helper\DateStatus::toString($this->status);

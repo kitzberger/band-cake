@@ -41,4 +41,9 @@ class SongsVersion extends Entity
         'user' => true,
         'song' => true,
     ];
+
+    public function _getCombinedTitle()
+    {
+        return $this->song->get('title') . ': ' . $this->_fields['title'];
+    }
 }

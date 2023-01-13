@@ -188,8 +188,8 @@ class DatesController extends AppController
                 $this->Flash->error(__('The date could not be saved. Please, try again.'));
             }
         }
-        $users = $this->Dates->Users->find('list', ['limit' => 200]);
-        $locations = $this->Dates->Locations->find('list', ['limit' => 200]);
+        $users = $this->Dates->Users->find('list', ['limit' => 200, 'order' => 'username']);
+        $locations = $this->Dates->Locations->find('list', ['limit' => 200, 'order' => 'title']);
         $this->set(compact('date', 'users', 'locations'));
         $this->set('_serialize', ['date']);
     }
@@ -228,8 +228,8 @@ class DatesController extends AppController
                 $this->Flash->error(__('The date could not be saved. Please, try again.'));
             }
         }
-        $users = $this->Dates->Users->find('list', ['limit' => 200]);
-        $locations = $this->Dates->Locations->find('list', ['limit' => 200]);
+        $users = $this->Dates->Users->find('list', ['limit' => 200, 'order' => 'username']);
+        $locations = $this->Dates->Locations->find('list', ['limit' => 200, 'order' => 'title']);
         $this->set(compact('date', 'users', 'locations'));
         $this->set('_serialize', ['date']);
     }

@@ -103,9 +103,9 @@ class VotesController extends AppController
                 $this->Flash->error(__('The vote could not be saved. Please, try again.'));
             }
         }
-        $users = $this->Votes->Users->find('list', ['limit' => 200]);
-        $dates = $this->Votes->Dates->find('list', ['limit' => 200]);
-        $ideas = $this->Votes->Ideas->find('list', ['limit' => 200]);
+        $users = $this->Votes->Users->find('list', ['limit' => 200, 'order' => 'username']);
+        $dates = $this->Votes->Dates->find('list', ['limit' => 200, 'order' => 'begin', 'valueField' => 'combinedTitle']);
+        $ideas = $this->Votes->Ideas->find('list', ['limit' => 200, 'order' => 'title']);
         $this->set(compact('vote', 'users', 'dates', 'ideas'));
         $this->set('_serialize', ['vote']);
     }
@@ -141,9 +141,9 @@ class VotesController extends AppController
                 $this->Flash->error(__('The vote could not be saved. Please, try again.'));
             }
         }
-        $users = $this->Votes->Users->find('list', ['limit' => 200]);
-        $dates = $this->Votes->Dates->find('list', ['limit' => 200]);
-        $ideas = $this->Votes->Ideas->find('list', ['limit' => 200]);
+        $users = $this->Votes->Users->find('list', ['limit' => 200, 'order' => 'username']);
+        $dates = $this->Votes->Dates->find('list', ['limit' => 200, 'order' => 'begin DESC', 'valueField' => 'combinedTitle']);
+        $ideas = $this->Votes->Ideas->find('list', ['limit' => 200, 'order' => 'title']);
         $this->set(compact('vote', 'users', 'dates', 'ideas'));
         $this->set('_serialize', ['vote']);
     }

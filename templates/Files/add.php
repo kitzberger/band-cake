@@ -5,26 +5,32 @@
         <?php
             echo $this->Form->control('title');
             echo $this->Form->control('file', ['type' => 'file']);
-            echo $this->Form->control('is_public', ['type' => 'checkbox']);
+            echo $this->Form->control('collections._ids', ['options' => $collections]);
             echo $this->Form->control(
                 'date_id',
-                ['options' => $dates,
-                                                'empty' => true,
-                                                'default' => (isset($this->request->query['date_id']) ? $this->request->query['date_id'] : null)]
+                [
+                    'options' => $dates,
+                    'empty' => true,
+                    'default' => (isset($this->request->query['date_id']) ? $this->request->query['date_id'] : null),
+                ]
             );
             echo $this->Form->control(
                 'idea_id',
-                ['options' => $ideas,
-                                                'empty' => true,
-                                                'default' => (isset($this->request->query['idea_id']) ? $this->request->query['idea_id'] : null)]
+                [
+                    'options' => $ideas,
+                    'empty' => true,
+                    'default' => (isset($this->request->query['idea_id']) ? $this->request->query['idea_id'] : null),
+                ]
             );
             echo $this->Form->control(
                 'song_id',
-                ['options' => $songs,
-                                                'empty' => true,
-                                                'default' => (isset($this->request->query['song_id']) ? $this->request->query['song_id'] : null)]
+                [
+                    'options' => $songs,
+                    'empty' => true,
+                    'default' => (isset($this->request->query['song_id']) ? $this->request->query['song_id'] : null),
+                ]
             );
-            echo $this->Form->control('collections._ids', ['options' => $collections]);
+            echo $this->Form->control('is_public', ['type' => 'checkbox', 'label' => 'Set as reference file for this song?']);
         ?>
     </fieldset>
     <?= $this->element('Forms/UserSelect') ?>

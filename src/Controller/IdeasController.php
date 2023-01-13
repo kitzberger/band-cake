@@ -120,7 +120,7 @@ class IdeasController extends AppController
                 $this->Flash->error(__('The idea could not be saved. Please, try again.'));
             }
         }
-        $users = $this->Ideas->Users->find('list', ['limit' => 200]);
+        $users = $this->Ideas->Users->find('list', ['limit' => 200, 'order' => 'username']);
         $this->set(compact('idea', 'users'));
         $this->set('_serialize', ['idea']);
     }
@@ -147,7 +147,7 @@ class IdeasController extends AppController
                 $this->Flash->error(__('The idea could not be saved. Please, try again.'));
             }
         }
-        $users = $this->Ideas->Users->find('list', ['limit' => 200]);
+        $users = $this->Ideas->Users->find('list', ['limit' => 200, 'order' => 'username']);
         $this->set(compact('idea', 'users'));
         $this->set('_serialize', ['idea']);
     }
