@@ -41,5 +41,4 @@ To put the application into debug mode set `DEBUG` to true in `config/.env`.
 * jQuery UI Touch Punch 0.2.3
 * Moment 2.14.1
 * [Fullcalendar 2.9.1](https://github.com/fullcalendar/fullcalendar/tree/v2.9.1)
-* foundation-datepicker 1.5.6
 * selectize.js 0.12.6

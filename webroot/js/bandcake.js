@@ -37,80 +37,44 @@ Dropzone.options.bandcakeUpload = {
 };
 
 $(document).ready(function() {
-    console.log('init_date()');
-    init_date('input.date');
-    console.log('init_datetime()');
-    init_datetime('input.datetime');
-    console.log('init_calendar()');
+    //console.log('init_calendar()');
     init_calendar();
-    console.log('init_datefilters()');
+    //console.log('init_datefilters()');
     init_datefilters()
-    console.log('init_selectize()');
+    //console.log('init_selectize()');
     init_selectize();
     //console.log('init_votes()');
     //init_votes();
-    console.log('init_audioplayer()');
+    //console.log('init_audioplayer()');
     init_audioplayer();
-    console.log('init_comments()');
+    //console.log('init_comments()');
     init_comments();
-    console.log('init_foundation()');
+    //console.log('init_foundation()');
     init_foundation();
 });
 
 function changeDateFields() {
-    //console.log('changeDateFields() called!');
-    $('input.date,input.datetime').each(function(index) {
+    //console.log('changeDateFields() called!')
+    $('input.date').each(function(index) {
         let date = this.value;
-        let type = $(this).data('pseudo-type')
+        let type = $(this).attr('type')
 
-        if (type === 'datetime') {
+        if (type === 'datetime-local') {
+            //console.log('change from datetime-local to date')
+            this.type = 'date'
             if (date) {
                 date = date.substring(0,10)
                 this.value = date
             }
-            $(this).fdatepicker('remove')
-            init_date(this)
         } else {
+            //console.log('change from date to datetime-local')
+            this.type = 'datetime-local'
             if (date) {
                 date = date + ' 00:00'
                 this.value = date
             }
-            $(this).fdatepicker('remove')
-            init_datetime(this)
         }
     })
-}
-
-function init_date(element) {
-    //console.log('init_date() called!');
-    $(element)
-    .attr('autocomplete', 'off')
-    .data('pseudo-type', 'date')
-    //.attr('style', 'border: 1px solid red;')
-    .fdatepicker(
-        {
-          language: 'de',
-          format: 'yyyy-mm-dd',
-          pickTime: false,
-          closeButton: true
-        }
-    )
-}
-
-function init_datetime(element) {
-    //console.log('init_datetime() called!');
-    $(element)
-    .attr('autocomplete', 'off')
-    .data('pseudo-type', 'datetime')
-    //.attr('style', 'border: 1px solid blue;')
-    .fdatepicker(
-        {
-          language: 'de',
-          format: 'yyyy-mm-dd hh:ii',
-          pickTime: true,
-          closeButton: true
-        }
-    )
 }
 
 function init_foundation() {

@@ -5,23 +5,23 @@
         <?php
 
             if ($date->is_fullday) {
-                $class = 'date';
+                $type = 'date';
                 $format = \Cake\Core\Configure::read('DateFormat');
             } else {
-                $class = 'datetime';
+                $type = 'datetime-local';
                 $format = \Cake\Core\Configure::read('DateTimeFormat');
             }
 
             echo $this->Form->control('begin', [
-                'class' => $class,
-                'type' => 'text',
+                'class' => 'date',
+                'type' => $type,
                 'format' => $format,
                 'default' => date($format),
                 'value' => $date->begin->format($format)
             ]);
             echo $this->Form->control('end', [
-                'class' => $class,
-                'type' => 'text',
+                'class' => 'date',
+                'type' => $type,
                 'format' => $format,
                 'default' => date($format),
                 'value' => !empty($date->end) ? $date->end->format($format) : ''
