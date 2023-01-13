@@ -38,7 +38,11 @@
                         <?= ($currentUser['is_admin'] ? '<b style="color:#FF7473">(admin!)</b>' : '') ?>
                     </a>
                 </li>
-                <li><?= $this->Html->link(__('Logout'), ['controller' => 'Users', 'action' => 'logout']) ?></li>
+                <li><?= $this->Html->link(
+                    '<i class="fi-x-circle show-for-small-only"></i> <span class="hide-for-small-only">' . __('Logout') . '</span>',
+                    ['controller' => 'Users', 'action' => 'logout'],
+                    ['escape' => false]) ?>
+                </li>
                 <?php } ?>
             </ul>
         </div>

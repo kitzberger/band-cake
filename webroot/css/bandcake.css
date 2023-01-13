@@ -16,8 +16,10 @@
     #actions-sidebar .side-nav li.heading-menu { display: none; }
     #actions-sidebar .side-nav li.heading-admin { padding: 7px; }
 
-    .top-bar .title-area { padding: 0; float: left; width: 50%; }
-    .top-bar .top-bar-section { float: left; width: 50%; }
+    .top-bar .title-area { padding: 0; float: left; width: 40%; }
+    .top-bar .title-area .name h1 a { width: auto; }
+    .top-bar .top-bar-section { float: left; width: 60%; }
+    .top-bar .top-bar-section ul { display: inline; height: auto !important; width: auto; }
     .top-bar .top-bar-section li { float: left; }
     .top-bar .top-bar-section li a { padding-left: 10px; padding-right: 10px; }
 
