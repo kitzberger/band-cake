@@ -120,7 +120,7 @@ class SongsController extends AppController
      */
     public function sync()
     {
-        if ($this->enabledFeatures['githubEnabled']) {
+        if ($this->enabledFeatures['githubRepo']) {
             $songs = $this->Songs->find('all')->where(['Songs.url !=' => '']);
 
             $count = 0;
