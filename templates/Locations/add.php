@@ -3,7 +3,7 @@
     <fieldset>
         <legend><?= __('Add Location') ?></legend>
         <?php
-            echo $this->Form->control('title');
+            echo $this->Form->control('title', ['autofocus' => 1]);
             echo $this->Form->control('address');
             echo $this->Form->control('city');
             echo $this->Form->control('zip');

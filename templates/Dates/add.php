@@ -3,6 +3,7 @@
     <fieldset>
         <legend><?= __('Add Date') ?></legend>
         <?php
+            echo $this->Form->control('title', ['autofocus' => 1]);
 
             if ($date->is_fullday) {
                 $type = 'date';
@@ -30,7 +31,6 @@
                 'value' => !empty($date->end) ? $date->end->format($format) : ''
             ]);
             echo '<input type="checkbox" name="is_fullday" id="full-day" onchange="changeDateFields()" ' . ($date->is_fullday ? "checked" : "") . ' value="1"><label for="full-day">Full-Day?</label>';
-            echo $this->Form->control('title');
             echo $this->Form->control('location_id', ['options' => $locations, 'empty' => true]);
             echo '<div class="input radio">';
             echo $this->Form->label('status');

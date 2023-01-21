@@ -3,7 +3,7 @@
     <fieldset>
         <legend><?= __('Add Idea') ?></legend>
         <?php
-            echo $this->Form->control('title');
+            echo $this->Form->control('title', ['autofocus' => 1]);
             echo $this->Form->control('text');
         ?>
     </fieldset>

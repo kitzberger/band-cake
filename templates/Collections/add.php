@@ -5,7 +5,7 @@
     <fieldset>
         <legend><?= __('Add Collection') ?></legend>
         <?php
-            echo $this->Form->control('title');
+            echo $this->Form->control('title', ['autofocus' => 1]);
             echo '<div data-alert class="alert-box info">' . __('Select files and songs for this collection right below or (mass) upload them afterwards when visiting the collection.') . '</div>';
             echo $this->Form->control('files._ids', ['options' => $files]);
             echo $this->Form->control('songs._ids', ['options' => $songs]);

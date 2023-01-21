@@ -3,7 +3,7 @@
     <fieldset>
         <legend><?= __('Add File') ?></legend>
         <?php
-            echo $this->Form->control('title');
+            echo $this->Form->control('title', ['autofocus' => 1]);
             echo $this->Form->control('file', ['type' => 'file']);
             echo $this->Form->control('collections._ids', ['options' => $collections]);
             echo $this->Form->control(
