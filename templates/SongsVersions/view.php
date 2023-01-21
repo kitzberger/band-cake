@@ -50,7 +50,9 @@
     </table>
     <div class="row">
         <h4><?= __('Text') ?></h4>
-        <?= $this->Text->autoParagraph(h($songsVersion->text)); ?>
+        <?php if ($songsVersion->text) { ?>
+            <div class="markdown mode-full"><?= $this->Markdown->transform($songsVersion->text) ?></div>
+        <?php } ?>
     </div>
     <div class="related">
         <h4><?= __('Comments') ?></h4>
