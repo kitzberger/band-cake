@@ -3,7 +3,9 @@
     <fieldset>
         <legend><?= __('Add Song') ?></legend>
         <?php
-            echo $this->Form->control('title');
+            $this->Form->setTemplates(['formGroup' => '{{label}}{{hint}}{{input}}']);
+
+            echo $this->Form->control('title', ['autofocus' => 1]);
             echo $this->Form->control('artist');
             if ($currentUser['is_admin']) {
                 echo $this->Form->control('is_pseudo');
@@ -12,7 +14,11 @@
                 }
             }
             if (empty($song->url)) {
-                echo $this->Form->control('text');
+                echo $this->Form->control('text', [
+                    'templateVars' => [
+                        'hint' => '<p class="hint">Supports <a href="https://www.markdownguide.org/cheat-sheet/" target="_blank">markdown</a> syntax.</p>',
+                    ]
+                ]);
             }
         ?>
     </fieldset>

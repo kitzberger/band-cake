@@ -178,7 +178,7 @@ div.gray {
     color: #999999;
 }
 
-
+.hint { color: #999999; font-size: 0.8em; margin: 0 }
 
 table.logs td.diff { width: 50%; }
 del { color: red; }

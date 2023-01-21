@@ -3,10 +3,17 @@
     <fieldset>
         <legend><?= __('Add Songs Version') ?></legend>
         <?php
+            $this->Form->setTemplates(['formGroup' => '{{label}}{{hint}}{{input}}']);
+
             echo $this->Form->control('song_id', ['options' => $songs]);
             echo $this->Form->control('title', ['autofocus' => 1]);
             echo $this->Form->control('length', ['type' => 'text']);
-            echo $this->Form->control('text');
+            echo $this->Form->control('text', [
+                'autofocus' => 1,
+                'templateVars' => [
+                    'hint' => '<p class="hint">Supports <a href="https://www.markdownguide.org/cheat-sheet/" target="_blank">markdown</a> syntax.</p>',
+                ]
+            ]);
         ?>
     </fieldset>
     <?php
