@@ -1,4 +1,4 @@
-<form method="GET">
+<form method="GET" class="hide-for-print">
     <div class="row collapse">
         <div class="medium-2 large-1 columns hide-for-small-only">
             <label for="sword" class="prefix"><?= __('Search') ?></label>

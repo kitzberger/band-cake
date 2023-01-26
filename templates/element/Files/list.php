@@ -7,7 +7,7 @@
             <th><?= __('Collection') ?></th>
             <th><?= __('Created') ?></th>
             <th><?= __('Modified') ?></th>
-            <th class="actions"><?= __('Actions') ?></th>
+            <th class="actions hide-for-print"><?= __('Actions') ?></th>
         </tr>
         <?php foreach ($files as $file): ?>
         <tr class="item item-<?= $file->getType() ?>">
@@ -26,7 +26,7 @@
             </td>
             <td><?= h($file->created) ?></td>
             <td><?= ($file->created != $file->modified) ? h($file->modified) : '' ?></td>
-            <td class="actions">
+            <td class="actions hide-for-print">
                 <?= $this->Html->link(__('View'), ['controller' => 'Files', 'action' => 'view', $file->id]) ?>
                 <?= $this->Html->link(__('Edit'), ['controller' => 'Files', 'action' => 'edit', $file->id]) ?>
                 <?= $this->Form->postLink(__('Delete'), ['controller' => 'Files', 'action' => 'delete', $file->id], ['confirm' => __('Are you sure you want to delete # {0}?', $file->id)]) ?>

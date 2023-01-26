@@ -2,7 +2,7 @@
     <h3>
         <?= h($song->title) ?>
         <?php $this->assign('title', $song->title); ?>
-        <small>
+        <small class="hide-for-print">
             <?= $this->Html->link('<i class="fi-pencil"></i> ' . __('Edit'), ['controller' => 'Songs', 'action' => 'edit', $song->id], ['escape' => false]) ?>
             <?php
                 if ($currentUser['is_active'] == 1 && $currentUser['id'] == $song->user_id) {
@@ -14,7 +14,7 @@
                 }
             ?>
         </small>
-        <small class="right">
+        <small class="right hide-for-print">
             <?php
             if ($song->text) {
                 echo $this->Html->link(

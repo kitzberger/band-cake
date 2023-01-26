@@ -29,7 +29,7 @@
                 <h1><?= $this->Html->link(__('Bandportal 2.0'), ['controller' => 'Misc', 'action' => 'dashboard']) ?></a></h1>
             </li>
         </ul>
-        <div class="top-bar-section">
+        <div class="top-bar-section hide-for-print">
             <ul class="right">
                 <?php if ($currentUser) { ?>
                 <li>
@@ -50,7 +50,7 @@
     <?= $this->Flash->render() ?>
     <div class="container clearfix">
         <?php if ($currentUser) { ?>
-        <nav class="large-3 medium-4 columns" id="actions-sidebar">
+        <nav class="large-3 medium-4 columns hide-for-print" id="actions-sidebar">
             <ul class="side-nav">
                 <?php
                     if ($currentUser['is_passive']) {

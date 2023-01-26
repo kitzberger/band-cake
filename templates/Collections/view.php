@@ -2,7 +2,7 @@
     <h3>
         <?= h($collection->title) ?>
         <?php $this->assign('title', $collection->title); ?>
-        <small>
+        <small class="hide-for-print">
             <?php
                 if ($currentUser['is_active']) {
                     echo $this->Html->link('<i class="fi-pencil"></i> ' . __('Edit'), ['controller' => 'Collections', 'action' => 'edit', $collection->id], ['escape' => false]);
@@ -19,7 +19,7 @@
                 }
             ?>
         </small>
-        <small class="right">
+        <small class="right hide-for-print">
             <?php
                 echo $this->element('Button/ShareLink', ['passiveUsers' => $passiveUsers, 'controller' => 'Collections', 'record' => $collection]);
 
@@ -59,7 +59,7 @@
         <?php if (!empty($collection->files)): ?>
         <h4><?= __('Related Files') ?></h4>
         <?= $this->element('Files/gallery', ['files' => $collection->files]); ?>
-        <table cellpadding="0" cellspacing="0" class="audio-player">
+        <table cellpadding="0" cellspacing="0" class="related-files audio-player">
             <tr>
                 <th class="index"></th>
                 <th><?= __('Record') ?></th>
@@ -94,7 +94,7 @@
 
         <?php if (!empty($collection->songs)): ?>
         <h4><?= __('Related Songs') ?></h4>
-        <table cellpadding="0" cellspacing="0">
+        <table cellpadding="0" cellspacing="0" class="related-songs">
             <tr>
                 <th class="index"></th>
                 <th><?= __('Title') ?></th>

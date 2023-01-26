@@ -1,7 +1,7 @@
 <?php
     $simpleMode = (isset($date_id) || isset($idea_id) || isset($song_id) || isset($song_version_id) || isset($collection_id));
 ?>
-<?= $this->Form->create($comment, ['url' => ['controller' => 'Comments', 'action' => 'add']]) ?>
+<?= $this->Form->create($comment, ['url' => ['controller' => 'Comments', 'action' => 'add'], 'class' => 'hide-for-print']) ?>
 <fieldset>
     <?php
         if ($simpleMode) {

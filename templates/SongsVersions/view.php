@@ -2,7 +2,7 @@
     <h3>
         <?= h($songsVersion->song->title) . ': ' . h($songsVersion->title) ?>
         <?php $this->assign('title', $songsVersion->title); ?>
-        <small>
+        <small class="hide-for-print">
             <?= $this->Html->link('<i class="fi-pencil"></i> '.__('Edit'), ['controller' => 'SongsVersions', 'action' => 'edit', $songsVersion->id], ['escape' => false]) ?>
             <?php
                 if ($currentUser['is_active'] == 1 && $currentUser['id'] == $songsVersion->user_id) {
