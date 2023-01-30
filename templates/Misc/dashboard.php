@@ -24,7 +24,7 @@
                 <?= $this->Html->link(__('All dates'), ['controller' => 'Dates', 'action' => 'index']); ?>
             </td>
             <td>
-                <h3>Latest songs</h3>
+                <h3>Latest song updates</h3>
                 <table>
                 <?php
                     foreach ($songs as $song) {
@@ -40,7 +40,7 @@
         </tr>
         <tr>
             <td>
-                <h3>Latest collections</h3>
+                <h3>Latest collection updates</h3>
                 <table>
                 <?php
                     foreach ($collections as $collection) {
@@ -54,7 +54,7 @@
                 <?= $this->Html->link(__('All collections'), ['controller' => 'Collections', 'action' => 'index']); ?>
             </td>
             <td>
-                <h3>Latest ideas</h3>
+                <h3>Latest idea updates</h3>
                 <table>
                 <?php
                     foreach ($ideas as $idea) {

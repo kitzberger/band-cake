@@ -55,7 +55,7 @@ class MiscController extends AppController
         $songs = $this->Songs->find(
             'all',
             [
-                'order' => 'created DESC',
+                'order' => 'modified DESC',
                 'limit' => 5,
             ]
         );
@@ -63,7 +63,7 @@ class MiscController extends AppController
             'all',
             [
                 'contain' => ['Comments'],
-                'order' => 'created DESC',
+                'order' => 'modified DESC',
                 'limit' => 5,
             ]
         );
@@ -71,7 +71,7 @@ class MiscController extends AppController
             'all',
             [
                 'contain' => ['Files', 'Songs'],
-                'order' => 'created DESC',
+                'order' => 'modified DESC',
                 'limit' => 5,
             ]
         );

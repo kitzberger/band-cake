@@ -91,6 +91,10 @@ class SongsVersionsController extends AppController
             if ($this->SongsVersions->save($songsVersion)) {
                 $this->Flash->success(__('The songs version has been saved.'));
 
+                $song = $this->SongsVersions->Songs->get($songsVersion->song_id);
+                $this->SongsVersions->Songs->touch($song);
+                $this->SongsVersions->Songs->save($song);
+
                 return $this->redirect(['controller' => 'Songs', 'action' => 'view', $songsVersion->song_id]);
             }
             $this->Flash->error(__('The songs version could not be saved. Please, try again.'));
@@ -114,12 +118,15 @@ class SongsVersionsController extends AppController
     public function edit($id = null)
     {
         $songsVersion = $this->SongsVersions->get($id, [
-            'contain' => [],
+            'contain' => ['Songs'],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $songsVersion = $this->SongsVersions->patchEntity($songsVersion, $this->request->getData());
             if ($this->SongsVersions->save($songsVersion)) {
                 $this->Flash->success(__('The songs version has been saved.'));
+
+                $this->SongsVersions->Songs->touch($songsVersion->song);
+                $this->SongsVersions->Songs->save($songsVersion->song);
 
                 return $this->redirect(['action' => 'view', $songsVersion->id]);
             }
