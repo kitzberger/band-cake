@@ -127,11 +127,13 @@
                 <td>
                     <?php
                         $file = null;
+                        // Selected version has a reference file?
                         foreach ($song->versions as $version) {
                             if ($version->id === $song->_joinData->song_version_id) {
                                 $file = $version->files[0] ?? null;
                             }
                         }
+                        // Otherwise use the song reference file.
                         if (empty($file)) {
                             $file = $song->files[0] ?? null;
                         }

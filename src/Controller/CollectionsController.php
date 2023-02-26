@@ -79,10 +79,16 @@ class CollectionsController extends AppController
                 'Files.Ideas',
                 'Files.Dates',
                 'Songs',
-                'Songs.Files' => ['conditions' => ['is_public' => 1]],
+                'Songs.Files' => [
+                    'conditions' => ['is_public' => 1],
+                    'sort' => ['Files.created' => 'DESC']
+                ],
                 'Songs.Users',
                 'Songs.SongsVersions',
-                'Songs.SongsVersions.Files' => ['conditions' => ['is_public' => 1]],
+                'Songs.SongsVersions.Files' => [
+                    'conditions' => ['is_public' => 1],
+                    'sort' => ['Files.created' => 'DESC']
+                ],
                 'Shares',
                 'Shares.Users',
                 'Comments' => ['sort' => ['Comments.modified' => 'ASC']],

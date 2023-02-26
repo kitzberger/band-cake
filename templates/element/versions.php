@@ -1,7 +1,7 @@
 <?php
-    if (count($song->versions) > 1) {
+    if (count($song->versions) > 0) {
         $chosenVersion = $song->_joinData->song_version_id;
-        $chosenVersionTitle = 'Unknown'; ?>
+        $chosenVersionTitle = $defaultVersionTitle = __('Not specified'); ?>
 <div class="button-group button-group-versions">
     <ul id="drop-song-<?= $song->id ?>" class="f-dropdown"
         data-dropdown-content
@@ -12,9 +12,10 @@
         data-csrf-token="<?= $_csrfToken ?>">
     <?php
         echo sprintf(
-            '<li><a href="javascript:" onclick="setVersion(this,%d,%d,null); return false">&nbsp;</a></li>',
+            '<li><a id="song-version-null" href="javascript:" onclick="setVersion(this,%d,%d,null); return false">%s</a></li>',
             $collection->id,
-            $song->id
+            $song->id,
+            $defaultVersionTitle
         );
         foreach ($song->versions as $version) {
             if ($version->id === $chosenVersion) {
@@ -30,14 +31,9 @@
             );
         } ?>
     </ul>
-    <a class="button tiny split">
+    <a class="button tiny split <?= $chosenVersion ? '' : 'secondary' ?>">
         <div id="song-<?= $song->id ?>-version-title"><?= $chosenVersionTitle ?></div>
         <span data-dropdown="drop-song-<?= $song->id ?>" aria-controls="drop" aria-expanded="false"></span>
     </a>
 </div>
-<?php
-    } elseif (count($song->versions) === 1) { ?>
-    <span class="button tiny">
-        <?= h($song->versions[0]->title) ?>
-    </span>
 <?php } ?>

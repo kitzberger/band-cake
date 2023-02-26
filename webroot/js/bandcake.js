@@ -145,9 +145,14 @@ function setVersion(el, collection_id, song_id, version_id) {
             var songId = data.collectionSong.song_id;
             var versionId = data.collectionSong.song_version_id;
             var versionTitle = $('#song-version-' + versionId).text();
-            console.log('New song_version_id: ' + versionId);
-            console.log('New song_version_title: ' + versionTitle);
+            // console.log('New song_version_id: ' + versionId);
+            // console.log('New song_version_title: ' + versionTitle);
             $('#song-' + songId + '-version-title').text(versionTitle);
+            if (versionId === null) {
+               $('#song-' + songId + '-version-title').parent().addClass('secondary');
+            } else {
+               $('#song-' + songId + '-version-title').parent().removeClass('secondary');
+            }
         }
       },
       error: function(jqXHR) {
