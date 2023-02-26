@@ -376,6 +376,7 @@ return [
         'user' => env('CALENDAR_USER', null),
         'pass' => env('CALENDAR_PASS', null),
         'url' => env('CALENDAR_URL', null),
+        'template_date_title' => env('CALENDAR_TEMPLATE_DATE_TITLE', 'Rehearsal at %dam'),
     ],
 
     'GFX' => [

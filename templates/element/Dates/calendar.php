@@ -26,10 +26,11 @@
         <h4><?= __('Date templates') ?></h4>
         <p>These items can be drag'n'dropped into the calendar</p>
         <?php
+            $templateDateTitle = Cake\Core\Configure::read('Calendar.template_date_title');
             foreach ([16,17,18,19] as $begin) {
                 $end = $begin+4;
                 echo '<div class="fc-event" data-start-time="' . $begin . ':00" data-stop-time="' . $end . ':00">';
-                echo __('Rehearsal at {0}pm', $begin);
+                echo sprintf($templateDateTitle, $begin);
                 echo '</div>';
             }
         ?>
