@@ -233,6 +233,9 @@ div.dashboard > table td table td:last-child { padding-right: 0; }
     .split.button.tiny span { width: 30px; }
     .split.button.tiny span:after { margin-left: -8px }
 
+
+    .dropzone { min-height: 40px; padding: 0; }
+    .dropzone .dz-message { margin: 0.5em 0; }
 }
 
 @media print {
