@@ -96,31 +96,33 @@
         <h4><?= __('Related Songs') ?></h4>
         <table cellpadding="0" cellspacing="0" class="related-songs">
             <tr>
-                <th class="index"></th>
+                <th class="index show-for-medium"></th>
                 <th><?= __('Title') ?></th>
+                <th><?= __('Text') ?></th>
                 <th><?= __('Version') ?></th>
                 <th><?= __('Reference file') ?></th>
-                <th></th>
             </tr>
             <?php
                 $i=1;
                 foreach ($collection->songs as $song):
             ?>
             <tr>
-                <td class="index"><?= $song->is_pseudo ? '' : $i++ ?></td>
+                <td class="index show-for-medium"><?= $song->is_pseudo ? '' : $i++ ?></td>
                 <td>
                     <?php
                         if ($song->is_pseudo) {
                             echo '&nbsp;';
                         } else {
-                            if ($song->text) {
-                                echo $this->Html->link($song->title, ['controller' => 'Songs', 'action' => 'display', $song->id]);
-                            } else {
-                                echo $this->Html->link($song->title, ['controller' => 'Songs', 'action' => 'view', $song->id]);
-                            }
+                            echo $this->Html->link($song->title, ['controller' => 'Songs', 'action' => 'view', $song->id]);
                         }
                     ?>
                 </td>
+                <td>
+                    <?php
+                        if ($song->is_pseudo == false && $song->text) {
+                            echo $this->Html->link('<i class="fi-page"></i>', ['controller' => 'Songs', 'action' => 'display', $song->id], ['escape' => false]);
+                        }
+                    ?>
                 <td>
                     <?= $this->element('versions', ['collection' => $collection, 'song' => $song]) ?>
                 </td>

@@ -178,11 +178,12 @@ div.related table .index { width: 30px; text-align: right; }
 table.vertical-table th { padding-left: 0; }
 table.vertical-table td { padding-right: 0; }
 
-table.versions { width: auto; float: right; }
+table.versions { width: 100%; }
 table.versions th,
-table.versions td { padding: 2px 10px 2px 5px; text-align: left; }
+table.versions td { padding: 2px 2px 2px 2px; text-align: left; }
+table.versions audio { width: 100%; }
 
-table.related-songs .button { margin-bottom: 0 }
+table.related-songs .button { margin-bottom: 0; }
 
 div.gray {
     color: #999999;
@@ -220,6 +221,18 @@ div.dashboard > table td table td:last-child { padding-right: 0; }
 
 @media only screen and (max-width: 40em) {
     div.dashboard > table > tbody > tr > td { display: block; width: 100%; padding-right: 0; padding-bottom: 20px; }
+
+    button.small,
+    .button.small {
+        /* Make it .tiny on mobile */
+        padding: 0.625rem 1.25rem 0.6875rem 1.25rem;
+        font-size: 0.6875rem
+    }
+
+    .split.button.tiny { padding: 10px 40px 10px 10px; }
+    .split.button.tiny span { width: 30px; }
+    .split.button.tiny span:after { margin-left: -8px }
+
 }
 
 @media print {

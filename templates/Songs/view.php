@@ -54,11 +54,13 @@
                 ?>
             </td>
         </tr>
-        <tr>
-            <th>
-                <?= __('Versions') ?>
+    </table>
+    <div class="related">
+        <h4>
+            <?= __('Versions') ?>
+            <small>
                 <?= $this->Html->link(
-                    __('<i class="fi-page-add"></i>'),
+                    '<i class="fi-page-add"></i> ' . __('New'),
                     [
                         'controller' => 'SongsVersions',
                         'action' => 'add',
@@ -68,36 +70,36 @@
                     ],
                     ['escape' => false]
                 ); ?>
-            </th>
-            <td>
-                <?php
-                    if (count($song->versions)) {
-                        echo '<table class="versions">';
-                        echo '<tr><th>Name</th><th>Length</th><th>Reference file</th><th>Modified</th></tr>';
-                        foreach ($song->versions as $version) {
-                            echo '<tr>';
-                            echo '<td>' . $this->Html->link($version->title, ['controller' => 'SongsVersions', 'action' => 'view', $version->id]) . '</td>';
-                            echo '<td>' . $this->element('duration', ['seconds' => $version->length]) . '</td>';
-                            if (count($version->files)) {
-                                echo '<td>';
-                                foreach ($version->files as $file) {
-                                    echo $this->element('Files/embed-inline', ['file' => $file]);
-                                }
-                                echo '</td>';
-                            } else {
-                                echo '<td></td>';
+            </small>
+        </h4>
+        <div class="no-padding-on-small">
+            <?php
+                if (count($song->versions)) {
+                    echo '<table class="versions">';
+                    echo '<tr><th>Name</th><th>Length</th><th>Reference file</th><th class="show-for-medium">Modified</th></tr>';
+                    foreach ($song->versions as $version) {
+                        echo '<tr>';
+                        echo '<td>' . $this->Html->link($version->title, ['controller' => 'SongsVersions', 'action' => 'view', $version->id]) . '</td>';
+                        echo '<td>' . $this->element('duration', ['seconds' => $version->length]) . '</td>';
+                        if (count($version->files)) {
+                            echo '<td>';
+                            foreach ($version->files as $file) {
+                                echo $this->element('Files/embed-inline', ['file' => $file]);
                             }
-                            echo '<td>' . $this->element('date', ['date' => $version->modified]) . '</td>';
-                            echo '</tr>';
+                            echo '</td>';
+                        } else {
+                            echo '<td></td>';
                         }
-                        echo '</table>';
-                    } else {
-                        echo '-';
+                        echo '<td class="show-for-medium">' . $this->element('date', ['date' => $version->modified]) . '</td>';
+                        echo '</tr>';
                     }
-                ?>
-            </td>
-        </tr>
-    </table>
+                    echo '</table>';
+                } else {
+                    echo '-';
+                }
+            ?>
+        </div>
+    </div>
     <div class="related">
         <h4><?= __('Comments') ?></h4>
         <?= $this->element('Comments/list', ['comments' => $song->comments]); ?>

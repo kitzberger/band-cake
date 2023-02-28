@@ -69,5 +69,5 @@
         echo $this->Form->control('user_id', ['type' => 'hidden', 'default' => $currentUser['id']]);
     }
 ?>
-<?= $this->Form->button(__('Submit')) ?>
+<?= $this->Form->button(__('Submit'), ['class' => 'small']) ?>
 <?= $this->Form->end() ?>
