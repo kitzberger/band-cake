@@ -153,11 +153,19 @@ table.dates tr.already-passed td { text-decoration: line-through; opacity: 0.5; 
 table.comments td.gravatar { width: 70px; }
 table.comments td.actions { width: 100px; white-space: nowrap; }
 
-div.dates div.related fieldset,
-div.ideas div.related fieldset,
-div.songs div.related fieldset,
-div.songsVersions div.related fieldset,
-div.collections div.related fieldset { margin: 0; padding: 0; }
+div.dates fieldset,
+div.ideas fieldset,
+div.files fieldset,
+div.comments fieldset,
+div.votes fieldset,
+div.users fieldset,
+div.shares fieldset,
+div.songs fieldset,
+div.songsVersions fieldset,
+div.collections fieldset,
+div.locations fieldset { margin: 0; padding: 0; }
+
+fieldset legend { margin-bottom: 1em }
 
 div.dates div.related h4,
 div.ideas div.related h4,
