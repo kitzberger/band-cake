@@ -72,33 +72,31 @@
                 ); ?>
             </small>
         </h4>
-        <div class="no-padding-on-small">
-            <?php
-                if (count($song->versions)) {
-                    echo '<table class="versions">';
-                    echo '<tr><th>Name</th><th>Length</th><th>Reference file</th><th class="show-for-medium">Modified</th></tr>';
-                    foreach ($song->versions as $version) {
-                        echo '<tr>';
-                        echo '<td>' . $this->Html->link($version->title, ['controller' => 'SongsVersions', 'action' => 'view', $version->id]) . '</td>';
-                        echo '<td>' . $this->element('duration', ['seconds' => $version->length]) . '</td>';
-                        if (count($version->files)) {
-                            echo '<td>';
-                            foreach ($version->files as $file) {
-                                echo $this->element('Files/embed-inline', ['file' => $file]);
-                            }
-                            echo '</td>';
-                        } else {
-                            echo '<td></td>';
+        <?php
+            if (count($song->versions)) {
+                echo '<table cellpadding="0" cellspacing="0" class="versions">';
+                echo '<tr><th>Name</th><th>Length</th><th>Reference file</th><th class="show-for-medium">Modified</th></tr>';
+                foreach ($song->versions as $version) {
+                    echo '<tr>';
+                    echo '<td>' . $this->Html->link($version->title, ['controller' => 'SongsVersions', 'action' => 'view', $version->id]) . '</td>';
+                    echo '<td class="no-wrap">' . $this->element('duration', ['seconds' => $version->length]) . '</td>';
+                    if (count($version->files)) {
+                        echo '<td>';
+                        foreach ($version->files as $file) {
+                            echo $this->element('Files/embed-inline', ['file' => $file]);
                         }
-                        echo '<td class="show-for-medium">' . $this->element('date', ['date' => $version->modified]) . '</td>';
-                        echo '</tr>';
+                        echo '</td>';
+                    } else {
+                        echo '<td></td>';
                     }
-                    echo '</table>';
-                } else {
-                    echo '-';
+                    echo '<td class="show-for-medium">' . $this->element('date', ['date' => $version->modified]) . '</td>';
+                    echo '</tr>';
                 }
-            ?>
-        </div>
+                echo '</table>';
+            } else {
+                echo '-';
+            }
+        ?>
     </div>
     <div class="related">
         <h4><?= __('Comments') ?></h4>

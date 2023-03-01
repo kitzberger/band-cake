@@ -10,7 +10,11 @@
             if ($currentUser['is_admin']) {
                 echo $this->Form->control('is_pseudo');
                 if ($githubEnabled) {
-                    echo $this->Form->control('url', ['label' => __('URL') . ' (' . \Cake\Core\Configure::read('Github.repository_url') . ')']);
+                    $hint = \Cake\Core\Configure::read('Github.repository_url');
+                    echo $this->Form->control('url', [
+                        'label' => __('URL') . ' <span class="show-for-medium">(' . $hint . ')</span>',
+                        'escape' => false
+                    ]);
                 }
             }
             if (empty($song->url)) {

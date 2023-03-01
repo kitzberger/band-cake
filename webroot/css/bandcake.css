@@ -7,6 +7,9 @@
 #actions-sidebar .side-nav a:focus,
 #actions-sidebar .side-nav a.active { background: rgb(26, 109, 117, 0.75); color: #ffffff; }
 
+.content .vertical-table,
+.content .related { margin-bottom: 2em }
+
 @media only screen and (max-width: 640px) {
     #actions-sidebar { padding: 0; }
     #actions-sidebar .side-nav { padding-top: 0; padding-left: 7px; }
@@ -25,7 +28,6 @@
 
     .content { padding: 0px 14px 14px; }
     .content h3 { margin-bottom: 0; }
-    .content .vertical-table { margin-bottom: 10px; }
     .content .related h4 { margin-top: 0; margin-bottom: 5px; padding-bottom: 0; }
     .content .related table { margin-bottom: 10px; }
 }
@@ -180,8 +182,7 @@ table.vertical-table td { padding-right: 0; }
 
 table.versions { width: 100%; }
 table.versions th,
-table.versions td { padding: 2px 2px 2px 2px; text-align: left; }
-table.versions audio { width: 100%; }
+table.versions td { padding: 2px 10px 2px 2px; text-align: left; }
 
 table.related-songs .button { margin-bottom: 0; }
 
@@ -212,11 +213,12 @@ ins { color: green; text-decoration: none; }
 .label.blocker { background: #555555; }
 .button.blocker { background: #555555; }
 
+.no-wrap { white-space: nowrap; }
+
 div.dashboard > table > tbody > tr { border: 0; }
 div.dashboard > table td { padding-left: 0; padding-right: 100px; }
 div.dashboard > table td table { table-layout: auto; }
 div.dashboard > table td table td { padding-right: 10px; }
-div.dashboard > table td table td.no-wrap { white-space: nowrap; }
 div.dashboard > table td table td:last-child { padding-right: 0; }
 
 @media only screen and (max-width: 40em) {
@@ -229,10 +231,13 @@ div.dashboard > table td table td:last-child { padding-right: 0; }
         font-size: 0.6875rem
     }
 
-    .split.button.tiny { padding: 10px 40px 10px 10px; }
-    .split.button.tiny span { width: 30px; }
-    .split.button.tiny span:after { margin-left: -8px }
+    .button { padding: 10px 10px 10px 10px; }
+    .button.split { padding: 10px 40px 10px 10px; }
+    .button.split span { width: 30px; }
+    .button.split span:after { margin-left: -8px }
+    .button.postfix { padding: 0; }
 
+    textarea[rows="5"] { height: 50px }
 
     .dropzone { min-height: 40px; padding: 0; }
     .dropzone .dz-message { margin: 0.5em 0; }

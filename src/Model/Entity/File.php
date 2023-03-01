@@ -56,7 +56,7 @@ class File extends Entity
     public function isAudio()
     {
         $fileFormat = $this->getExtension();
-        return in_array($fileFormat, ['mp3', 'mpeg', 'ogg', 'wav', 'flac', 'm4a']);
+        return in_array($fileFormat, ['mp3', 'mpeg', 'ogg', 'wav', 'flac', 'm4a', 'mp4']);
     }
 
     public function isImage()
