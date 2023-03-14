@@ -14,11 +14,11 @@ class FilesController extends AppController
         $action = $this->request->getParam('action');
 
         if ($user['is_active']) {
-            if (in_array($action, ['index', 'view', 'add', 'upload'])) {
+            if (in_array($action, ['index', 'view', 'add', 'edit', 'upload'])) {
                 return true;
             }
 
-            if (in_array($action, ['edit', 'delete'])) {
+            if (in_array($action, ['delete'])) {
                 $fileId = (int)$this->request->getParam('pass')[0];
                 if ($this->Files->isOwnedBy($fileId, $user['id'])) {
                     return true;
