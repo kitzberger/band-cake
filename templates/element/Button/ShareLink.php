@@ -1,6 +1,6 @@
 <?php
 
-if ($currentUser['is_active']) {
+if ($currentUser['is_admin'] || $currentUser['is_active']) {
     echo '<ul id="drop-share" class="f-dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">';
     foreach ($passiveUsers as $user) {
         echo '<li>';
