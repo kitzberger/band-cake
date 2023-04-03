@@ -4,13 +4,13 @@
         <?php $this->assign('title', $collection->title); ?>
         <small class="hide-for-print">
             <?php
-                if ($currentUser['is_active']) {
+                if ($currentUser['is_admin'] || $currentUser['is_active']) {
                     echo $this->Html->link('<i class="fi-pencil"></i> ' . __('Edit'), ['controller' => 'Collections', 'action' => 'edit', $collection->id], ['escape' => false]);
                     echo ' ';
                     echo $this->Html->link('<i class="fi-page-copy"></i> ' . __('Copy'), ['controller' => 'Collections', 'action' => 'add', $collection->id], ['escape' => false]);
                     echo ' ';
                 }
-                if ($currentUser['is_active'] == 1 && $currentUser['id'] == $collection->user_id) {
+                if ($currentUser['is_admin'] || ($currentUser['is_active'] == 1 && $currentUser['id'] == $collection->user_id)) {
                     echo $this->Form->postLink(
                         '<i class="fi-trash"></i> ' . __('Delete'),
                         ['action' => 'delete', $collection->id],
