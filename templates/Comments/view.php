@@ -2,7 +2,11 @@
     <h3>
         <?= h($comment->id) ?>
         <small>
-            <?= $this->Html->link(__('Edit'), ['controller' => 'Comments', 'action' => 'edit', $comment->id]) ?>
+            <?= $this->Html->link(
+                '<i class="fi-pencil"></i> ' . __('Edit'),
+                ['controller' => 'Comments', 'action' => 'edit', $comment->id],
+                ['escape' => false])
+            ?>
         </small>
     </h3>
     <table class="vertical-table">

@@ -2,7 +2,11 @@
     <h3>
         <?= h($user->username) ?>
         <small>
-            <?= $this->Html->link(__('Edit'), ['controller' => 'Users', 'action' => 'edit', $user->id]) ?>
+            <?= $this->Html->link(
+                '<i class="fi-pencil"></i> ' . __('Edit'),
+                ['controller' => 'Users', 'action' => 'edit', $user->id],
+                ['escape' => false])
+            ?>
         </small>
     </h3>
     <table class="vertical-table">
