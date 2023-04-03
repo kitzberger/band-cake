@@ -24,6 +24,33 @@ ddev start
 
 To put the application into debug mode set `DEBUG` to true in `config/.env`.
 
+## Create users
+
+```bash
+ddev ssh
+
+$ bin/cake create_user
+Username:
+> peter
+Email:
+> peter@example.org
+Password:
+> 123456
+Admin? (yes/no)
+[no] > yes
+Active? (yes/no)
+[yes] > no
+Passive? (yes/no)
+[no] > no
+User creation successfully!
+```
+
+There's currently 3 roles a user can have:
+
+* Admin (not necessarily a band member, but can be)
+* Active (active band members)
+* Passive (not a band member, but someone whom the bands wants to share certain data with: songs, setlists, etc.)
+
 ## Dependencies
 
 ### CakePHP 4.x
