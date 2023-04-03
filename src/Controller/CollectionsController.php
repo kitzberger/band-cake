@@ -14,7 +14,7 @@ class CollectionsController extends AppController
         $action = $this->request->getParam('action');
 
         if ($user['is_active']) {
-            if (in_array($action, ['index', 'view', 'add', 'edit', 'share'])) {
+            if (in_array($action, ['index', 'view', 'add', 'edit', 'share', 'setSongVersion'])) {
                 return true;
             }
 
