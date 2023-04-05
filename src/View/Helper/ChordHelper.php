@@ -19,6 +19,9 @@ class ChordHelper extends Helper
             return '';
         }
 
+        // Replace windows linebreaks with linux ones (necessary for capo detection later!)
+        $text = str_replace("\r\n", "\n", $text);
+
         $transposeBy = 0;
         if (isset($options['transposeBy']) && $options['transposeBy']) {
             $transposeBy = $this->determineTransposeByParameter($text, $options['transposeBy']);
