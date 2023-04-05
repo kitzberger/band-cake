@@ -48,7 +48,11 @@ class AppController extends Controller
             ]
         ]);
 
-        $this->viewBuilder()->addHelpers(['Tanuck/Markdown.Markdown']);
+        $this->viewBuilder()->addHelpers([
+            'Tanuck/Markdown.Markdown' => [
+                'parser' => 'GithubMarkdown',
+            ]
+        ]);
 
         $this->enabledFeatures = [
             'remoteCalendar' => (bool)Configure::read('Calendar.url'),
