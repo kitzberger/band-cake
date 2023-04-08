@@ -383,6 +383,97 @@ if (!Date.prototype.toMyDateString) {
   }());
 }
 
+var wavesurfer;
+
+function init_waveform() {
+    if (undefined === wavesurfer) {
+        wavesurfer = WaveSurfer.create({
+            // https://wavesurfer-js.org/docs/options.html
+            container: '#audioplayer .waveform',
+            waveColor: 'gray',
+            progressColor: 'blue',
+            height: 50,
+            normalize: false,
+            splitChannels: false,
+            interact: true, // mouse interaction
+            plugins: [
+                WaveSurfer.cursor.create({
+                    showTime: true,
+                    opacity: 1,
+                    customShowTimeStyle: {
+                        'background-color': '#000',
+                        color: '#fff',
+                        padding: '2px',
+                        'font-size': '10px'
+                    }
+                }),
+                WaveSurfer.timeline.create({
+                    container: '#audioplayer .timeline'
+                }),
+                WaveSurfer.regions.create({
+                }),
+            ]
+        });
+        wavesurfer.on('error', function(e) {
+            console.warn(e);
+        });
+        wavesurfer.on('ready', function () {
+            wavesurfer.play();
+        });
+        $('[data-action="waveform-playPause"]').on('click', function() {
+            wavesurfer.playPause();
+        });
+        $('[data-action="waveform-hide"]').on('click', function() {
+            wavesurfer.cancelAjax();
+            wavesurfer.stop();
+            $('#audioplayer').hide();
+        });
+        $('body').on('keydown', function(event) {
+            // console.log($(':focus').length);
+            // console.log($(':focus'));
+            if ($(':focus').length > 0) {
+                return;
+            }
+            // console.log(event.keyCode);
+            if (event.keyCode == 27) {
+                $('[data-action="waveform-hide"]:visible').trigger('click')
+            }
+            if (event.keyCode == 32) {
+                event.preventDefault()
+                $('[data-action="waveform-playPause"]:visible').trigger('click')
+            }
+        })
+    }
+    $('#audioplayer').show();
+}
+
+function play_in_waveform(el) {
+    init_waveform()
+
+    let data = $(el).data('audioplayer')
+
+    $('#audioplayer .topbar .title').html(data.title)
+    $('#audioplayer .topbar .url').attr('href', data.url)
+
+    wavesurfer.load(data.url)
+
+    // Remove old regions
+    wavesurfer.clearRegions()
+    $('#audioplayer .toolbar .regions').html('');
+
+    // Add new regions
+    for (region of data.regions) {
+        //console.log(region)
+        wavesurfer.addRegion(region)
+        let button = '<a class="button" onclick="play_region(' + region.id + ')">' + region.title + '</a>'
+        $('#audioplayer .toolbar .regions').append(button)
+    }
+}
+
+function play_region(regionId) {
+    wavesurfer.regions.list[regionId].play()
+}
+
 function init_audioplayer() {
     var audioTags = jQuery(".audio-player audio")
     audioTags.bind('ended', function() {

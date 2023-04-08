@@ -1,7 +1,6 @@
 <?php
 
 $fileFormat = $file->getExtension();
-$filePath = 'uploads' . DS . $file->file;
 
 if ($file->isMissing()) {
     echo '[missing]';
@@ -12,9 +11,16 @@ if ($file->isMissing()) {
         case 'ogg':
         case 'wav':
             ?>
-                <audio controls style="height: 30px">
-                    <source src="<?= DS . $filePath ?>" type="audio/<?= $fileFormat ?>">
-                </audio>
+                <a class="button round no-margin tiny" onclick="play_in_waveform(this)" data-audioplayer='<?= json_encode($file->getAudioPlayerData()) ?>'>
+                    <i class="fi fi-play"></i>
+                    <?= __('Play') ?>
+                </a>
+                <?= $this->Html->link('<i class="fi-download"></i> ' . __('Download'), $file->getRelativePath(), ['class' => 'button round tiny', 'escape' => false]); ?>
+                <!--
+                    <audio controls style="height: 30px">
+                        <source src="<?= $file->getRelativePath() ?>" type="audio/<?= $fileFormat ?>">
+                    </audio>
+                -->
             <?php
             break;
         case 'jpg':
@@ -24,6 +30,6 @@ if ($file->isMissing()) {
             echo $this->Glide->image($file->file, ['w' => 50], []);
             break;
         default:
-            echo $this->Html->link('<i class="fi-download"></i> ' . __('Download'), $filePath, ['class' => 'button small', 'escape' => false]);
+            echo $this->Html->link('<i class="fi-download"></i> ' . __('Download'), $file->getRelativePath(), ['class' => 'button small', 'escape' => false]);
     }
 }

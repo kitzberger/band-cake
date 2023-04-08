@@ -3,12 +3,20 @@
     <fieldset>
         <legend><?= __('Edit File') ?></legend>
         <?php
+            $this->Form->setTemplates(['formGroup' => '{{label}}{{hint}}{{input}}']);
+
             echo $this->Form->control('title');
             echo $this->Form->control('file', ['readonly']);
             echo $this->Form->control('collections._ids', ['options' => $collections]);
             echo $this->Form->control('date_id', ['options' => $dates, 'empty' => true]);
             echo $this->Form->control('idea_id', ['options' => $ideas, 'empty' => true]);
             if ($file->isAudio()) {
+                echo $this->Form->control('regions', [
+                    'placeholder' => '[' . PHP_EOL . '  {"id": 123, "start": 10.0, "end": 20.0, "title": "Verse 1"},' . PHP_EOL . '  {"id": 124, "start": 30.0, "end": 50.0, "title": "Chorus"}' . PHP_EOL . ']',
+                    'templateVars' => [
+                        'hint' => '<p class="hint">Experimental feature! Needs to be a valid JSON string. Click <a href="https://wavesurfer-js.org/plugins/regions.html" target="_blank">here</a> for details.</p>',
+                    ],
+                ]);
                 echo $this->Form->control(
                     'song_id',
                     [
