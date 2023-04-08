@@ -396,6 +396,7 @@ function init_waveform() {
             normalize: false,
             splitChannels: false,
             interact: true, // mouse interaction
+            backend: 'MediaElement',
             plugins: [
                 WaveSurfer.cursor.create({
                     showTime: true,
