@@ -70,19 +70,24 @@ class File extends Entity
         return $this->isAudio() ? 'audio' : ($this->isImage() ? 'image' : 'other');
     }
 
-    public function getPath()
+    public function getRelativePath()
+    {
+        return DS . 'uploads' . DS . $this->file;
+    }
+
+    public function getAbsolutePath()
     {
         return $path = WWW_ROOT . 'uploads' . DS . $this->file;
     }
 
     public function isMissing()
     {
-        return file_exists($this->getPath()) === false;
+        return file_exists($this->getAbsolutePath()) === false;
     }
 
     public function getDimensions()
     {
-        $size = getimagesize($this->getPath());
+        $size = getimagesize($this->getAbsolutePath());
         if ($size) {
             return [
                 'w' => $size[0],
@@ -90,7 +95,7 @@ class File extends Entity
                 'r' => $size[0] / $size[1],
             ];
         } else {
-            throw new \Exception('Cannot get image size of: ' . $this->getPath());
+            throw new \Exception('Cannot get image size of: ' . $this->getAbsolutePath());
         }
     }
 }
