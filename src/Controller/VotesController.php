@@ -83,7 +83,21 @@ class VotesController extends AppController
     {
         $vote = $this->Votes->newEmptyEntity();
         if ($this->request->is('post')) {
-            $vote = $this->Votes->patchEntity($vote, $this->request->getData());
+            $data = $this->request->getData();
+            $previousVote = $this->Votes->find('all', [
+                'conditions' => [
+                    'user_id' => $data['user_id'] ?? '',
+                    'OR' => [
+                        'idea_id' => $data['idea_id'] ?? '',
+                        'date_id' => $data['date_id'] ?? '',
+                    ]
+                ],
+            ])->first();
+            if ($previousVote) {
+                $vote = $this->Votes->patchEntity($previousVote, $data);
+            } else {
+                $vote = $this->Votes->patchEntity($vote, $data);
+            }
             if ($this->Votes->save($vote)) {
                 $vote = $this->Votes->get($vote['id'], [
                     'contain' => ['Users', 'Dates', 'Ideas', 'Dates.Votes', 'Ideas.Votes']
