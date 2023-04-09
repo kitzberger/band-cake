@@ -75,7 +75,8 @@
         <div id="audioplayer" style="display: none">
             <div class="topbar">
                 <span class="title"></span>
-                <a class="url"><i class="fi fi-download"></i></a>
+                <a class="url edit"><i class="fi-pencil"></i></a>
+                <a class="url download"><i class="fi-download"></i></a>
             </div>
             <div class="waveform"></div>
             <div class="timeline"></div>

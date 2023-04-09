@@ -11,11 +11,11 @@ if ($file->isMissing()) {
         case 'ogg':
         case 'wav':
             ?>
-                <a class="button round no-margin tiny" onclick="playInWaveform(this); return false" data-audioplayer='<?= json_encode($file->getAudioPlayerData()) ?>'>
+                <a class="button round no-margin tiny" onclick="playInWaveform(this); return false" data-audioplayer='<?= json_encode($file->getAudioPlayerData()) ?>' title="<?= __('Play') . ' ' . $file->title ?>">
                     <i class="fi fi-play"></i>
                     <?= __('Play') ?>
                 </a>
-                <?= $this->Html->link('<i class="fi-download"></i> ' . __('Download'), $file->getRelativePath(), ['class' => 'button round tiny', 'escape' => false]); ?>
+                <?= $this->Html->link('<i class="fi-download"></i> ' . __('Download'), $file->getRelativePath(), ['class' => 'button round tiny', 'escape' => false, 'title' => __('Download') . ' ' . $file->title]); ?>
                 <!--
                     <audio controls style="height: 30px">
                         <source src="<?= $file->getRelativePath() ?>" type="audio/<?= $fileFormat ?>">

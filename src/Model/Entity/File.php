@@ -3,6 +3,7 @@
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
+use Cake\Routing\Router;
 
 /**
  * File Entity
@@ -105,7 +106,8 @@ class File extends Entity
         return [
             'title' => $this->title,
             'url' => $this->getRelativePath(),
-            'regions' => json_decode($this->regions, true),
+            'urlEdit' => Router::url(['controller' => 'Files', 'action' => 'edit', $this->id]),
+            'regions' => json_decode($this->regions, true) ?? [],
         ];
     }
 }

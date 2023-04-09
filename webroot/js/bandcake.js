@@ -450,7 +450,8 @@ function playInWaveform (el) {
   const data = $(el).data('audioplayer')
 
   $('#audioplayer .topbar .title').html(data.title)
-  $('#audioplayer .topbar .url').attr('href', data.url)
+  $('#audioplayer .topbar .url.download').attr('href', data.url)
+  $('#audioplayer .topbar .url.edit').attr('href', data.urlEdit)
 
   wavesurfer.load(data.url)
 
