@@ -11,7 +11,7 @@ if ($file->isMissing()) {
         case 'ogg':
         case 'wav':
             ?>
-                <a class="button round no-margin tiny" onclick="playInWaveform(this)" data-audioplayer='<?= json_encode($file->getAudioPlayerData()) ?>'>
+                <a class="button round no-margin tiny" onclick="playInWaveform(this); return false" data-audioplayer='<?= json_encode($file->getAudioPlayerData()) ?>'>
                     <i class="fi fi-play"></i>
                     <?= __('Play') ?>
                 </a>
