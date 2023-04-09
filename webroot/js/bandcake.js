@@ -37,20 +37,20 @@ Dropzone.options.bandcakeUpload = {
 }
 
 $(document).ready(function () {
-  // console.log('init_calendar()');
-  init_calendar()
-  // console.log('init_datefilters()');
-  init_datefilters()
-  // console.log('init_selectize()');
-  init_selectize()
-  // console.log('init_votes()');
-  // init_votes();
-  // console.log('init_audioplayer()');
-  init_audioplayer()
-  // console.log('init_comments()');
-  init_comments()
-  // console.log('init_foundation()');
-  init_foundation()
+  // console.log('initCalendar()');
+  initCalendar()
+  // console.log('initDatefilters()');
+  initDatefilters()
+  // console.log('initSelectize()');
+  initSelectize()
+  // console.log('initVotes()');
+  // initVotes();
+  // console.log('initAudioplayer()');
+  initAudioplayer()
+  // console.log('initComments()');
+  initComments()
+  // console.log('initFoundation()');
+  initFoundation()
 })
 
 function changeDateFields () {
@@ -77,18 +77,18 @@ function changeDateFields () {
   })
 }
 
-function init_foundation () {
+function initFoundation () {
   $(document).foundation()
 }
 
 function vote (el, value) {
   ul = $(el).closest('ul')
   url = ul.data('url-vote')
-  related_to = ul.data('related-to').split(':')
-  user_id = ul.data('user-id')
+  relatedTo = ul.data('related-to').split(':')
+  userId = ul.data('user-id')
 
-  if (related_to[0] == 'date') { data = { date_id: related_to[1], user_id, vote: value } }
-  if (related_to[0] == 'idea') { data = { idea_id: related_to[1], user_id, vote: value } }
+  if (relatedTo[0] == 'date') { data = { date_id: relatedTo[1], user_id: userId, vote: value } }
+  if (relatedTo[0] == 'idea') { data = { idea_id: relatedTo[1], user_id: userId, vote: value } }
 
   $.ajax({
     type: 'POST',
@@ -99,7 +99,7 @@ function vote (el, value) {
     data,
     success: function (data, textStatus, jqXHR) {
       if (jqXHR.status == 200) {
-        console.log('New vote_id: ' + data.vote.id)
+        // console.log('New vote id: ' + data.vote.id)
         // console.dir(jqXHR);
         myVote = $('#my-vote')
         myVote.removeClass('success alert secondary')
@@ -125,7 +125,7 @@ function vote (el, value) {
   })
 }
 
-function setVersion (el, collection_id, song_id, version_id) {
+function setVersion (el, collectionId, songId, versionId) {
   ul = $(el).closest('ul')
   url = ul.data('url-set-version')
 
@@ -136,9 +136,9 @@ function setVersion (el, collection_id, song_id, version_id) {
       'X-CSRF-Token': ul.data('csrf-token')
     },
     data: {
-      collection_id,
-      song_id,
-      song_version_id: version_id
+      collectionId,
+      songId,
+      song_version_id: versionId
     },
     success: function (data, textStatus, jqXHR) {
       if (jqXHR.status == 200) {
@@ -165,7 +165,7 @@ function setVersion (el, collection_id, song_id, version_id) {
   })
 }
 
-function init_calendar () {
+function initCalendar () {
   // prepare draggable events
   $('#external-events .fc-event').each(function () {
     // store data so the calendar knows to render an event upon drop
@@ -324,7 +324,7 @@ function postNewDate (data, eventId) {
   })
 }
 
-function init_comments () {
+function initComments () {
   const commentTable = $('table.comments')
   const togglePanel = commentTable.find('.toggle-old-ones')
   const showOldOnes = commentTable.find('.toggle-old-ones a.show-old-ones')
@@ -356,7 +356,7 @@ function init_comments () {
   }
 }
 
-function init_selectize () {
+function initSelectize () {
   $('select[multiple]').selectize({
     plugins: ['remove_button', 'drag_drop']
   })
@@ -381,7 +381,7 @@ if (!Date.prototype.toMyDateString) {
 
 let wavesurfer
 
-function init_waveform () {
+function initWaveform () {
   if (undefined === wavesurfer) {
     wavesurfer = WaveSurfer.create({
       // https://wavesurfer-js.org/docs/options.html
@@ -444,8 +444,8 @@ function init_waveform () {
   $('#audioplayer').show()
 }
 
-function play_in_waveform (el) {
-  init_waveform()
+function playInWaveform (el) {
+  initWaveform()
 
   const data = $(el).data('audioplayer')
 
@@ -462,16 +462,16 @@ function play_in_waveform (el) {
   for (region of data.regions) {
     // console.log(region)
     wavesurfer.addRegion(region)
-    const button = '<a class="button" onclick="play_region(' + region.id + ')">' + region.title + '</a>'
+    const button = '<a class="button" onclick="playRegion(' + region.id + ')">' + region.title + '</a>'
     $('#audioplayer .toolbar .regions').append(button)
   }
 }
 
-function play_region (regionId) {
+function playRegion (regionId) {
   wavesurfer.regions.list[regionId].play()
 }
 
-function init_audioplayer () {
+function initAudioplayer () {
   const audioTags = jQuery('.audio-player audio')
   audioTags.bind('ended', function () {
     current = jQuery(this).closest('.item-audio')
@@ -485,7 +485,7 @@ function init_audioplayer () {
   })
 }
 
-function init_datefilters () {
+function initDatefilters () {
   $('.button[data-status]').bind('click', function (event) {
     event.preventDefault()
     el = $(event.target)
