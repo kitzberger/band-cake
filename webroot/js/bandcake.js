@@ -136,8 +136,8 @@ function setVersion (el, collectionId, songId, versionId) {
       'X-CSRF-Token': ul.data('csrf-token')
     },
     data: {
-      collectionId,
-      songId,
+      collection_id: collectionId,
+      song_id: songId,
       song_version_id: versionId
     },
     success: function (data, textStatus, jqXHR) {
