@@ -423,7 +423,28 @@ function initWaveform () {
     $('[data-action="waveform-hide"]').on('click', function () {
       wavesurfer.cancelAjax()
       wavesurfer.stop()
+      updateFileRegions()
       $('#audioplayer').hide()
+    })
+    $('[data-action="waveform-edit"]').on('click', function () {
+      if ($('#audioplayer').attr('data-file-unlocked') == 0) {
+        $('#audioplayer').attr('data-file-unlocked', 1)
+        wavesurfer.enableDragSelection({})
+      } else {
+        $('#audioplayer').attr('data-file-unlocked', 0)
+        wavesurfer.disableDragSelection({})
+        updateFileRegions()
+      }
+    })
+    wavesurfer.on('region-update-end', function() {
+      $('#audioplayer').attr('data-file-dirty', true)
+    })
+    wavesurfer.on('region-dblclick', function (region) {
+      let oldTitle = region.attributes.title
+      let newTitle = prompt('Set new title? (currently: ' + oldTitle + ')')
+      if (newTitle !== null) {
+        region.attributes.title = newTitle
+      }
     })
     $('body').on('keydown', function (event) {
       // console.log($(':focus').length);
@@ -449,6 +470,7 @@ function playInWaveform (el) {
 
   const data = $(el).data('audioplayer')
 
+  $('#audioplayer').data('file-id', data.id)
   $('#audioplayer .topbar .title').html(data.title)
   $('#audioplayer .topbar .url.download').attr('href', data.url)
   $('#audioplayer .topbar .url.edit').attr('href', data.urlEdit)
@@ -463,7 +485,7 @@ function playInWaveform (el) {
   for (region of data.regions) {
     // console.log(region)
     wavesurfer.addRegion(region)
-    const button = '<a class="button" onclick="playRegion(' + region.id + ')">' + region.title + '</a>'
+    const button = '<a class="button" onclick="playRegion(' + region.id + ')">' + region.attributes.title + '</a>'
     $('#audioplayer .toolbar .regions').append(button)
   }
 }
@@ -471,13 +493,40 @@ function playInWaveform (el) {
 function playRegion (regionId) {
   let region = wavesurfer.regions.list[regionId]
 
-  if ($('#loop:checked').length === 1) {
+  if ($('#loop').is(':checked')) {
     region.setLoop(true)
   } else {
     region.setLoop(false)
   }
 
   region.play()
+}
+
+function updateFileRegions () {
+  if ($('#audioplayer').attr('data-file-dirty')) {
+    if (confirm('Save regions?')) {
+      let fileId = $('#audioplayer').data('file-id')
+      let regions = wavesurfer.regions.list
+      let regionData = []
+      for (let index in regions) {
+        let region = regions[index]
+        regionData.push({
+          id: region.id,
+          start: region.start,
+          end: region.end,
+          attributes: {
+            title: region.attributes.title
+          }
+        })
+      }
+      regionData = JSON.stringify(regionData)
+      postEditFile(fileId, {regions: regionData}, function() {
+        $('#audioplayer').removeAttr('data-file-dirty')
+      })
+    } else {
+      $('#audioplayer').removeAttr('data-file-dirty')
+    }
+  }
 }
 
 function initAudioplayer () {
@@ -529,9 +578,9 @@ function filterDates () {
 function postEditFile (fileId, data, callback) {
   $.ajax({
     type: 'POST',
-    url: $('#bandcakeUpload').data('url-edit') + '/' + fileId,
+    url: urlFileEdit + '/' + fileId,
     headers: {
-      'X-CSRF-Token': $('#bandcakeUpload #csrftoken').val()
+      'X-CSRF-Token': csrfToken
     },
     data,
     success: function (data, textStatus, jqXHR) {

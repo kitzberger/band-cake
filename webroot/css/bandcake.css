@@ -226,6 +226,9 @@ div.dashboard > table td table td { padding-right: 10px; }
 div.dashboard > table td table td:last-child { padding-right: 0; }
 
 #audioplayer { position: fixed; z-index: 10; width: 100%; bottom: 0; background: #eeeeee; padding: 10px; }
+#audioplayer[data-file-unlocked="1"] { background: #d39898 }
+#audioplayer[data-file-unlocked="1"] .button-edit { display: none }
+#audioplayer[data-file-unlocked="0"] .button-save { display: none }
 #audioplayer .topbar { margin-bottom: 10px; text-align: center; }
 #audioplayer .waveform { }
 #audioplayer .timeline { }

@@ -72,7 +72,7 @@
         <?= $this->fetch('content') ?>
     </div>
     <footer>
-        <div id="audioplayer" style="display: none">
+        <div id="audioplayer" style="display: none" data-file-id="" data-file-unlocked="0">
             <div class="topbar">
                 <span class="title"></span>
                 <a class="url edit"><i class="fi-pencil"></i></a>
@@ -81,9 +81,13 @@
             <div class="waveform"></div>
             <div class="timeline"></div>
             <div class="toolbar">
-                <input type="checkbox" value="0" id="loop"><label for="loop">Loop?</label>
+                <input type="checkbox" value="1" id="loop"><label for="loop">Loop?</label>
                 <a class="button success" data-action="waveform-playPause">Play/pause</a>
                 <span class="regions"></span>
+                <a class="button warning" data-action="waveform-edit">
+                    <span class="button-edit">Edit</span>
+                    <span class="button-save">Save</span>
+                </a>
                 <a class="button alert" data-action="waveform-hide">Close</a>
             </div>
         </div>
@@ -91,6 +95,9 @@
     <script>
         // Workaround disabling pinch-zoom on iOS: https://stackoverflow.com/questions/4389932/how-do-you-disable-viewport-zooming-on-mobile-safari
         document.addEventListener('gesturestart', function (e) { e.preventDefault(); });
+
+        let csrfToken = <?= json_encode($this->request->getAttribute('csrfToken')) ?>;
+        let urlFileEdit = '<?= $this->Url->build(['controller' => 'Files', 'action' => 'edit']) ?>';
     </script>
     <script src="//unpkg.com/wavesurfer.js@6.6.3/dist/wavesurfer.js"></script>
     <script src="//unpkg.com/wavesurfer.js@6.6.3/dist/plugin/wavesurfer.cursor.js"></script>

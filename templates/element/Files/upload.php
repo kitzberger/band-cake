@@ -18,7 +18,7 @@
 ?>
 
 <div class="hide-for-print">
-    <form action="<?= $this->Url->build(['controller' => 'Files', 'action' => 'upload']) ?>" data-url-edit="<?= $this->Url->build(['controller' => 'Files', 'action' => 'edit']) ?>" class="dropzone" id="bandcakeUpload">
+    <form action="<?= $this->Url->build(['controller' => 'Files', 'action' => 'upload']) ?>" class="dropzone" id="bandcakeUpload">
         <?php
             if ($id_params) {
                 echo $this->Form->control($id_params['key'], ['type' => 'hidden', 'value' => $id_params['value']]);

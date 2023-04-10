@@ -104,6 +104,7 @@ class File extends Entity
     public function getAudioPlayerData()
     {
         return [
+            'id' => $this->id,
             'title' => $this->title,
             'url' => $this->getRelativePath(),
             'urlEdit' => Router::url(['controller' => 'Files', 'action' => 'edit', $this->id]),
