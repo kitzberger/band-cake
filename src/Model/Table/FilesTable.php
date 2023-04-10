@@ -132,8 +132,10 @@ class FilesTable extends AbstractTable
 
     public function beforeMarshal(Event $event, \ArrayObject $data, \ArrayObject $options)
     {
-        // Make sure NULL is saved instead of empty string
-        $data['regions'] = $data['regions'] ?: null;
+        if ($data['regions'] ?? false) {
+            // Make sure NULL is saved instead of empty string
+            $data['regions'] = $data['regions'] ?: null;
+        }
     }
 
     public function afterSaveCommit(Event $event, EntityInterface $entity, \ArrayObject $options)

@@ -485,7 +485,7 @@ function playInWaveform (el) {
   for (region of data.regions) {
     // console.log(region)
     wavesurfer.addRegion(region)
-    const button = '<a class="button" onclick="playRegion(' + region.id + ')">' + region.attributes.title + '</a>'
+    const button = '<a class="button" onclick="playRegion(\'' + region.id + '\')">' + region.attributes.title + '</a>'
     $('#audioplayer .toolbar .regions').append(button)
   }
 }
