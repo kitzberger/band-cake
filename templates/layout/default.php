@@ -81,6 +81,7 @@
             <div class="waveform"></div>
             <div class="timeline"></div>
             <div class="toolbar">
+                <input type="checkbox" value="0" id="loop"><label for="loop">Loop?</label>
                 <a class="button success" data-action="waveform-playPause">Play/pause</a>
                 <span class="regions"></span>
                 <a class="button alert" data-action="waveform-hide">Close</a>

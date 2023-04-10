@@ -469,7 +469,15 @@ function playInWaveform (el) {
 }
 
 function playRegion (regionId) {
-  wavesurfer.regions.list[regionId].play()
+  let region = wavesurfer.regions.list[regionId]
+
+  if ($('#loop:checked').length === 1) {
+    region.setLoop(true)
+  } else {
+    region.setLoop(false)
+  }
+
+  region.play()
 }
 
 function initAudioplayer () {
