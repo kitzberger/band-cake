@@ -425,6 +425,7 @@ function initWaveform () {
       wavesurfer.stop()
       updateFileRegions()
       $('#audioplayer').hide()
+      $('body').removeClass('audioplayer-visible')
     })
     $('[data-action="waveform-edit"]').on('click', function () {
       if ($('#audioplayer').attr('data-file-unlocked') == 0) {
@@ -462,6 +463,7 @@ function initWaveform () {
       }
     })
   }
+  $('body').addClass('audioplayer-visible')
   $('#audioplayer').show()
 }
 

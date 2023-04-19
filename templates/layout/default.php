@@ -48,7 +48,7 @@
         </div>
     </nav>
     <?= $this->Flash->render() ?>
-    <div class="container clearfix">
+    <div id="main-container" class="container clearfix">
         <?php if ($currentUser) { ?>
         <nav class="large-3 medium-4 columns hide-for-print" id="actions-sidebar">
             <ul class="side-nav">
