@@ -196,7 +196,11 @@ Configure::write('DateTimeFormatEnd', 'Y-m-d 23:59');
 Configure::write('CakePdf', [
     'engine' => [
         'className' => 'CakePdf.WkHtmlToPdf',
-        'binary' => ROOT . DS . 'vendor/bin/wkhtmltopdf-amd64'
+        'binary' => ROOT . DS . 'vendor/bin/wkhtmltopdf-amd64',
+        'options' => [
+            'zoom' => '1.0',
+            'disable-smart-shrinking' => true,
+        ],
     ],
     'margin' => [
         'bottom' => 8,

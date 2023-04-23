@@ -108,6 +108,20 @@ class SongsController extends AppController
         $this->set('transposeBy', $this->request->getQuery('transposeBy') ?? 0);
         $this->set('mode', $this->request->getQuery('mode') ?? 'full');
 
+        $zoom = (float)($this->request->getQuery('zoom') ?? 1.0);
+
+        $this->viewBuilder()->setOption(
+            'pdfConfig',
+            [
+                'title' => $song->title,
+                'engine' => [
+                    'options' => [
+                        'zoom' => $zoom,
+                    ],
+                ],
+            ]
+        );
+
         $this->set('song', $song);
         $this->set('_serialize', ['song']);
     }
