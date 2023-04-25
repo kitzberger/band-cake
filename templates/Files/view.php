@@ -49,7 +49,28 @@
         </tr>
     </table>
     <div class="related">
+        <h4><?= __('File') ?></h4>
         <?= $this->element('Files/embed', ['file' => $file]) ?>
+
+        <h4><?= __('Regions') ?></h4>
+        <?php if ($file->regions): ?>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Title</th>
+                </tr>
+                <?php foreach (json_decode($file->regions, false) as $region): ?>
+                    <tr>
+                        <td><?= h($region->id) ?></td>
+                        <td><?= number_format($region->start, 1) ?></td>
+                        <td><?= number_format($region->end, 1) ?></td>
+                        <td><?= h($region->title) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
+        <?php endif; ?>
     </div>
     <div class="related">
         <h4><?= __('Collections') ?></h4>

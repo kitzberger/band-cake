@@ -2,6 +2,8 @@
 
 namespace App\Model\Table;
 
+use Cake\Datasource\EntityInterface;
+use Cake\Event\Event;
 use Cake\ORM\RulesChecker;
 use Cake\Validation\Validator;
 
@@ -95,6 +97,18 @@ class FilesTable extends AbstractTable
             ->requirePresence('file', 'create')
             ->notEmpty('file');
 
+        $validator
+            ->allowEmptyString('regions')
+            ->add('regions', 'regionsAreJson', [
+                'rule' => function ($value, array $context) {
+                    $json = json_decode($value);
+                    if (json_last_error()) {
+                        return json_last_error_msg();
+                    }
+                    return true;
+                }
+            ]);
+
         return $validator;
     }
 
@@ -116,7 +130,15 @@ class FilesTable extends AbstractTable
         return $rules;
     }
 
-    public function afterSaveCommit(\Cake\Event\Event $event, \Cake\Datasource\EntityInterface $entity, \ArrayObject $options)
+    public function beforeMarshal(Event $event, \ArrayObject $data, \ArrayObject $options)
+    {
+        if ($data['regions'] ?? false) {
+            // Make sure NULL is saved instead of empty string
+            $data['regions'] = $data['regions'] ?: null;
+        }
+    }
+
+    public function afterSaveCommit(Event $event, EntityInterface $entity, \ArrayObject $options)
     {
         $diff = $this->getDiff($entity, ['title', 'file', 'is_public']);
 

@@ -2,7 +2,7 @@
     <table cellpadding="0" cellspacing="0" class="files audio-player">
         <tr>
             <th><?= __('User') ?></th>
-            <th><?= __('File') ?></th>
+            <th colspan="2"><?= __('File') ?></th>
             <th><?= __('Reference') ?></th>
             <th><?= __('Collection') ?></th>
             <th><?= __('Created') ?></th>
@@ -12,9 +12,8 @@
         <?php foreach ($files as $file): ?>
         <tr class="item item-<?= $file->getType() ?>">
             <td><?= h($file->user->username) ?></td>
-            <td><?= h($file->title) ?><br>
-                <?= $this->element('Files/embed-inline', ['file' => $file]) ?>
-            </td>
+            <td><?= h($file->title) ?></td>
+            <td class="no-wrap"><?= $this->element('Files/embed-inline', ['file' => $file]) ?></td>
             <td><?= $file->is_public ? '<i class="fi-check"></i>' : '' ?></td>
             <td><?php
                 if (!empty($file->collections)) {

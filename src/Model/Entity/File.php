@@ -3,6 +3,7 @@
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
+use Cake\Routing\Router;
 
 /**
  * File Entity
@@ -15,6 +16,7 @@ use Cake\ORM\Entity;
  * @property int $song_version_id
  * @property string $title
  * @property string $file
+ * @property array $regions
  * @property bool $is_public
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
@@ -97,5 +99,16 @@ class File extends Entity
         } else {
             throw new \Exception('Cannot get image size of: ' . $this->getAbsolutePath());
         }
+    }
+
+    public function getAudioPlayerData()
+    {
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'url' => $this->getRelativePath(),
+            'urlEdit' => Router::url(['controller' => 'Files', 'action' => 'edit', $this->id]),
+            'regions' => json_decode($this->regions, true) ?? [],
+        ];
     }
 }

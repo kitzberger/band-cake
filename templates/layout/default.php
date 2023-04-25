@@ -48,7 +48,7 @@
         </div>
     </nav>
     <?= $this->Flash->render() ?>
-    <div class="container clearfix">
+    <div id="main-container" class="container clearfix">
         <?php if ($currentUser) { ?>
         <nav class="large-3 medium-4 columns hide-for-print" id="actions-sidebar">
             <ul class="side-nav">
@@ -72,11 +72,37 @@
         <?= $this->fetch('content') ?>
     </div>
     <footer>
+        <div id="audioplayer" style="display: none" data-file-id="" data-file-unlocked="0">
+            <div class="topbar">
+                <span class="title"></span>
+                <a class="url edit"><i class="fi-pencil"></i></a>
+                <a class="url download"><i class="fi-download"></i></a>
+            </div>
+            <div class="waveform"></div>
+            <div class="timeline"></div>
+            <div class="toolbar">
+                <input type="checkbox" value="1" id="loop"><label for="loop">Loop?</label>
+                <a class="button success" data-action="waveform-playPause">Play/pause</a>
+                <span class="regions"></span>
+                <a class="button warning" data-action="waveform-edit">
+                    <span class="button-edit">Edit</span>
+                    <span class="button-save">Save</span>
+                </a>
+                <a class="button alert" data-action="waveform-hide">Close</a>
+            </div>
+        </div>
     </footer>
     <script>
         // Workaround disabling pinch-zoom on iOS: https://stackoverflow.com/questions/4389932/how-do-you-disable-viewport-zooming-on-mobile-safari
         document.addEventListener('gesturestart', function (e) { e.preventDefault(); });
+
+        let csrfToken = <?= json_encode($this->request->getAttribute('csrfToken')) ?>;
+        let urlFileEdit = '<?= $this->Url->build(['controller' => 'Files', 'action' => 'edit']) ?>';
     </script>
+    <script src="//unpkg.com/wavesurfer.js@6.6.3/dist/wavesurfer.js"></script>
+    <script src="//unpkg.com/wavesurfer.js@6.6.3/dist/plugin/wavesurfer.cursor.js"></script>
+    <script src="//unpkg.com/wavesurfer.js@6.6.3/dist/plugin/wavesurfer.regions.js"></script>
+    <script src="//unpkg.com/wavesurfer.js@6.6.3/dist/plugin/wavesurfer.timeline.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <?= $this->Html->script('dropzone.js') ?>
     <?= $this->Html->script('foundation.js') ?>

@@ -1,3 +1,5 @@
+body.audioplayer-visible #main-container { padding-bottom: 165px }
+
 .container { overflow: auto; }
 .content,
 #actions-sidebar { margin-bottom: 20px; padding-bottom: 0; }
@@ -191,6 +193,7 @@ div.gray {
 }
 
 .hint { color: #999999; font-size: 0.8em; margin: 0 }
+.form .input.error .error-message { color: #C3232D; }
 
 table.logs td.diff { width: 50%; }
 del { color: red; }
@@ -213,6 +216,9 @@ ins { color: green; text-decoration: none; }
 .label.blocker { background: #555555; }
 .button.blocker { background: #555555; }
 
+.button.tiny { padding: 0.325rem 0.75rem 0.3875rem 0.75rem; }
+.button.no-margin { margin: 0 }
+
 .no-wrap { white-space: nowrap; }
 
 div.dashboard > table > tbody > tr { border: 0; }
@@ -220,6 +226,16 @@ div.dashboard > table td { padding-left: 0; padding-right: 100px; }
 div.dashboard > table td table { table-layout: auto; }
 div.dashboard > table td table td { padding-right: 10px; }
 div.dashboard > table td table td:last-child { padding-right: 0; }
+
+#audioplayer { position: fixed; z-index: 10; width: 100%; bottom: 0; background: #eeeeee; padding: 10px; }
+#audioplayer[data-file-unlocked="1"] { background: #d39898 }
+#audioplayer[data-file-unlocked="1"] .button-edit { display: none }
+#audioplayer[data-file-unlocked="0"] .button-save { display: none }
+#audioplayer .topbar { margin-bottom: 10px; text-align: center; }
+#audioplayer .waveform { }
+#audioplayer .timeline { }
+#audioplayer .toolbar { margin-top: 10px; display: flex; justify-content: center; }
+#audioplayer .toolbar .button { padding: 5px; margin: 0 5px 0 0; }
 
 @media only screen and (max-width: 40em) {
     div.dashboard > table > tbody > tr > td { display: block; width: 100%; padding-right: 0; padding-bottom: 20px; }
