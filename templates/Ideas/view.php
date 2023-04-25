@@ -40,7 +40,7 @@
     </table>
     <div class="row">
         <h4><?= __('Text') ?></h4>
-        <?= $this->element('text', ['text' => $idea->text]) ?>
+        <?= $this->element('text', ['text' => $idea->text, 'markdown' => true]) ?>
     </div>
     <div class="related">
         <h4><?= __('Votes') ?></h4>

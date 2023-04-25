@@ -5,15 +5,21 @@
 // stripping tags
 
 if ($text) {
-    echo $this->Text->autoParagraph(
-        $this->Text->autoLink(
-            h(
-                strip_tags(
-                    str_replace(['<br>','<br/>','<br />'], "\n", $text)
+    if ($markdown ?? false) {
+        echo '<div class="markdown">';
+        echo $this->Markdown->transform($text);
+        echo '</div>';
+    } else {
+        echo $this->Text->autoParagraph(
+            $this->Text->autoLink(
+                h(
+                    strip_tags(
+                        str_replace(['<br>','<br/>','<br />'], "\n", $text)
+                    ),
+                    false
                 ),
-                false
-            ),
-            ['escape' => false]
-        )
-    );
+                ['escape' => false]
+            )
+        );
+    }
 }

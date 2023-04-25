@@ -92,7 +92,7 @@
     <?php if ($date->text): ?>
     <div class="row">
         <h4><?= __('Text') ?></h4>
-        <?= $this->element('text', ['text' => $date->text]) ?>
+        <?= $this->element('text', ['text' => $date->text, 'markdown' => true]) ?>
     </div>
     <?php endif ?>
     <div class="related">

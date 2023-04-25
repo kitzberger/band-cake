@@ -3,6 +3,7 @@
     <fieldset>
         <legend><?= __('Add Date') ?></legend>
         <?php
+            $this->Form->setTemplates(['formGroup' => '{{label}}{{hint}}{{input}}']);
             echo $this->Form->control('title', ['autofocus' => 1]);
 
             if ($date->is_fullday) {
@@ -44,7 +45,11 @@
             ], ['default' => 0]);
             echo '</div>';
             echo '</div>';
-            echo $this->Form->control('text');
+            echo $this->Form->control('text', [
+                'templateVars' => [
+                    'hint' => '<p class="hint">Supports <a href="https://www.markdownguide.org/cheat-sheet/" target="_blank">markdown</a> syntax.</p>',
+                ]
+            ]);
         ?>
     </fieldset>
     <?= $this->element('Forms/UserSelect') ?>

@@ -3,8 +3,13 @@
     <fieldset>
         <legend><?= __('Add Idea') ?></legend>
         <?php
+            $this->Form->setTemplates(['formGroup' => '{{label}}{{hint}}{{input}}']);
             echo $this->Form->control('title', ['autofocus' => 1]);
-            echo $this->Form->control('text');
+            echo $this->Form->control('text', [
+                'templateVars' => [
+                    'hint' => '<p class="hint">Supports <a href="https://www.markdownguide.org/cheat-sheet/" target="_blank">markdown</a> syntax.</p>',
+                ]
+            ]);
         ?>
     </fieldset>
     <?php
