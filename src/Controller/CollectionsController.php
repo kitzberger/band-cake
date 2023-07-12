@@ -106,6 +106,20 @@ class CollectionsController extends AppController
             ]
         );
 
+        $zoom = (float)($this->request->getQuery('zoom') ?? 1.0);
+
+        $this->viewBuilder()->setOption(
+            'pdfConfig',
+            [
+                'title' => $collection->title,
+                'engine' => [
+                    'options' => [
+                        'zoom' => $zoom,
+                    ],
+                ],
+            ]
+        );
+
         $this->set('collection', $collection);
         $this->set('passiveUsers', $passiveUsers);
         $this->set('_serialize', ['collection']);
