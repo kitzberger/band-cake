@@ -18,11 +18,11 @@
     <table cellpadding="0" cellspacing="0" class="users no-padding-on-small">
         <thead>
             <tr>
-                <th><?= $this->Paginator->sort('username') ?></th>
-                <th><?= $this->Paginator->sort('email') ?></th>
-                <th><?= $this->Paginator->sort('is_admin') ?></th>
-                <th><?= $this->Paginator->sort('is_active') ?></th>
-                <th><?= $this->Paginator->sort('is_passive') ?></th>
+                <th><?= $this->Paginator->sort('Users.username', 'Username') ?></th>
+                <th><?= $this->Paginator->sort('Users.email', 'E-Mail') ?></th>
+                <th><?= $this->Paginator->sort('Users.is_admin', 'Is Admin?') ?></th>
+                <th><?= $this->Paginator->sort('Users.is_active', 'Is Active?') ?></th>
+                <th><?= $this->Paginator->sort('Users.is_passive', 'Is Passive?') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>

@@ -3,12 +3,12 @@
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('song_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('title') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('SongVersions.id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('SongVersions.user_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('SongVersions.song_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('SongVersions.title') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('SongVersions.created') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('SongVersions.modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>

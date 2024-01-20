@@ -8,7 +8,7 @@
                 <th><?= __('Record') ?></th>
                 <th><?= __('Relation') ?></th>
                 <th><?= __('Diff') ?></th>
-                <th><?= $this->Paginator->sort('created') ?></th>
+                <th><?= $this->Paginator->sort('Logs.created', 'Created') ?></th>
             </tr>
         </thead>
         <tbody>

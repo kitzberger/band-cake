@@ -19,14 +19,14 @@
     <table cellpadding="0" cellspacing="0" class="files no-padding-on-small">
         <thead>
             <tr>
-                <th><?= $this->Paginator->sort('title') ?></th>
-                <th class="show-for-medium"><?= $this->Paginator->sort('file') ?></th>
+                <th><?= $this->Paginator->sort('Files.title', 'Title') ?></th>
+                <th class="show-for-medium"><?= $this->Paginator->sort('Files.file', 'File') ?></th>
                 <th><?= __('Reference') ?></th>
                 <th><?= __('Record') ?></th>
                 <th><?= __('Collection') ?></th>
-                <th class="show-for-medium"><?= $this->Paginator->sort('user_id') ?></th>
-                <th class="show-for-medium"><?= $this->Paginator->sort('created') ?></th>
-                <th><?= $this->Paginator->sort('modified') ?></th>
+                <th class="show-for-medium"><?= $this->Paginator->sort('Files.user_id', 'User') ?></th>
+                <th class="show-for-medium"><?= $this->Paginator->sort('Files.created', 'Created') ?></th>
+                <th><?= $this->Paginator->sort('Files.modified', 'Modified') ?></th>
             </tr>
         </thead>
         <tbody>

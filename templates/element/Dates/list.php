@@ -1,10 +1,10 @@
 <table cellpadding="0" cellspacing="0" class="dates no-padding-on-small">
     <thead>
         <tr>
-            <th><?= $this->Paginator->sort('title') ?></th>
-            <th><?= $this->Paginator->sort('begin') ?></th>
-            <th><?= $this->Paginator->sort('status') ?></th>
-            <th><?= $this->Paginator->sort('votes') ?></th>
+            <th><?= $this->Paginator->sort('Dates.title', 'Title') ?></th>
+            <th><?= $this->Paginator->sort('Dates.begin', 'Begin') ?></th>
+            <th><?= $this->Paginator->sort('Dates.status', 'Status') ?></th>
+            <th><?= $this->Paginator->sort('Dates.votes', 'Votes') ?></th>
         </tr>
     </thead>
     <tbody>

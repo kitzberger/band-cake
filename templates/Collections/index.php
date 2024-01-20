@@ -19,10 +19,10 @@
     <table cellpadding="0" cellspacing="0" class="collections no-padding-on-small">
         <thead>
             <tr>
-                <th><?= $this->Paginator->sort('title') ?></th>
+                <th><?= $this->Paginator->sort('Collections.title', 'Title') ?></th>
                 <th><?= __('Files') ?> / <?= __('Songs') ?></th>
-                <th class="show-for-medium"><?= $this->Paginator->sort('created') ?></th>
-                <th><?= $this->Paginator->sort('modified') ?></th>
+                <th class="show-for-medium"><?= $this->Paginator->sort('Collections.created', 'Created') ?></th>
+                <th><?= $this->Paginator->sort('Collections.modified', 'Modified') ?></th>
             </tr>
         </thead>
         <tbody>

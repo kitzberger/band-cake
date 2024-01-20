@@ -19,10 +19,10 @@
     <table cellpadding="0" cellspacing="0" class="ideas no-padding-on-small">
         <thead>
             <tr>
-                <th><?= $this->Paginator->sort('title') ?></th>
-                <th class="show-for-medium"><?= $this->Paginator->sort('user_id') ?></th>
-                <th class="show-for-medium"><?= $this->Paginator->sort('created') ?></th>
-                <th><?= $this->Paginator->sort('modified') ?></th>
+                <th><?= $this->Paginator->sort('Ideas.title', 'Title') ?></th>
+                <th class="show-for-medium"><?= $this->Paginator->sort('Ideas.user_id', 'User') ?></th>
+                <th class="show-for-medium"><?= $this->Paginator->sort('Ideas.created', 'Created') ?></th>
+                <th><?= $this->Paginator->sort('Ideas.modified', 'Modified') ?></th>
             </tr>
         </thead>
         <tbody>

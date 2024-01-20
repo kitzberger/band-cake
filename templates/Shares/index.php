@@ -24,11 +24,11 @@
     <table cellpadding="0" cellspacing="0" class="shares no-padding-on-small">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Shares.user_id', 'User') ?></th>
                 <th><?= __('Record') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('expire_date') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Shares.expire_date', 'Expire Date') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Shares.created', 'Created') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Shares.modified', 'Modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>

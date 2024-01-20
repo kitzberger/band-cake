@@ -19,10 +19,10 @@
     <table cellpadding="0" cellspacing="0" class="locations no-padding-on-small">
         <thead>
             <tr>
-                <th><?= $this->Paginator->sort('title') ?></th>
-                <th><?= $this->Paginator->sort('city') ?></th>
-                <th class="show-for-medium"><?= $this->Paginator->sort('created') ?></th>
-                <th class="show-for-medium"><?= $this->Paginator->sort('modified') ?></th>
+                <th><?= $this->Paginator->sort('Locations.title', 'Name') ?></th>
+                <th><?= $this->Paginator->sort('Locations.city', 'City') ?></th>
+                <th class="show-for-medium"><?= $this->Paginator->sort('Locations.created', 'Created') ?></th>
+                <th class="show-for-medium"><?= $this->Paginator->sort('Locations.modified', 'Modified') ?></th>
             </tr>
         </thead>
         <tbody>

@@ -18,10 +18,10 @@
     <table cellpadding="0" cellspacing="0" class="comments no-padding-on-small">
         <thead>
             <tr>
-                <th><?= $this->Paginator->sort('user_id') ?></th>
+                <th><?= $this->Paginator->sort('Comments.user_id', 'User') ?></th>
                 <th><?= __('Record') ?></th>
-                <th><?= $this->Paginator->sort('created') ?></th>
-                <th><?= $this->Paginator->sort('modified') ?></th>
+                <th><?= $this->Paginator->sort('Comments.created', 'Created') ?></th>
+                <th><?= $this->Paginator->sort('Comments.modified', 'Modified') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
