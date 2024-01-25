@@ -23,7 +23,7 @@
             <?php
                 echo $this->element('Button/ShareLink', ['passiveUsers' => $passiveUsers, 'controller' => 'Collections', 'record' => $collection]);
 
-                echo $this->Html->link('<i class="fi-page-pdf"></i> ' . __('Get PDF'), ['controller' => 'Collections', 'action' => 'view', $collection->id, '_ext' => 'pdf'], ['escape' => false, 'class' => 'button small success'])
+                echo $this->Html->link('<i class="fi-page-pdf"></i> ' . __('Get PDF'), ['controller' => 'Collections', 'action' => 'view', $collection->id, '?' => ['zoom' => '1.0'], '_ext' => 'pdf'], ['escape' => false, 'class' => 'button small success'])
             ?>
         </small>
     </h3>
