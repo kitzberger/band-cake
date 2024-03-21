@@ -26,6 +26,7 @@ use Cake\Auth\DefaultPasswordHasher;
  * @property \App\Model\Entity\Collection[] $collections
  * @property \App\Model\Entity\Vote[] $votes
  * @property \App\Model\Entity\Share[] $shares
+ * @property \App\Model\Entity\Band[] $bands
  */
 class User extends Entity
 {

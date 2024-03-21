@@ -1,4 +1,9 @@
 <li><?= $this->Html->link(
+    __('Bands'),
+    ['controller' => 'Bands', 'action' => 'index'],
+    ['class' => $controller=='Bands' ? 'active' : '']
+) ?></li>
+<li><?= $this->Html->link(
     __('Users'),
     ['controller' => 'Users', 'action' => 'index'],
     ['class' => $controller=='Users' ? 'active' : '']

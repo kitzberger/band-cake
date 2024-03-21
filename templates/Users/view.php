@@ -19,6 +19,24 @@
             <td><?= h($user->email) ?></td>
         </tr>
         <tr>
+            <th><?= __('Bands') ?></th>
+            <td><?php
+                if (count($user->bands)) {
+                    echo '<ul>';
+                    foreach ($user->bands as $band) {
+                        echo '<li>';
+                        echo $this->Html->link(
+                            $band->title,
+                            ['controller' => 'Bands', 'action' => 'view', $band->id],
+                            ['escape' => false]
+                        );
+                        echo '</li>';
+                    }
+                    echo '</ul>';
+                }
+            ?></td>
+        </tr>
+        <tr>
             <th><?= __('Is Admin') ?></th>
             <td><?= $user->is_admin ? __('Yes') : __('No') ?></td>
         </tr>

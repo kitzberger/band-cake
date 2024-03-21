@@ -17,6 +17,7 @@ use Cake\Validation\Validator;
  * @property \Cake\ORM\Association\HasMany $Songs
  * @property \Cake\ORM\Association\HasMany $Votes
  * @property \Cake\ORM\Association\HasMany $Shares
+ * @property \Cake\ORM\Association\BelongsToMany $Bands
  *
  * @method \App\Model\Entity\User get($primaryKey, $options = [])
  * @method \App\Model\Entity\User newEntity($data = null, array $options = [])
@@ -70,6 +71,11 @@ class UsersTable extends Table
         ]);
         $this->hasMany('Shares', [
             'foreignKey' => 'user_id'
+        ]);
+        $this->belongsToMany('Bands', [
+            'foreignKey' => 'user_id',
+            'targetForeignKey' => 'band_id',
+            'joinTable' => 'bands_users',
         ]);
     }
 

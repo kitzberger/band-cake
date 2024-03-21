@@ -86,10 +86,12 @@ class UsersController extends AppController
     public function view($id = null)
     {
         $user = $this->Users->get($id, [
-            'contain' => ['Comments', 'Dates', 'Files', 'Ideas', 'Collections', 'Songs', 'Votes',
-                          'Comments.Songs', 'Comments.Ideas', 'Comments.Dates',
-                          'Files.Songs', 'Files.Ideas', 'Files.Dates',
-                          'Votes.Ideas', 'Votes.Dates'
+            'contain' => [
+                'Comments', 'Dates', 'Files', 'Ideas', 'Collections', 'Songs', 'Votes',
+                'Comments.Songs', 'Comments.Ideas', 'Comments.Dates',
+                'Files.Songs', 'Files.Ideas', 'Files.Dates',
+                'Votes.Ideas', 'Votes.Dates',
+                'Bands',
             ]
         ]);
 
@@ -115,8 +117,9 @@ class UsersController extends AppController
                 $this->Flash->error(__('The user could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('user'));
-        $this->set('_serialize', ['user']);
+        $bands = $this->Users->Bands->find('list', ['limit' => 9999, 'order' => 'title']);
+        $this->set(compact('user', 'bands'));
+        $this->set('_serialize', ['user', 'bands']);
     }
 
     /**
@@ -129,7 +132,7 @@ class UsersController extends AppController
     public function edit($id = null)
     {
         $user = $this->Users->get($id, [
-            'contain' => []
+            'contain' => ['Bands']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $data = $this->request->getData();
@@ -146,8 +149,9 @@ class UsersController extends AppController
                 $this->Flash->error(__('The user could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('user'));
-        $this->set('_serialize', ['user']);
+        $bands = $this->Users->Bands->find('list', ['limit' => 9999, 'order' => 'title']);
+        $this->set(compact('user', 'bands'));
+        $this->set('_serialize', ['user', 'bands']);
     }
 
     /**
