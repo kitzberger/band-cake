@@ -73,7 +73,7 @@ class BandsController extends AppController
     public function edit($id = null)
     {
         $band = $this->Bands->get($id, [
-            'contain' => []
+            'contain' => ['Users']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $band = $this->Bands->patchEntity($band, $this->request->getData());
