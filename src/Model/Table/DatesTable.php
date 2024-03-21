@@ -14,6 +14,7 @@ use Cake\Validation\Validator;
  * @property \Cake\ORM\Association\HasMany $Files
  * @property \Cake\ORM\Association\HasMany $Votes
  * @property \Cake\ORM\Association\HasMany $Shares
+ * @property \Cake\ORM\Association\BelongsToMany $Bands
  *
  * @method \App\Model\Entity\Date get($primaryKey, $options = [])
  * @method \App\Model\Entity\Date newEntity($data = null, array $options = [])
@@ -62,6 +63,11 @@ class DatesTable extends AbstractTable
         ]);
         $this->hasMany('Shares', [
             'foreignKey' => 'date_id'
+        ]);
+        $this->belongsToMany('Bands', [
+            'foreignKey' => 'date_id',
+            'targetForeignKey' => 'band_id',
+            'joinTable' => 'bands_dates',
         ]);
     }
 

@@ -49,6 +49,7 @@
                     'hint' => '<p class="hint">Supports <a href="https://www.markdownguide.org/cheat-sheet/" target="_blank">markdown</a> syntax.</p>',
                 ]
             ]);
+            echo $this->Form->control('bands._ids', ['options' => $bands]);
         ?>
     </fieldset>
     <?= $this->element('Forms/UserSelect') ?>

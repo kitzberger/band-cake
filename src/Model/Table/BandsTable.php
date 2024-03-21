@@ -63,6 +63,11 @@ class BandsTable extends AbstractTable
             'targetForeignKey' => 'collection_id',
             'joinTable' => 'bands_collections'
         ]);
+        $this->belongsToMany('Dates', [
+            'foreignKey' => 'band_id',
+            'targetForeignKey' => 'date_id',
+            'joinTable' => 'bands_dates'
+        ]);
         // $this->hasMany('Shares', [
         //     'foreignKey' => 'song_id'
         // ]);

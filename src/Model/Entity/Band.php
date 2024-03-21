@@ -17,6 +17,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\User[] $users
  * @property \App\Model\Entity\Idea[] $ideas
+ * @property \App\Model\Entity\Date[] $dates
  * @property \App\Model\Entity\Song[] $songs
  * @property \App\Model\Entity\SongsVersion[] $versions
  * @property \App\Model\Entity\Collection[] $shares

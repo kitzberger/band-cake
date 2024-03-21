@@ -14,6 +14,7 @@ use Cake\Validation\Validator;
  * @property \Cake\ORM\Association\HasMany $Shares
  * @property \Cake\ORM\Association\HasMany $Versions
  * @property \Cake\ORM\Association\BelongsToMany $Collections
+ * @property \Cake\ORM\Association\BelongsToMany $Bands
  *
  * @method \App\Model\Entity\Song get($primaryKey, $options = [])
  * @method \App\Model\Entity\Song newEntity($data = null, array $options = [])

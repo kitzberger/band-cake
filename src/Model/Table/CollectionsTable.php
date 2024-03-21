@@ -13,6 +13,7 @@ use Cake\Validation\Validator;
  * @property \Cake\ORM\Association\BelongsToMany $Songs
  * @property \Cake\ORM\Association\HasMany $Comments
  * @property \Cake\ORM\Association\HasMany $Shares
+ * @property \Cake\ORM\Association\BelongsToMany $Bands
  *
  * @method \App\Model\Entity\Collection get($primaryKey, $options = [])
  * @method \App\Model\Entity\Collection newEntity($data = null, array $options = [])

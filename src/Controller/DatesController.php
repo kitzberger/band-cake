@@ -189,8 +189,9 @@ class DatesController extends AppController
             }
         }
         $users = $this->Dates->Users->find('list', ['limit' => 200, 'order' => 'username']);
+        $bands = $this->Dates->Bands->find('list', ['limit' => 200, 'order' => 'title']);
         $locations = $this->Dates->Locations->find('list', ['limit' => 200, 'order' => 'title']);
-        $this->set(compact('date', 'users', 'locations'));
+        $this->set(compact('date', 'users', 'locations', 'bands'));
         $this->set('_serialize', ['date']);
     }
 
@@ -204,7 +205,7 @@ class DatesController extends AppController
     public function edit($id = null)
     {
         $date = $this->Dates->get($id, [
-            'contain' => ['Locations']
+            'contain' => ['Locations', 'Bands']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $date = $this->Dates->patchEntity($date, $this->request->getData());
@@ -229,8 +230,9 @@ class DatesController extends AppController
             }
         }
         $users = $this->Dates->Users->find('list', ['limit' => 200, 'order' => 'username']);
+        $bands = $this->Dates->Bands->find('list', ['limit' => 200, 'order' => 'title']);
         $locations = $this->Dates->Locations->find('list', ['limit' => 200, 'order' => 'title']);
-        $this->set(compact('date', 'users', 'locations'));
+        $this->set(compact('date', 'users', 'locations', 'bands'));
         $this->set('_serialize', ['date']);
     }
 
