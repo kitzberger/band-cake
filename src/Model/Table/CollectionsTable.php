@@ -65,6 +65,11 @@ class CollectionsTable extends AbstractTable
         $this->hasMany('Shares', [
             'foreignKey' => 'collection_id'
         ]);
+        $this->belongsToMany('Bands', [
+            'foreignKey' => 'collection_id',
+            'targetForeignKey' => 'band_id',
+            'joinTable' => 'bands_collections',
+        ]);
     }
 
     public function beforeMarshal(\Cake\Event\Event $event, \ArrayObject $data, \ArrayObject $options)

@@ -36,7 +36,7 @@ class BandsController extends AppController
     public function view($id = null)
     {
         $band = $this->Bands->get($id, [
-            'contain' => ['Users', 'Songs']
+            'contain' => ['Users', 'Songs', 'Collections']
         ]);
 
         $this->set('band', $band);

@@ -16,6 +16,7 @@
             ?>
     <fieldset>
         <legend><?= __('Admin fields') ?></legend>
+        <?= $this->Form->control('bands._ids', ['options' => $bands]); ?>
         <?= $this->Form->control('user_id', ['options' => $users, 'empty' => true, 'default' => $currentUser['id']]) ?>
     </fieldset>
     <?php

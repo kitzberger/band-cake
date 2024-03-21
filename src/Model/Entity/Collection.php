@@ -18,6 +18,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\Song[] $songs
  * @property \App\Model\Entity\Share[] $shares
  * @property \App\Model\Entity\Comment[] $comments
+ * @property \App\Model\Entity\Bands[] $bands
  */
 class Collection extends Entity
 {

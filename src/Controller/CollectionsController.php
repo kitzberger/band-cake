@@ -163,7 +163,8 @@ class CollectionsController extends AppController
         $users = $this->Collections->Users->find('list', ['limit' => 200]);
         $files = $this->Collections->Files->find('list', ['limit' => 200]);
         $songs = $this->Collections->Songs->find('list', ['limit' => 200]);
-        $this->set(compact('collection', 'users', 'files', 'songs'));
+        $bands = $this->Collections->Bands->find('list', ['limit' => 200]);
+        $this->set(compact('collection', 'users', 'files', 'songs', 'bands'));
         $this->set('_serialize', ['collection']);
     }
 
@@ -221,6 +222,7 @@ class CollectionsController extends AppController
             'contain' => [
                 'Files' => ['sort' => 'sorting ASC'],
                 'Songs' => ['sort' => 'sorting ASC'],
+                'Bands' => [],
             ]
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
@@ -233,6 +235,8 @@ class CollectionsController extends AppController
                         'Files._joinData',
                         'Songs',
                         'Songs._joinData',
+                        'Bands',
+                        'Bands._joinData',
                     ]
                 ]
             );
@@ -245,6 +249,7 @@ class CollectionsController extends AppController
             }
         }
         $users = $this->Collections->Users->find('list', ['limit' => 200]);
+        $bands = $this->Collections->Bands->find('list', ['limit' => 200]);
 
         // Create a list of all files, but start with the files that are listed in this collection
         $allFiles = $this->Collections->Files->find('list', ['limit' => 200, 'order' => 'title ASC']);
@@ -262,7 +267,7 @@ class CollectionsController extends AppController
         }
         $songs += $allSongs->toArray();
 
-        $this->set(compact('collection', 'users', 'files', 'songs'));
+        $this->set(compact('collection', 'users', 'files', 'songs', 'bands'));
         $this->set('_serialize', ['collection']);
     }
 
