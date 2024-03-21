@@ -178,7 +178,8 @@ class SongsController extends AppController
             }
         }
         $users = $this->Songs->Users->find('list', ['limit' => 200]);
-        $this->set(compact('song', 'users'));
+        $bands = $this->Songs->Bands->find('list', ['limit' => 200]);
+        $this->set(compact('song', 'users', 'bands'));
         $this->set('_serialize', ['song']);
     }
 
@@ -192,7 +193,7 @@ class SongsController extends AppController
     public function edit($id = null)
     {
         $song = $this->Songs->get($id, [
-            'contain' => []
+            'contain' => ['Bands']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $song = $this->Songs->patchEntity($song, $this->request->getData());
@@ -205,7 +206,8 @@ class SongsController extends AppController
             }
         }
         $users = $this->Songs->Users->find('list', ['limit' => 200]);
-        $this->set(compact('song', 'users'));
+        $bands = $this->Songs->Bands->find('list', ['limit' => 200]);
+        $this->set(compact('song', 'users', 'bands'));
         $this->set('_serialize', ['song']);
     }
 

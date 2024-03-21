@@ -21,6 +21,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\File[] $files
  * @property \App\Model\Entity\Share[] $shares
  * @property \App\Model\Entity\SongsVersion[] $versions
+ * @property \App\Model\Entity\Bands[] $bands
  */
 class Song extends Entity
 {

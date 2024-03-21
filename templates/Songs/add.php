@@ -8,6 +8,7 @@
             echo $this->Form->control('title', ['autofocus' => 1]);
             echo $this->Form->control('artist');
             if ($currentUser['is_admin']) {
+                echo $this->Form->control('bands._ids', ['options' => $bands]);
                 echo $this->Form->control('is_pseudo');
                 if ($githubEnabled) {
                     $hint = \Cake\Core\Configure::read('Github.repository_url');

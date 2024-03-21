@@ -66,6 +66,11 @@ class SongsTable extends AbstractTable
             'foreignKey' => 'song_id',
             'propertyName' => 'versions', // override ugly default property name 'songs_versions'
         ]);
+        $this->belongsToMany('Bands', [
+            'foreignKey' => 'song_id',
+            'targetForeignKey' => 'band_id',
+            'joinTable' => 'bands_songs',
+        ]);
     }
 
     /**
