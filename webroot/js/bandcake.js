@@ -125,6 +125,34 @@ function vote (el, value) {
   })
 }
 
+function setBand (el) {
+  select = $(el)
+  url = select.data('url-band')
+  data = {
+    band: select.find(":selected").val()
+  }
+  $.ajax({
+    type: 'POST',
+    url,
+    headers: {
+      'X-CSRF-Token': select.data('csrf-token')
+    },
+    data,
+    success: function (data, textStatus, jqXHR) {
+      if (jqXHR.status == 200) {
+        location.reload();
+      }
+    },
+    error: function (jqXHR) {
+      if (jqXHR.status !== 200) {
+        alert(jqXHR.statusText + '\n\n' + jqXHR.responseJSON.message)
+      }
+      console.dir(jqXHR)
+    },
+    dataType: 'json'
+  })
+}
+
 function setVersion (el, collectionId, songId, versionId) {
   ul = $(el).closest('ul')
   url = ul.data('url-set-version')

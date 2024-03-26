@@ -19,6 +19,8 @@ class AppController extends Controller
 {
     protected array $enabledFeatures = [];
 
+    protected ?int $currentBand = null;
+
     /**
      * Initialization hook method.
      *
@@ -58,6 +60,8 @@ class AppController extends Controller
             'remoteCalendar' => (bool)Configure::read('Calendar.url'),
             'githubRepo' => (bool)Configure::read('Github.repository_url'),
         ];
+
+        $this->currentBand = $this->request->getSession()->read('band', 0);
     }
 
     /**
@@ -71,13 +75,22 @@ class AppController extends Controller
         $currentUser = $this->Auth->User();
         $this->set('currentUser', $currentUser);
 
-        if (isset($currentUser) && $currentUser['is_passive'] === true) {
-            $this->loadModel('Shares');
-            $shares = $this->Shares->find('all', [
-                'conditions' => ['Shares.user_id' => $currentUser['id']],
-                'contain' => ['Dates', 'Songs', 'Ideas', 'Collections', 'Files']
-            ]);
-            $this->set('currentUserShares', $shares);
+        if (isset($currentUser)) {
+            $this->loadModel('Bands');
+            $bands = $this->Bands->find()->matching('Members', function ($q) use ($currentUser) {
+                return $q->where(['BandsUsers.user_id' => $currentUser['id']]);
+            });
+            $this->set('currentUserBands', $bands);
+            $this->set('currentBand', $this->currentBand);
+
+            if ($currentUser['is_passive'] === true) {
+                $this->loadModel('Shares');
+                $shares = $this->Shares->find('all', [
+                    'conditions' => ['Shares.user_id' => $currentUser['id']],
+                    'contain' => ['Dates', 'Songs', 'Ideas', 'Collections', 'Files']
+                ]);
+                $this->set('currentUserShares', $shares);
+            }
         }
         $this->set('controller', $this->request->getParam('controller'));
         $this->set('_csrfToken', $this->request->getAttribute('csrfToken'));

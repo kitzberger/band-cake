@@ -48,7 +48,8 @@ class BandsTable extends AbstractTable
             'foreignKey' => 'user_id',
             'joinType' => 'LEFT'
         ]);
-        $this->belongsToMany('Users', [
+        $this->belongsToMany('Members', [
+            'className' => 'Users',
             'foreignKey' => 'band_id',
             'targetForeignKey' => 'user_id',
             'joinTable' => 'bands_users'
@@ -68,13 +69,6 @@ class BandsTable extends AbstractTable
             'targetForeignKey' => 'date_id',
             'joinTable' => 'bands_dates'
         ]);
-        // $this->hasMany('Shares', [
-        //     'foreignKey' => 'song_id'
-        // ]);
-        // $this->hasMany('SongsVersions', [
-        //     'foreignKey' => 'song_id',
-        //     'propertyName' => 'versions', // override ugly default property name 'songs_versions'
-        // ]);
     }
 
     /**

@@ -5,24 +5,15 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Band Entity
+ * BandsUser Entity
  *
- * @property int $id
+ * @property int $band_id
  * @property int $user_id
- * @property string $title
- * @property string $text
- * @property \Cake\I18n\FrozenTime $created
- * @property \Cake\I18n\FrozenTime $modified
  *
+ * @property \App\Model\Entity\Band $band
  * @property \App\Model\Entity\User $user
- * @property \App\Model\Entity\User[] $members
- * @property \App\Model\Entity\Idea[] $ideas
- * @property \App\Model\Entity\Date[] $dates
- * @property \App\Model\Entity\Song[] $songs
- * @property \App\Model\Entity\SongsVersion[] $versions
- * @property \App\Model\Entity\Collection[] $shares
  */
-class Band extends Entity
+class BandsUser extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -35,6 +26,7 @@ class Band extends Entity
      */
     protected $_accessible = [
         '*' => true,
-        'id' => false
+        'band_id' => false,
+        'user_id' => false
     ];
 }

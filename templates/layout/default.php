@@ -38,6 +38,16 @@
                         <?= ($currentUser['is_admin'] ? '<b style="color:#FF7473">(admin!)</b>' : '') ?>
                     </a>
                 </li>
+                <?php if ($currentUserBands->count() > 1): ?>
+                <li>
+                    <select onchange="setBand(this)" data-csrf-token="<?= $_csrfToken ?>" data-url-band="<?= $this->Url->build(['controller' => 'Users', 'action' => 'setBand']) ?>">
+                        <option>All bands</option>
+                        <?php foreach ($currentUserBands as $band): ?>
+                            <option value="<?= $band->id ?>" <?= $band->id == $currentBand ? 'selected="selected"' : '' ?>><?= h($band->title) ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </li>
+                <?php endif; ?>
                 <li><?= $this->Html->link(
                     '<i class="fi-x-circle show-for-small-only"></i> <span class="hide-for-small-only">' . __('Logout') . '</span>',
                     ['controller' => 'Users', 'action' => 'logout'],

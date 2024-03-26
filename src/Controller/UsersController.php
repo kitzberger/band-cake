@@ -173,4 +173,17 @@ class UsersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    /**
+     * Set band method
+     *
+     * @return \Cake\Network\Response|null Redirects to index.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function setBand()
+    {
+        $data = $this->request->getData();
+        $band = (int)($data['band'] ?? null);
+        $this->request->getSession()->write('band', $band);
+    }
 }
