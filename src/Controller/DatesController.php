@@ -52,20 +52,24 @@ class DatesController extends AppController
         $lastOfMonth = clone $now->endOfMonth()->modify('+1 day');
         ;
         #debug($firstOfMonth); debug($lastOfMonth);
-        $this->paginate = [
-            'contain' => ['Users', 'Votes'],
-            'order' => ['Dates.begin ASC'],
-            'conditions' => [
-                'OR' => [
-                    [
-                        'Dates.begin >=' => $firstOfMonth,
-                    ],
-                    [
-                        'Dates.end >=' => $firstOfMonth,
-                    ],
+        $conditions = [
+            'OR' => [
+                [
+                    'Dates.begin >=' => $firstOfMonth,
                 ],
-                ['Dates.title LIKE' => '%' . $sword . '%'],
+                [
+                    'Dates.end >=' => $firstOfMonth,
+                ],
             ],
+            ['Dates.title LIKE' => '%' . $sword . '%'],
+        ];
+        if ($this->currentBand) {
+            $conditions[] = ['Dates.BandsDates.band_id' => $this->currentBand];
+        }
+        $this->paginate = [
+            'contain' => ['Users', 'Votes', 'Bands'],
+            'order' => ['Dates.begin ASC'],
+            'conditions' => $conditions,
             'limit' => 200
         ];
         $dates = $this->paginate($this->Dates);
